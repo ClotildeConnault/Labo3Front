@@ -16,7 +16,7 @@
             </ul></td>
             <td>{{p.price}}</td>
             <td>
-                <button class="btn btn-primary" type="button" routerLink="/detail/{{p.id}}">Détails</button>
+                <button class="btn btn-primary" type="button" [routerLink]="['detail', p.id]">Détails</button>
             </td>
             <td>
                 <button class="btn btn-danger" type="button" (click)="onClick(p.id)">Supprimer</button>
@@ -24,3 +24,4 @@
         </tr>
     </tbody>
 </table>
+<router-outlet></router-outlet>

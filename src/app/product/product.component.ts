@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product.model';
 import { ProductService } from '../services/product.service';
@@ -11,11 +12,25 @@ import { ProductService } from '../services/product.service';
 export class ProductComponent implements OnInit {
 
   products$ : Observable<Product[]>;
+  navigationSubscription;
 
-  constructor(private productService : ProductService) { }
+  constructor(
+    private productService : ProductService,
+    private router : Router
+    ) { 
+      this.navigationSubscription = this.router.events.subscribe(
+        (e:any) => {if (e instanceof NavigationEnd) {
+          this.initialize();
+        }}
+        )
+    }
 
   ngOnInit(): void {
     this.products$ = this.productService.getAll()
+  }
+
+  initialize() {
+    this.products$ = this.productService.getAll();
   }
 
   onClick(id : number) {

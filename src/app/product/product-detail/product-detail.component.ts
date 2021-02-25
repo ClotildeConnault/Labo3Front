@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Product } from 'src/app/models/product.model';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -10,15 +10,36 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductDetailComponent implements OnInit {
 
-  Product : Product;
+  product : Product;
+  navigationSubscription;
 
   constructor(
     private productService : ProductService,
-    private activatedRoute : ActivatedRoute
-    ) { }
+    private activatedRoute : ActivatedRoute,
+    private router : Router
+    ) { 
+      this.navigationSubscription = this.router.events.subscribe(
+        (e:any) => {if (e instanceof NavigationEnd) {
+          this.initialize();
+        }}
+        )
+    }
 
   ngOnInit(): void {
     let id = this.activatedRoute.snapshot.params['id'];
+    console.log(id);
+
+    this.productService.getByID(id).subscribe(
+      product => {this.product = product}
+    )
+    
+  };
+
+  initialize() {
+    let id = this.activatedRoute.snapshot.params['id'];
+    this.productService.getByID(id).subscribe(
+      product => {this.product = product}
+    )
   }
 
 }
