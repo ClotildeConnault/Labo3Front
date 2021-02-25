@@ -31,4 +31,5 @@ export class UserService {
   update(id, user: User): Observable<User> {
     return this.httpClient.put<User>(this.BASE_URL + "/" + id, user);
   }
+  
 }
