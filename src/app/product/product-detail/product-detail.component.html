@@ -1,1 +1,19 @@
-<p>product-detail works!</p>
+<h1>Détails</h1>
+<div *ngIf="product">
+    <p>Détail du produit : {{product.name}}</p>
+
+    <p>Description : {{product.description}}</p>
+    <p>Date d'insertion' : {{product.insertDate}}</p>
+    <p>Date de mise à jour : {{product.updateDate}}</p>
+    <p>Date de péremption : {{product.expirationDate}} </p>
+    <p>Prix : {{product.price}} </p>
+    <p>Quantité en stock : {{product.quantity}} </p>
+    <p>Fournisseur : {{product.supplier}} </p>
+    <p>Catégorie(s)</p>
+        <ul>
+            <li *ngFor="let c of product.categories">{{c.name}}</li>
+        </ul>
+    
+</div>
+
+
