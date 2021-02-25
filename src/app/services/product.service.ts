@@ -20,8 +20,11 @@ export class ProductService {
     return this.httpClient.get<Product>(this.BASE_URL + "/" + id);
   }
 
-  delete(id): Observable<Product> {
-    return this.httpClient.delete<Product>(this.BASE_URL + "/" + id);
+  delete(id) {
+    this.httpClient.delete(this.BASE_URL + "/" + id).subscribe(
+      data => console.log("success", data),
+      error => console.error("couldn't delete because, error")
+    );
   }
 
   insert(product: Product): Observable<Product> {

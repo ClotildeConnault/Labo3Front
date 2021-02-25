@@ -42,4 +42,10 @@ export class ProductDetailComponent implements OnInit {
     )
   }
 
+  ngOnDestroy() {
+    if (this.navigationSubscription) {  
+       this.navigationSubscription.unsubscribe();
+    }
+  }
+
 }
