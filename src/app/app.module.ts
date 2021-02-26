@@ -23,7 +23,8 @@ import { ProductDetailComponent } from './product/product-detail/product-detail.
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

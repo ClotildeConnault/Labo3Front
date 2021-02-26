@@ -11,6 +11,7 @@ import { ProductService } from '../services/product.service';
 })
 export class ProductComponent implements OnInit {
 
+  searching : boolean
   products$ : Observable<Product[]>;
   navigationSubscription;
 
@@ -26,7 +27,15 @@ export class ProductComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.products$ = this.productService.getAll()
+    this.productService.searchingSubscriber$.subscribe(searching => {
+      if (searching){
+        this.productService.searchValueSubscriber$.subscribe(searchValue => {this.products$ = this.productService.searchByName(searchValue)})
+      }else{
+        this.products$ = this.productService.getAll()
+      }    
+    })
+    
+    
   }
 
   initialize() {
