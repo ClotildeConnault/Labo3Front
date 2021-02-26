@@ -39,7 +39,18 @@ export class ProductAddComponent implements OnInit {
     const form = this.form_product;
     if(form.valid){
       this.product = form.value;
+
+      /**
+       * Transformation de la date pour la DB
+       */
+
       this.product.expirationDate = new Date(form.get('expirationDate').value);
+
+      /**
+       * Imputation du taux de TVA
+       */
+
+      this.product.tva = Number(form.get('tva').value);
 
       /**
        * Récupération du fournisseur et de la catégorie

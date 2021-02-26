@@ -11,7 +11,7 @@ export const PRODUCT_FORM_CREATE: FormGroupDef = {
     price: new FormControl(0),
     quantity: new FormControl(0),
     imagePath: new FormControl(null),
-    TVA: new FormControl(0),
+    tva: new FormControl(null),
     categories: new FormControl(0, [Validators.required, Validators.min(1)]),
     supplier: new FormControl(0, [Validators.required, Validators.min(1)]),
 }
