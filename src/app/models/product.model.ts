@@ -10,7 +10,7 @@ export class Product {
     expirationDate : Date;
     price : number;
     quantity : number;
-    imagePath : string;
+    imagePath : string; 
     TVA : number;
     categories : [Category];
     supplier : Supplier

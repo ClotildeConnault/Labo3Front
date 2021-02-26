@@ -1,18 +1,26 @@
-<h1>Détails</h1>
-<div *ngIf="product">
-    <p>Détail du produit : {{product.name}}</p>
 
-    <p>Description : {{product.description}}</p>
-    <p>Date d'insertion' : {{product.insertDate}}</p>
-    <p>Date de mise à jour : {{product.updateDate}}</p>
-    <p>Date de péremption : {{product.expirationDate}} </p>
-    <p>Prix : {{product.price}} </p>
-    <p>Quantité en stock : {{product.quantity}} </p>
-    <p>Fournisseur : {{product.supplier}} </p>
-    <p>Catégorie(s)</p>
+
+<div class="card bg-light mb-3" style="width: 18rem;" *ngIf="product">
+    <img class="card-img-top" src={{product.imagePath}} alt="image du produit">
+    <div class="card-header">
+        {{product.name}}
+    </div>
+    <div class="card-body">
+    <p class="card-text">Description : {{product.description}}</p>
+    <p class="card-text">Date d'insertion' : {{product.insertDate}}</p>
+    <p class="card-text">Date de mise à jour : {{product.updateDate}}</p>
+    <p class="card-text">Date de péremption : {{product.expirationDate}} </p>
+    <p class="card-text">Prix : {{product.price}} </p>
+    <p class="card-text">Quantité en stock : {{product.quantity}} </p>
+    <p class="card-text">Fournisseur : {{product.supplier.companyName}} </p>
+    <p class="card-text">Catégorie(s)</p>
         <ul>
             <li *ngFor="let c of product.categories">{{c.name}}</li>
         </ul>
+    </div>
+    
+
+    
     
 </div>
 

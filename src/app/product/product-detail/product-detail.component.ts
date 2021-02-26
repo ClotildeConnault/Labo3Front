@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Product } from 'src/app/models/product.model';
+import { Supplier } from 'src/app/models/supplier.model';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductDetailComponent implements OnInit {
 
   product : Product;
+  supplier : Supplier;
   navigationSubscription;
 
   constructor(
@@ -33,6 +35,7 @@ export class ProductDetailComponent implements OnInit {
       product => {this.product = product}
     )
     
+    
   };
 
   initialize() {
@@ -40,6 +43,12 @@ export class ProductDetailComponent implements OnInit {
     this.productService.getByID(id).subscribe(
       product => {this.product = product}
     )
+  }
+
+  ngOnDestroy() {
+    if (this.navigationSubscription) {  
+       this.navigationSubscription.unsubscribe();
+    }
   }
 
 }

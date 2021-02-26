@@ -7,7 +7,11 @@ import { ProductComponent } from './product/product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { NavComponent } from './components/nav/nav.component';
+
+import { LoginComponent } from './components/login/login.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 @NgModule({
@@ -16,7 +20,9 @@ import { ProductDetailComponent } from './product/product-detail/product-detail.
     ProductComponent,
     HomeComponent,
     NavComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    LoginComponent
+
   ],
   imports: [
     BrowserModule,
@@ -24,7 +30,9 @@ import { ProductDetailComponent } from './product/product-detail/product-detail.
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

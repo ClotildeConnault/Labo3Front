@@ -43,7 +43,17 @@ export class ProductComponent implements OnInit {
   }
 
   onClick(id : number) {
+    console.log(id);
     this.productService.delete(id);
+    this.initialize();
+    this.router.navigate(['/products']);
+    
+  }
+
+  ngOnDestroy() {
+    if (this.navigationSubscription) {  
+       this.navigationSubscription.unsubscribe();
+    }
   }
 
 }
