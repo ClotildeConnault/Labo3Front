@@ -1,0 +1,52 @@
+<div>
+
+    <h3 class="col-sm-12">Mise à jour du produit : </h3>
+
+    <form class="col-sm-8" [formGroup]="form_product" (submit)="onUpdate()">
+	    <div class="form-group">
+	        <label for="name">Nom : </label>
+	        <input class="form-control" type="text" id="name" name="name" placeholder="Nom du produit" formControlName="name" [(ngModel)]="product.name">
+        </div>
+        <div class="form-group">
+	        <label for="description">Description : </label>
+	        <textarea class="form-control" type="text" id="description" name="description" placeholder="Description du produit" formControlName="description" [(ngModel)]="product.description"></textarea>
+        </div>
+        <div class="form-group">
+	        <label for="expirationDate">Date d'expiration : </label>
+	        <input class="form-control" type="date" id="expirationDate" name="expirationDate" formControlName="expirationDate" [(ngModel)]="product.expirationDate">
+        </div>
+        <div class="form-group">
+	        <label for="price">Prix unitaire (en euros) : </label>
+	        <input class="form-control" type="number" step="0.01" id="price" name="price" formControlName="price" [(ngModel)]="product.price">
+        </div>
+        <div class="form-group">
+	        <label for="quantity">Stock disponible : </label>
+	        <input class="form-control" type="number" id="quantity" name="quantity" formControlName="quantity" [(ngModel)]="product.quantity">
+        </div>
+        <div class="form-group">
+	        <label for="imagePath">Image : </label>
+	        <input class="form-control" type="text" id="imagePath" name="imagePath" placeholder="Entrez l'URL de l'image ici" formControlName="imagePath" [(ngModel)]="product.imagePath">
+        </div>
+        <div class="form-group">
+	        <label for="tva">TVA applicable : </label>
+            <select class="form-control" type="text" id="tva" name="tva" formControlName="tva" [(ngModel)]="product.tva">
+                <option value="6">6%</option>
+                <option value="12">12%</option>
+                <option value="21">21%</option>
+            </select>
+        </div>
+        <div class="form-group">
+	    	<label for="supplier">Fournisseur : </label>
+			<select class="form-control" id="supplier" name="supplier" formControlName="supplier" [(ngModel)]="product.supplier">
+		    		<option *ngFor="let s of suppliers$ | async" [value]="s.id">{{s.companyName}}</option>
+		    </select>
+		</div>
+        <div class="form-group">
+	    	<label for="categories">Catégorie : </label>
+			<select class="form-control" id="categories" name="categories" formControlName="categories" multiple [(ngModel)]="product.categories">
+		    		<option *ngFor="let c of categories$ | async" [value]="c.id">{{c.name}}</option>
+		    </select>
+		</div>
+        <button class="btn btn-success" type="submit">Modifier ce produit</button>&nbsp;<button class="btn btn-primary" routerLink="/products">Revenir à la liste des produits</button>
+    </form>
+</div>
