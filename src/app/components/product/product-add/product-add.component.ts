@@ -24,7 +24,7 @@ export class ProductAddComponent implements OnInit {
   suppltab: Array<Supplier>;
   cattab: Array<Category>;
   product: Product;
-  categories: Array<Category>;
+  categories: Array<Category> = [];
 
   constructor(private service : ProductService, private supplServ : SupplierService, private catServ : CategoryService, private router : Router) { }
 
@@ -39,8 +39,7 @@ export class ProductAddComponent implements OnInit {
     const form = this.form_product;
     if(form.valid){
       this.product = form.value;
-      this.product.insertDate = new Date();
-      this.product.updateDate = new Date();
+      this.product.expirationDate = new Date(form.get('expirationDate').value);
 
       /**
        * Récupération du fournisseur et de la catégorie
@@ -53,7 +52,7 @@ export class ProductAddComponent implements OnInit {
       }
 
       for(let i = 0; i < this.cattab.length; i++) {
-        if(this.cattab[i].id == form.get('category').value) {
+        if(this.cattab[i].id == form.get('categories').value) {
           this.categories.push(this.cattab[i]);
         }
       }
