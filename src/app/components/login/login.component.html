@@ -1,0 +1,16 @@
+<div *ngIf="!isConnected">
+    <form class="form-group" [formGroup]="fg" (ngSubmit)="onSubmit()">
+        <span>
+            <input type="email" class="form-control" placeholder="email" formControlName="email"> &nbsp;
+        </span>
+        <span>
+            <input type="password" class="form-control" placeholder="mot de passe" formControlName="password"> &nbsp;
+        </span>
+        <button class="btn btn-info" size="tiny" status="info" [disabled]="fg.invalid">Connexion</button>&nbsp;    
+        <!-- <button class="btn btn-info" size="tiny" status="info" (click)="register()">Enregistrement</button> -->   
+    </form>         
+</div>
+
+<div *ngIf="isConnected">
+    <button nbButton size="tiny" status="warning" (click)="logout()">Déconnexion</button>    
+</div>
