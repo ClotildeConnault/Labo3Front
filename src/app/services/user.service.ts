@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
+import { UserRegister } from '../models/userRegister.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,10 @@ export class UserService {
 
   private BASE_URL = 'http://localhost:8080/users'
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient,
+    private router : Router
+    ) { }
 
   getAll(): Observable<User[]> {
     return this.httpClient.get<User[]>(this.BASE_URL);
@@ -24,8 +29,11 @@ export class UserService {
     return this.httpClient.delete<User>(this.BASE_URL + "/" + id);
   }
 
-  insert(user: User): Observable<User> {
-    return this.httpClient.post<User>(this.BASE_URL, user);
+  insert(user: UserRegister) {
+    return this.httpClient.post<UserRegister>(this.BASE_URL, user).subscribe({
+      next : () => this.router.navigate(['']),
+      error : (error) => console.log(error)
+    })
   }
 
   update(id, user: User): Observable<User> {

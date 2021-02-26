@@ -13,5 +13,6 @@ export class Product {
     imagePath : string; 
     TVA : number;
     categories : [Category];
-    supplier : Supplier
+    supplier : Supplier;
+    inactive : boolean;
 }

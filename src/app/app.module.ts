@@ -14,6 +14,7 @@ import { ProductAddComponent } from './components/product/product-add/product-ad
 import { RegisterComponent } from './components/register/register.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
