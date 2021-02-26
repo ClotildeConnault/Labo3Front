@@ -12,7 +12,7 @@
     <p class="card-text">Date de péremption : {{product.expirationDate}} </p>
     <p class="card-text">Prix : {{product.price}} </p>
     <p class="card-text">Quantité en stock : {{product.quantity}} </p>
-    <p class="card-text">Fournisseur : {{product.supplier}} </p>
+    <p class="card-text">Fournisseur : {{product.supplier.companyName}} </p>
     <p class="card-text">Catégorie(s)</p>
         <ul>
             <li *ngFor="let c of product.categories">{{c.name}}</li>
