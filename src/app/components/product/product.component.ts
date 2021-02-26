@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Product } from '../../models/product.model';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-product',
@@ -7,9 +11,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductComponent implements OnInit {
 
-  constructor() { }
+  products$ : Observable<Product[]>;
+  navigationSubscription;
+
+  constructor(
+    private productService : ProductService,
+    private router : Router
+    ) { 
+      this.navigationSubscription = this.router.events.subscribe(
+        (e:any) => {if (e instanceof NavigationEnd) {
+          this.initialize();
+        }}
+        )
+    }
 
   ngOnInit(): void {
+    this.products$ = this.productService.getAll()
+  }
+
+  initialize() {
+    this.products$ = this.productService.getAll();
+  }
+
+  onClick(id : number) {
+    console.log(id);
+    this.productService.delete(id);
+    this.initialize();
+    this.router.navigate(['/products']);
+    
+  }
+
+  ngOnDestroy() {
+    if (this.navigationSubscription) {  
+       this.navigationSubscription.unsubscribe();
+    }
   }
 
 }
