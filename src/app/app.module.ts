@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductDetailComponent } from './components/product/product-detail/product-detail.component';
 import { ProductAddComponent } from './components/product/product-add/product-add.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ProductSearchComponent } from './components/product/product-search/product-search.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { RegisterComponent } from './components/register/register.component';
     ProductDetailComponent,
     LoginComponent,
     ProductAddComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProductSearchComponent
   ],
   imports: [
     BrowserModule,

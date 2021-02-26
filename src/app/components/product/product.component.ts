@@ -28,12 +28,14 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService.searchingSubscriber$.subscribe(searching => {
-      if (searching){
-        this.productService.searchValueSubscriber$.subscribe(searchValue => {this.products$ = this.productService.searchByName(searchValue)})
-      }else{
-        this.products$ = this.productService.getAll()
-      }    
-    })
+        if (searching){
+            this.products$=this.productService.listProductSubscriber$
+            this.products$.subscribe(v => console.log(v))
+          }else{
+          this.products$ = this.productService.getAll()
+        }    
+      })
+    
     
     
   }
