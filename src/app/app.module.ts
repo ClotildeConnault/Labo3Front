@@ -11,7 +11,7 @@ import { ProductDetailComponent } from './components/product/product-detail/prod
 import { ProductAddComponent } from './components/product/product-add/product-add.component';
 
 import { LoginComponent } from './components/login/login.component';
-import { ProductDetailComponent } from './product/product-detail/product-detail.component';
+//import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -23,7 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomeComponent,
     NavComponent,
     ProductDetailComponent,
-    ProductAddComponent
+    ProductAddComponent,
     LoginComponent
 
   ],
