@@ -53,7 +53,7 @@ export class ProductAddComponent implements OnInit {
       this.product.tva = Number(form.get('tva').value);
 
       /**
-       * Récupération du fournisseur et de la catégorie
+       * Récupération du fournisseur
        */
 
       for(let i = 0; i < this.suppltab.length; i++) {
@@ -62,14 +62,20 @@ export class ProductAddComponent implements OnInit {
         }
       }
 
+      /**
+       * Récupération des catégories
+       */
+
       for(let i = 0; i < this.cattab.length; i++) {
-        if(this.cattab[i].id == form.get('categories').value) {
-          this.categories.push(this.cattab[i]);
-        }
+        form.get('categories').value.forEach(element => {
+          if(this.cattab[i].id == element) {
+            this.categories.push(this.cattab[i]);
+          }
+        });     
       }
       this.product.categories = this.categories;
       
-      console.log(this.product);
+      //console.log(this.product);
       this.service.insert(this.product).subscribe();
       this.form_product.reset();
       this.router.navigate(['products']);
