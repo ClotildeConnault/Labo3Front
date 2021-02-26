@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Product } from '../models/product.model';
 
 @Injectable({
@@ -9,6 +9,20 @@ import { Product } from '../models/product.model';
 export class ProductService {
 
   private BASE_URL = 'http://localhost:8080/products'
+
+  private searchingSubject = new Subject<boolean>();
+  private searchValueSubject = new Subject<String>();
+
+  searchingSubscriber$ = this.searchingSubject.asObservable();
+  searchValueSubscriber$ = this.searchValueSubject.asObservable();
+  
+  emitSearching(searching : boolean){
+    this.searchingSubject.next(searching);
+  }
+
+  emitSearchValue(searchValue : String){
+    this.searchValueSubject.next(searchValue);
+  }
 
   constructor(private httpClient: HttpClient) { }
 
@@ -33,5 +47,9 @@ export class ProductService {
 
   update(id, product: Product): Observable<Product> {
     return this.httpClient.put<Product>(this.BASE_URL + "/" + id, product);
+  }
+
+  searchByName(productName : String){
+    return this.httpClient.post<Product[]>(this.BASE_URL + "/searchByName", productName);
   }
 }
