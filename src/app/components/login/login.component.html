@@ -1,8 +1,10 @@
-<div *ngIf="!isConnected">
+<div class="login">
+    <div *ngIf="!isConnected">
     <form class="form-group" [formGroup]="fg" (ngSubmit)="onSubmit()">
         <span>
             <input type="email" class="form-control" placeholder="email" formControlName="email"> &nbsp;
         </span>
+        &nbsp;&nbsp;
         <span>
             <input type="password" class="form-control" placeholder="mot de passe" formControlName="password"> &nbsp;
         </span>
@@ -13,4 +15,5 @@
 
 <div *ngIf="isConnected">
     <button nbButton size="tiny" status="warning" (click)="logout()">Déconnexion</button>    
+</div>
 </div>
