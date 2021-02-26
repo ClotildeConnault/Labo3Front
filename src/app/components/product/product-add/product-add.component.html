@@ -29,7 +29,7 @@
         </div>
         <div class="form-group">
 	        <label for="TVA">TVA applicable : </label>
-            <select class="form-control" type="number" id="quantity" name="quantity" formControlName="quantity">
+            <select class="form-control" type="number" id="TVA" name="TVA" formControlName="TVA">
                 <option value="6">6%</option>
                 <option value="12">12%</option>
                 <option value="21">21%</option>
@@ -42,8 +42,8 @@
 		    </select>
 		</div>
         <div class="form-group">
-	    	<label for="category">Catégorie : </label>
-			<select class="form-control" id="category" name="category" formControlName="category">
+	    	<label for="categories">Catégorie : </label>
+			<select class="form-control" id="categories" name="categories" formControlName="categories">
 		    		<option *ngFor="let c of categories$ | async" [value]="c.id">{{c.name}}</option>
 		    </select>
 		</div>
