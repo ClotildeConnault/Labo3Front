@@ -1,26 +1,52 @@
 <div>
 
-    <h3>Création d'un nouveau produit : </h3>
+    <h3 class="col-sm-12">Création d'un nouveau produit : </h3>
 
-    <form [formGroup]="this.form_product" (submit)="onSubmit()">
-	    <div>
+    <form class="col-sm-8" [formGroup]="form_product" (submit)="onSubmit()">
+	    <div class="form-group">
 	        <label for="name">Nom : </label>
-	        <input type="text" id="name" name="name" placeholder="Nom du produit" formControlName="name">
+	        <input class="form-control" type="text" id="name" name="name" placeholder="Nom du produit" formControlName="name">
         </div>
-        <div>
+        <div class="form-group">
 	        <label for="description">Description : </label>
-	        <textarea type="text" id="description" name="description" placeholder="Description du produit" formControlName="description"></textarea>
+	        <textarea class="form-control" type="text" id="description" name="description" placeholder="Description du produit" formControlName="description"></textarea>
         </div>
-        <div>
+        <div class="form-group">
 	        <label for="expirationDate">Date d'expiration : </label>
-	        <input type="date" id="expirationDate" name="expirationDate" formControlName="expirationDate">
+	        <input class="form-control" type="date" id="expirationDate" name="expirationDate" formControlName="expirationDate">
         </div>
-        <div>
-	        <label for="price">Prix unitaire : </label>
-	        <input type="number" id="price" name="price" formControlName="price">
+        <div class="form-group">
+	        <label for="price">Prix unitaire (en euros) : </label>
+	        <input class="form-control" type="number" step="0.01" id="price" name="price" formControlName="price">
         </div>
-        <button type="submit">Ajouter ce produit</button>
+        <div class="form-group">
+	        <label for="quantity">Stock disponible : </label>
+	        <input class="form-control" type="number" id="quantity" name="quantity" formControlName="quantity">
+        </div>
+        <div class="form-group">
+	        <label for="imagePath">Image : </label>
+	        <input class="form-control" type="text" id="imagePath" name="imagePath" placeholder="Entrez l'URL de l'image ici" formControlName="imagePath">
+        </div>
+        <div class="form-group">
+	        <label for="TVA">TVA applicable : </label>
+            <select class="form-control" type="number" id="quantity" name="quantity" formControlName="quantity">
+                <option value="6">6%</option>
+                <option value="12">12%</option>
+                <option value="21">21%</option>
+            </select>
+        </div>
+        <div class="form-group">
+	    	<label for="supplier">Fournisseur : </label>
+			<select class="form-control" id="supplier" name="supplier" formControlName="supplier">
+		    		<option *ngFor="let s of suppliers$ | async" [value]="s.id">{{s.companyName}}</option>
+		    </select>
+		</div>
+        <div class="form-group">
+	    	<label for="category">Catégorie : </label>
+			<select class="form-control" id="category" name="category" formControlName="category">
+		    		<option *ngFor="let c of categories$ | async" [value]="c.id">{{c.name}}</option>
+		    </select>
+		</div>
+        <button class="btn btn-success" type="submit">Ajouter ce produit</button>&nbsp;<button class="btn btn-primary" routerLink="/products">Revenir à la liste des produits</button>
     </form>
-    <button (click)="return()">Revenir à la liste des produits</button>
-
 </div>
