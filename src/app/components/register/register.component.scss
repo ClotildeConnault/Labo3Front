@@ -1,0 +1,10 @@
+.sousForm {
+   display : flex;
+   justify-content: space-between;
+   flex-direction: column;
+
+   label {
+       margin-left: 20px;
+       width: 100px;
+   }
+}

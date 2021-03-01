@@ -1,19 +1,34 @@
 <div class="login">
     <div *ngIf="!isConnected">
     <form class="form-group" [formGroup]="fg" (ngSubmit)="onSubmit()">
-        <span>
-            <input type="email" class="form-control" placeholder="email" formControlName="email"> &nbsp;
-        </span>
-        &nbsp;&nbsp;
-        <span>
-            <input type="password" class="form-control" placeholder="mot de passe" formControlName="password"> &nbsp;
-        </span>
+        <div class="test">
+            
+            <div class="loginInputs">
+                <span>
+                    <input type="text" class="form-control" placeholder="pseudo" formControlName="pseudo"> &nbsp;
+                </span>
+                &nbsp;&nbsp;
+                <span>
+                    <input type="password" class="form-control" placeholder="mot de passe" formControlName="password"> &nbsp;
+                </span>
+        
+            </div>
+            <div>
+                <p *ngIf="isWrong" style="color: red; font-size: 12px;">Le pseudo ou le mot de passe n'est pas correct</p> 
+            </div>
+            
+            
+        </div>
+        
+        
+        
         <button class="btn btn-info" size="tiny" status="info" [disabled]="fg.invalid">Connexion</button>&nbsp;    
         <button class="btn btn-info" size="tiny" status="info" (click)="register()">Enregistrement</button>  
-    </form>         
+    </form>
+            
 </div>
 
 <div *ngIf="isConnected">
-    <button nbButton size="tiny" status="warning" (click)="logout()">Déconnexion</button>    
+    <button class="btn btn-danger" size="tiny" status="warning" (click)="logout()">Déconnexion</button>    
 </div>
 </div>
