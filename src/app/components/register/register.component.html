@@ -1,1 +1,28 @@
-<p>register works!</p>
+
+
+
+<div class="card bg-light mb-3" style="width: 18rem;">
+    <div class="card-header">
+        Nouvel utilisateur
+    </div>
+    <div class="card-body">
+        <form class="form-group" [formGroup]="fg" (ngSubmit)="onSubmit()"> 
+            <label>Prénom</label>
+            <input class="form-control" type="text" formControlName="firstName">
+            <label>Nom</label>
+            <input class="form-control" type="text" formControlName="lastName">
+            <label>Niveau d'accès</label>
+            <select class="form-control" formControlName="accessLevel">
+                <option *ngFor="let a of accessLevel" [value]="a">{{accessLevelLabelMapping[a]}}</option>
+            </select>
+            <label>Pseudo</label>
+            <input class="form-control" type="text" formControlName="pseudo">
+            <label>Mot de passe</label>
+            <input class="form-control" type="password" formControlName="password">
+            <label>Adresse</label>
+            <div formArrayName="address"></div>
+            <input class="form-control" type="text" formControlName="firstName"> -->
+            <button class="btn btn-light" type="submit" [disabled]="fg.invalid">Enregister</button>
+        </form>
+
+    </div>

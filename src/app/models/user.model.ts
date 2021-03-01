@@ -2,7 +2,6 @@ export class User {
     id: number;
     firstName: string;
     lastName: string;
-    image: string;
     accessLevel : AccessLevel;
     pseudo : string;
     password : string;
@@ -22,3 +21,9 @@ export enum AccessLevel {
     EMPLOYEE,
     ADMINISTRATOR,
 }
+
+export const accessLevelLabelMapping: Record<AccessLevel, string> = {
+    [AccessLevel.CUSTOMER]: "Client",
+    [AccessLevel.EMPLOYEE]: "Employé",
+    [AccessLevel.ADMINISTRATOR]: "Administrateur"
+};

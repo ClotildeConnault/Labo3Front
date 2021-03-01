@@ -13,6 +13,8 @@ import { ProductDetailComponent } from './components/product/product-detail/prod
 import { ProductAddComponent } from './components/product/product-add/product-add.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProductSearchComponent } from './components/product/product-search/product-search.component';
+import { ProductUpdateComponent } from './components/product/product-update/product-update.component';
+
 
 
 @NgModule({
@@ -26,6 +28,7 @@ import { ProductSearchComponent } from './components/product/product-search/prod
     ProductAddComponent,
     RegisterComponent,
     ProductSearchComponent
+    ProductUpdateComponent
   ],
   imports: [
     BrowserModule,

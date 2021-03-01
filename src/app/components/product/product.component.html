@@ -9,14 +9,15 @@
         <th></th>
     </thead>
     <tbody *ngFor="let p of products$ | async">
-        <tr>
+        <tr *ngIf="!p.inactive">
             <td>{{p.name}}</td>
             <td><ul>
                 <li *ngFor="let c of p.categories">{{c.name}}</li>
             </ul></td>
             <td>{{p.price}}</td>
             <td>
-                <button class="btn btn-primary" type="button" [routerLink]="['detail', p.id]">Détails</button>
+              <button class="btn btn-primary" type="button" [routerLink]="['detail', p.id]">Détails</button>
+            
             </td>
             <td>
                 <button class="btn btn-danger" type="button" (click)="onClick(p.id)">Supprimer</button>

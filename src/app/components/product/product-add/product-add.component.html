@@ -41,10 +41,9 @@
 		    		<option *ngFor="let s of suppliers$ | async" [value]="s.id">{{s.companyName}}</option>
 		    </select>
 		</div>
-        <!-- TODO : Permettre une sélection multiple de catégories -->
         <div class="form-group">
 	    	<label for="categories">Catégorie : </label>
-			<select class="form-control" id="categories" name="categories" formControlName="categories">
+			<select class="form-control" id="categories" name="categories" formControlName="categories" multiple>
 		    		<option *ngFor="let c of categories$ | async" [value]="c.id">{{c.name}}</option>
 		    </select>
 		</div>

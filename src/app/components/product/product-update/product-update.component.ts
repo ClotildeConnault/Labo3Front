@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { PRODUCT_FORM_CREATE } from 'src/app/forms/product.form';
 import { Category } from 'src/app/models/category.model';
@@ -11,11 +11,11 @@ import { ProductService } from 'src/app/services/product.service';
 import { SupplierService } from 'src/app/services/supplier.service';
 
 @Component({
-  selector: 'app-product-add',
-  templateUrl: './product-add.component.html',
-  styleUrls: ['./product-add.component.scss']
+  selector: 'app-product-update',
+  templateUrl: './product-update.component.html',
+  styleUrls: ['./product-update.component.scss']
 })
-export class ProductAddComponent implements OnInit {
+export class ProductUpdateComponent implements OnInit {
 
   form_product = new FormGroup(PRODUCT_FORM_CREATE);
 
@@ -24,33 +24,42 @@ export class ProductAddComponent implements OnInit {
   suppltab: Array<Supplier>;
   cattab: Array<Category>;
   product: Product;
+  productUpdate: Product;
   categories: Array<Category> = [];
 
-  constructor(private service : ProductService, private supplServ : SupplierService, private catServ : CategoryService, private router : Router) { }
+  constructor(private service : ProductService, private supplServ : SupplierService, private catServ : CategoryService, private activatedRoute : ActivatedRoute, private router : Router) { }
 
   ngOnInit(): void {
+    let id = this.activatedRoute.snapshot.params['id'];
+
+    this.service.getByID(id).subscribe(
+      product => {this.product = product}
+    )
+
     this.suppliers$ = this.supplServ.getAll();
     this.categories$ = this.catServ.getAll()
     this.supplServ.getAll().subscribe(x => this.suppltab = x);
     this.catServ.getAll().subscribe(x => this.cattab = x);
   }
 
-  onSubmit() {
+  onUpdate() {
     const form = this.form_product;
     if(form.valid){
-      this.product = form.value;
+      this.productUpdate = form.value;
+
+      this.productUpdate.insertDate = this.product.insertDate;
 
       /**
        * Transformation de la date pour la DB
        */
 
-      this.product.expirationDate = new Date(form.get('expirationDate').value);
+      this.productUpdate.expirationDate = new Date(form.get('expirationDate').value);
 
       /**
        * Imputation du taux de TVA
        */
 
-      this.product.tva = Number(form.get('tva').value);
+      this.productUpdate.tva = Number(form.get('tva').value);
 
       /**
        * Récupération du fournisseur
@@ -58,7 +67,7 @@ export class ProductAddComponent implements OnInit {
 
       for(let i = 0; i < this.suppltab.length; i++) {
         if(this.suppltab[i].id == form.get('supplier').value) {
-          this.product.supplier = this.suppltab[i];
+          this.productUpdate.supplier = this.suppltab[i];
         }
       }
 
@@ -73,10 +82,10 @@ export class ProductAddComponent implements OnInit {
           }
         });     
       }
-      this.product.categories = this.categories;
+      this.productUpdate.categories = this.categories;
       
       //console.log(this.product);
-      this.service.insert(this.product).subscribe();
+      this.service.update(this.product.id, this.productUpdate).subscribe();
       this.form_product.reset();
       this.router.navigate(['products']);
     } else {

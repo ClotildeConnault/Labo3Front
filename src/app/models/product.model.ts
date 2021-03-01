@@ -11,6 +11,7 @@ export class Product {
     price : number;
     quantity : number;
     imagePath : string; 
+    inactive : boolean;
     tva : number;
     categories : Category[];
     supplier : Supplier

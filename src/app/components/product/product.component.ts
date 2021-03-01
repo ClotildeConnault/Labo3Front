@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Product } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 @Component({
   selector: 'app-product',
@@ -47,6 +48,7 @@ export class ProductComponent implements OnInit {
   onClick(id : number) {
     console.log(id);
     this.productService.delete(id);
+   this.products$.forEach(p => console.log(p))
     this.initialize();
     this.router.navigate(['/products']);
     
