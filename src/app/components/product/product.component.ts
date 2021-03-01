@@ -42,6 +42,7 @@ export class ProductComponent implements OnInit {
   }
 
   initialize() {
+    console.log("INITIALIZE");
     this.products$ = this.productService.getAll();
   }
 
@@ -49,6 +50,7 @@ export class ProductComponent implements OnInit {
     this.productService.delete(id);
     this.initialize();
     this.router.navigate(['/products']);
+    
   }
 
   ngOnDestroy() {

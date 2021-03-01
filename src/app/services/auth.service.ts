@@ -27,6 +27,10 @@ export class AuthService {
     this.conSub.next(this.isConnected);
   }
 
+  public getIsConnected(): boolean {
+    return this.isConnected;
+    }
+
   login(pseudo : string, pwd : string) {
 
     let user = new LoginInfo();

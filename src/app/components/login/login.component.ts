@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  isWrong : boolean;
   isConnected : boolean;
   fg : FormGroup;
   status : Subscription; 
@@ -35,6 +36,8 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.authService.login(this.fg.value['pseudo'], this.fg.value['password']);
     console.log("TEST onSUBMIT" + this.isConnected);
+    this.isWrong = !this.authService.getIsConnected();
+
     
   }
 
