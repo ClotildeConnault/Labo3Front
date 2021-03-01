@@ -15,6 +15,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ProductUpdateComponent } from './components/product/product-update/product-update.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
