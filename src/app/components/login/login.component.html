@@ -10,10 +10,11 @@
         </span>
         <button class="btn btn-info" size="tiny" status="info" [disabled]="fg.invalid">Connexion</button>&nbsp;    
         <button class="btn btn-info" size="tiny" status="info" (click)="register()">Enregistrement</button>  
-    </form>         
+    </form>
+    <p>Le pseudo ou le mot de passe n'est pas correct</p>         
 </div>
 
 <div *ngIf="isConnected">
-    <button nbButton size="tiny" status="warning" (click)="logout()">Déconnexion</button>    
+    <button class="btn btn-danger" size="tiny" status="warning" (click)="logout()">Déconnexion</button>    
 </div>
 </div>

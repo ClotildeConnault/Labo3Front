@@ -35,10 +35,15 @@ export class AuthService {
 
     this.client.post<User>(this.url+"/users/auth", user).subscribe({
       next : (data : User) => {
-        this.currentUser = data;
-        this.isConnected = true;
+        if(data !== null){
+            this.currentUser = data;
+            this.isConnected = true;
+            this.emitStatus();
+            localStorage.setItem("isConnected", 'ok');
+        }
+
         this.emitStatus();
-        localStorage.setItem("isConnected", 'ok');
+
       },
       error : error => {console.log("ça plante : " + error.message)}
     })
@@ -46,7 +51,7 @@ export class AuthService {
 
   logout() {
     this.isConnected = false;
-    this.emitStatus;
+    this.emitStatus();
     localStorage.removeItem('isConnected');
   }
 }

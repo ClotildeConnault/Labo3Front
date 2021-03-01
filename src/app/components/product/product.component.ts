@@ -46,12 +46,9 @@ export class ProductComponent implements OnInit {
   }
 
   onClick(id : number) {
-    console.log(id);
     this.productService.delete(id);
-   this.products$.forEach(p => console.log(p))
     this.initialize();
     this.router.navigate(['/products']);
-    
   }
 
   ngOnDestroy() {
