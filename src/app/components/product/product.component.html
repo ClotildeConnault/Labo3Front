@@ -7,6 +7,7 @@
         <th>Prix</th>
         <th></th>
         <th></th>
+        <th></th>
     </thead>
     <tbody *ngFor="let p of products$ | async">
         <tr *ngIf="!p.inactive">
@@ -20,10 +21,14 @@
             
             </td>
             <td>
+                <button class="btn btn-warning" type="button" routerLink="/products/update/{{p.id}}">Mettre à jour</button>
+              
+              </td>
+            <td>
                 <button class="btn btn-danger" type="button" (click)="onClick(p.id)">Supprimer</button>
             </td>
         </tr>
     </tbody>
 </table>
-<button class="btn btn-warning" type="button" routerLink="/products/add">Ajouter un produit</button>
+<button class="btn btn-info" type="button" routerLink="/products/add">Ajouter un produit</button>
 <router-outlet></router-outlet>
