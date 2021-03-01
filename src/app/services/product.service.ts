@@ -11,17 +11,23 @@ export class ProductService {
   private BASE_URL = 'http://localhost:8080/products'
 
   private searchingSubject = new Subject<boolean>();
-  private searchValueSubject = new Subject<String>();
+  //private searchValueSubject = new Subject<String>();
+  private listProductSubject = new Subject<Product[]>();
 
   searchingSubscriber$ = this.searchingSubject.asObservable();
-  searchValueSubscriber$ = this.searchValueSubject.asObservable();
+  //searchValueSubscriber$ = this.searchValueSubject.asObservable();
+  listProductSubscriber$ = this.listProductSubject.asObservable();
   
   emitSearching(searching : boolean){
     this.searchingSubject.next(searching);
   }
 
-  emitSearchValue(searchValue : String){
+ /* emitSearchValue(searchValue : String){
     this.searchValueSubject.next(searchValue);
+  }*/
+
+  emitListProduct(listProduct : Product[]){
+    this.listProductSubject.next(listProduct);
   }
 
   constructor(private httpClient: HttpClient) { }
@@ -51,5 +57,9 @@ export class ProductService {
 
   searchByName(productName : String){
     return this.httpClient.post<Product[]>(this.BASE_URL + "/searchByName", productName);
+  }
+
+  search(product : Product){
+    return this.httpClient.post<Product[]>(this.BASE_URL + "/search", product)
   }
 }

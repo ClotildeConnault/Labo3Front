@@ -1,0 +1,27 @@
+<div class="col-6">
+    <h3>Recherche avancée</h3>
+        <form [formGroup]="searchForm">
+            <div class="form-group">
+                <label for="name">Nom du produit</label>
+                <input type="text" class="form-control" id="name" formControlName="name">
+            </div>
+            <div class="form-group">
+                <label for="description">Description du produit</label>
+                <input type="text" class="form-control" id="description" formControlName="description">
+            </div>
+            <div class="form-group">
+                <label for="name">Date expiration minimale</label>
+                <input type="date" class="form-control" id="expirationDate" formControlName="expirationDate">
+            </div>
+            <div class="form-group">
+                <label for="price">Prix max du produit</label>
+                <input type="number" class="form-control" id="price" formControlName="price" step="0.01" min="0.01">
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantité minimale en stock</label>
+                <input type="number" class="form-control" id="quantity" formControlName="quantity" min="1">
+            </div>
+            <button class="btn btn-success" (click)="search()">Recherche</button>
+        </form>
+</div>
+

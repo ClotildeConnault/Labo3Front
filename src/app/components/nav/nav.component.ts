@@ -29,9 +29,19 @@ export class NavComponent implements OnInit {
     if (this.searchForm.valid){      
       this.productService.emitSearching(true);
       const searchName = this.searchForm.value['search'];
-      this.productService.emitSearchValue(searchName)
-      this.router.navigateByUrl("/products");
+      this.productService.searchByName(searchName).subscribe(pl => {
+        this.productService.emitListProduct(pl)
+      })
+      
+      //this.productService.emitSearchValue(searchName)
+      
+        this.router.navigateByUrl("/products");
+      
+      
+    }else{
+      console.log("pas valide")
     }
+
     
   }
 
