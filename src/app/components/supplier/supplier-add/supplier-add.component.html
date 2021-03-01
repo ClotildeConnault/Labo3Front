@@ -1,0 +1,24 @@
+<div>
+
+    <h3 class="col-sm-12">Création d'un nouveau fournisseur : </h3>
+
+    <form class="col-sm-8" [formGroup]="form_supplier" (submit)="onSubmit()">
+	    <div class="form-group">
+	        <label for="companyName">Nom : </label>
+	        <input class="form-control" type="text" id="companyName" name="companyName" placeholder="Nom du fournisseur" formControlName="companyName">
+        </div>
+        <div class="form-group">
+	        <label for="statut">Statut social : </label>
+            <select class="form-control" type="text" id="statut" name="statut" formControlName="statut">
+                <option *ngFor="let s of statut" [value]="s">{{SocialStatutLabelMapping[s]}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+	        <label for="sector">Secteur d'activité : </label>
+            <select class="form-control" type="text" id="sector" name="sector" formControlName="sector">
+                <option *ngFor="let sc of sector" [value]="sc">{{SectorLabelMapping[sc]}}</option>
+            </select>
+        </div>
+        <button class="btn btn-success" type="submit">Ajouter ce fournisseur</button>&nbsp;<button class="btn btn-primary" routerLink="/suppliers">Revenir à la liste des fournisseurs</button>
+    </form>
+</div>

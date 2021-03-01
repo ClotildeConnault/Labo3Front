@@ -4,12 +4,17 @@
     <thead>
         <th>Nom</th>
         <th></th>
+        <th></th>
+        <th></th>
     </thead>
     <tbody *ngFor="let s of suppliers$ | async">
         <tr>
             <td>{{s.companyName}}</td>
             <td><button class="btn btn-primary" type="button" routerLink="/suppliers/detail/{{s.id}}">Détails</button></td>
+            <td><button class="btn btn-warning" type="button" routerLink="/suppliers/update/{{s.id}}">Modifier</button></td>
+            <td><button class="btn btn-danger" type="button">Supprimer (inactif)</button></td>
         </tr>
+        
     </tbody>
 </table>
-<button class="btn btn-info" type="button" routerLink="">Ajouter un fournisseur (inactif)</button>
+<button class="btn btn-info" type="button" routerLink="/suppliers/add">Ajouter un fournisseur</button>

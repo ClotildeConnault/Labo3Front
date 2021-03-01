@@ -16,6 +16,8 @@ import { ProductSearchComponent } from './components/product/product-search/prod
 import { ProductUpdateComponent } from './components/product/product-update/product-update.component';
 import { SupplierComponent } from './components/supplier/supplier.component';
 import { SupplierDetailComponent } from './components/supplier/supplier-detail/supplier-detail.component';
+import { SupplierAddComponent } from './components/supplier/supplier-add/supplier-add.component';
+import { SupplierUpdateComponent } from './components/supplier/supplier-update/supplier-update.component';
 
 
 
@@ -32,7 +34,9 @@ import { SupplierDetailComponent } from './components/supplier/supplier-detail/s
     ProductSearchComponent,
     ProductUpdateComponent,
     SupplierComponent,
-    SupplierDetailComponent
+    SupplierDetailComponent,
+    SupplierAddComponent,
+    SupplierUpdateComponent
   ],
   imports: [
     BrowserModule,

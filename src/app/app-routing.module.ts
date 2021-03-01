@@ -9,6 +9,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { ProductUpdateComponent } from './components/product/product-update/product-update.component';
 import { SupplierComponent } from './components/supplier/supplier.component';
 import { SupplierDetailComponent } from './components/supplier/supplier-detail/supplier-detail.component';
+import { SupplierAddComponent } from './components/supplier/supplier-add/supplier-add.component';
+import { SupplierUpdateComponent } from './components/supplier/supplier-update/supplier-update.component';
 
 
 const routes: Routes = [
@@ -29,6 +31,8 @@ const routes: Routes = [
     component: ProductDetailComponent
   }
 ]},
+  {path: 'suppliers/add', component: SupplierAddComponent},
+  {path: 'suppliers/update/:id', component: SupplierUpdateComponent},
   {path: '**', redirectTo: 'home'}
 ];
 
