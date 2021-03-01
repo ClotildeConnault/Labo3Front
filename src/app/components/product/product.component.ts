@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Product } from '../../models/product.model';
@@ -12,6 +12,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 })
 export class ProductComponent implements OnInit {
 
+  isShow : boolean;
   searching : boolean
   products$ : Observable<Product[]>;
   navigationSubscription;
@@ -51,6 +52,30 @@ export class ProductComponent implements OnInit {
     this.initialize();
     this.router.navigate(['/products']);
     
+  }
+
+  details(id) {
+    this.router.navigate(['products/detail/' + id]);
+    this.gotoTop();
+  }
+
+  @HostListener('window:scroll')
+  checkScroll() {
+    const scrollPosition = document.documentElement.scrollTop;
+
+    if (scrollPosition >= 100){
+      this.isShow = true;
+    } else {
+      this.isShow = false;
+    }
+  }
+
+  gotoTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    })
   }
 
   ngOnDestroy() {
