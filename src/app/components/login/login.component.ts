@@ -23,17 +23,18 @@ export class LoginComponent implements OnInit {
     this.authService.conSub.subscribe((data : boolean) => this.isConnected = data);
 
     this.fg = this.builder.group({
-      email : ['', [Validators.required, Validators.email]],
+      pseudo : ['', Validators.required],
       password : ['', Validators.required]
     })
   }
 
   onSubmit() {
-    this.authService.login(this.fg.value['email'], this.fg.value['password']);
+    this.authService.login(this.fg.value['pseudo'], this.fg.value['password']);
   }
 
   logout() {
-    this.isConnected = false;
+    this.authService.logout();
+    console.log(this.isConnected);
   }
 
   register() {

@@ -27,7 +27,7 @@ import { ProductUpdateComponent } from './components/product/product-update/prod
     LoginComponent,
     ProductAddComponent,
     RegisterComponent,
-    ProductSearchComponent
+    ProductSearchComponent,
     ProductUpdateComponent
   ],
   imports: [

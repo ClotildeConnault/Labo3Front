@@ -1,28 +1,55 @@
 
 
 
-<div class="card bg-light mb-3" style="width: 18rem;">
+<div class="card bg-light mb-3" style="width: 40rem;">
     <div class="card-header">
         Nouvel utilisateur
     </div>
     <div class="card-body">
-        <form class="form-group" [formGroup]="fg" (ngSubmit)="onSubmit()"> 
-            <label>Prénom</label>
-            <input class="form-control" type="text" formControlName="firstName">
-            <label>Nom</label>
-            <input class="form-control" type="text" formControlName="lastName">
-            <label>Niveau d'accès</label>
-            <select class="form-control" formControlName="accessLevel">
-                <option *ngFor="let a of accessLevel" [value]="a">{{accessLevelLabelMapping[a]}}</option>
-            </select>
-            <label>Pseudo</label>
-            <input class="form-control" type="text" formControlName="pseudo">
-            <label>Mot de passe</label>
-            <input class="form-control" type="password" formControlName="password">
+        <form [formGroup]="fg" (ngSubmit)="onSubmit()"> 
+            <div class="form-group">
+
+                <label>Prénom</label>
+                <input class="form-control" type="text" formControlName="firstName">
+                <label>Nom</label>
+                <input class="form-control" type="text" formControlName="lastName">
+                <label>Niveau d'accès</label>
+                <select class="form-control" formControlName="accessLevel">
+                    <option *ngFor="let a of accessLevel" [value]="a">{{accessLevelLabelMapping[a]}}</option>
+                </select>
+                <label>Pseudo</label>
+                <input class="form-control" type="text" formControlName="pseudo">
+                <label>Mot de passe</label>
+                <input class="form-control" type="password" formControlName="password">
+            </div>
             <label>Adresse</label>
-            <div formArrayName="address"></div>
-            <input class="form-control" type="text" formControlName="firstName"> -->
-            <button class="btn btn-light" type="submit" [disabled]="fg.invalid">Enregister</button>
+            <div formGroupName="address" class="sousForm">
+                <div >
+                    <label>Rue</label>
+                    <input type="text" formControlName="street" name="street">
+                </div>
+                <div>
+                     <label>Numéro</label>
+                     <input type="number" formControlName="number" name="number">
+                </div>
+                <div >
+                    <label>Ville</label>
+                    <input type="text" formControlName="city" name="city">
+                </div>
+                <div >
+                    <label>Code postal</label>
+                    <input type="text" formControlName="zipcode" name="zipcode">
+                </div>
+                <div>
+                    <label>Pays</label>
+                    <input type="text" formControlName="country" name="country">
+                </div>
+
+            </div>
+           
+            <button class="btn btn-light" [disabled]="fg.invalid">Enregistrer</button>
         </form>
 
     </div>
+
+   

@@ -10,7 +10,7 @@ import { User } from '../models/user.model';
 })
 export class AuthService {
 
-  private url : string = "http://localhost:8080/products"
+  private url : string = "http://localhost:8080"
 
   currentUser : User;
 
@@ -27,25 +27,26 @@ export class AuthService {
     this.conSub.next(this.isConnected);
   }
 
-  login(mail : string, pwd : string) {
+  login(pseudo : string, pwd : string) {
 
     let user = new LoginInfo();
-    user.email = mail;
+    user.pseudo = pseudo;
     user.password = pwd;
 
-    this.client.post<User>(this.url+"/auth", user).subscribe({
+    this.client.post<User>(this.url+"/users/auth", user).subscribe({
       next : (data : User) => {
         this.currentUser = data;
         this.isConnected = true;
         this.emitStatus();
-        localStorage.setItem("role", this.currentUser.accessLevel.toString());
         localStorage.setItem("isConnected", 'ok');
       },
       error : error => {console.log("ça plante : " + error.message)}
     })
+  }
 
-
-
-
+  logout() {
+    this.isConnected = false;
+    this.emitStatus;
+    localStorage.removeItem('isConnected');
   }
 }
