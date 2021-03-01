@@ -1,1 +1,15 @@
-<p>supplier works!</p>
+<h4>Liste des fournisseurs</h4>
+
+<table class="table table-striped">
+    <thead>
+        <th>Nom</th>
+        <th></th>
+    </thead>
+    <tbody *ngFor="let s of suppliers$ | async">
+        <tr>
+            <td>{{s.companyName}}</td>
+            <td><button class="btn btn-primary" type="button" routerLink="/suppliers/detail/{{s.id}}">Détails</button></td>
+        </tr>
+    </tbody>
+</table>
+<button class="btn btn-info" type="button" routerLink="">Ajouter un fournisseur (inactif)</button>

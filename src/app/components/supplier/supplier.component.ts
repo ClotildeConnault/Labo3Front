@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Supplier } from 'src/app/models/supplier.model';
+import { SupplierService } from 'src/app/services/supplier.service';
 
 @Component({
   selector: 'app-supplier',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SupplierComponent implements OnInit {
 
-  constructor() { }
+  suppliers$ : Observable<Supplier[]>;
+
+  constructor(private service : SupplierService) { }
 
   ngOnInit(): void {
+    this.suppliers$ = this.service.getAll()
   }
 
 }

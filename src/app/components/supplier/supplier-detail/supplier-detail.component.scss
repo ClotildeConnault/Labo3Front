@@ -1,0 +1,32 @@
+.article{
+    width: 250px;
+    height: 275px;
+    float: left;
+    padding: 5px;
+    margin: 5px;
+    border: 5px inset rgb(126, 240, 255);
+    background-color: rgb(205, 249, 255);
+    text-align: center;
+}
+
+// .imageArticle{
+//     background-size: cover;
+//     width: 200px;
+//     height: 200px;
+//     margin: auto;
+// }
+
+.imageArticle {
+    height: 200px;
+    width: 200px;
+    text-align: center;
+    overflow: hidden;
+    background-size: cover;
+    margin: auto;
+}
+ 
+/* Puis on adapte notre image */
+img {
+    height: 200px;
+    width: 200px;
+}
