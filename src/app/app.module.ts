@@ -14,6 +14,8 @@ import { ProductAddComponent } from './components/product/product-add/product-ad
 import { RegisterComponent } from './components/register/register.component';
 import { ProductSearchComponent } from './components/product/product-search/product-search.component';
 import { ProductUpdateComponent } from './components/product/product-update/product-update.component';
+import { SupplierComponent } from './components/supplier/supplier.component';
+import { SupplierDetailComponent } from './components/supplier/supplier-detail/supplier-detail.component';
 
 
 
@@ -28,7 +30,9 @@ import { ProductUpdateComponent } from './components/product/product-update/prod
     ProductAddComponent,
     RegisterComponent,
     ProductSearchComponent,
-    ProductUpdateComponent
+    ProductUpdateComponent,
+    SupplierComponent,
+    SupplierDetailComponent
   ],
   imports: [
     BrowserModule,

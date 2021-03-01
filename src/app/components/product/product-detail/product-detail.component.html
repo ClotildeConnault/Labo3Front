@@ -7,12 +7,12 @@
     </div>
     <div class="card-body">
     <p class="card-text">Description : {{product.description}}</p>
-    <p class="card-text">Date d'insertion' : {{product.insertDate}}</p>
-    <p class="card-text">Date de mise à jour : {{product.updateDate}}</p>
-    <p class="card-text">Date de péremption : {{product.expirationDate}} </p>
+    <p class="card-text">Date d'insertion : {{product.insertDate | date:'dd/MM/yyyy, HH:mm:ss'}}</p>
+    <p class="card-text">Date de mise à jour : {{product.updateDate | date:'dd/MM/yyyy, HH:mm:ss'}}</p>
+    <p class="card-text">Date de péremption : {{product.expirationDate | date:'dd/MM/yyyy, HH:mm:ss'}} </p>
     <p class="card-text">Prix : {{product.price}} </p>
     <p class="card-text">Quantité en stock : {{product.quantity}} </p>
-    <p class="card-text">Fournisseur : {{product.supplier.companyName}} </p>
+    <p class="card-text">Fournisseur : <a routerLink="/suppliers/detail/{{product.supplier.id}}">{{product.supplier.companyName}}</a> </p>
     <p class="card-text">Catégorie(s)</p>
         <ul>
             <li *ngFor="let c of product.categories">{{c.name}}</li>
