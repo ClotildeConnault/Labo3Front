@@ -17,5 +17,7 @@
         </form>
         <button type="button" class="btn btn-success" routerLink="/products/search">Recherche avancée</button>
         <app-login></app-login>
+        <button class="btn btn-info" routerLink="/user" *ngIf="isConnected">Mon compte</button>
+        <button class="btn btn-success" routerLink="/basket">Panier</button>
     </div>
 </nav>

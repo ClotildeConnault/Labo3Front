@@ -74,9 +74,13 @@ export class ProductComponent implements OnInit {
   }
 
   onClick(id : number) {
-    this.productService.delete(id);
-    this.initialize();
-    this.router.navigate(['/products']);
+    this.productService.delete(id).subscribe(
+      data => {console.log("success", data);
+      this.initialize();
+      this.router.navigate(['/products'])},
+      error => console.error("couldn't delete because, error")
+    );
+    
     
   }
 

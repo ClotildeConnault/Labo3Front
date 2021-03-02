@@ -23,20 +23,23 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.status = this.authService.conSub.subscribe((data : boolean) => this.isConnected = data);
+    this.status = this.authService.conSub.subscribe((data : boolean) => {
+      this.isConnected = data;
+      console.log("TEST onINIT" + this.isConnected);
+    });
 
     this.fg = this.builder.group({
       pseudo : ['', Validators.required],
       password : ['', Validators.required]
     })
 
-    console.log("TEST onINIT" + this.isConnected);
+    
   }
 
   onSubmit() {
     this.authService.login(this.fg.value['pseudo'], this.fg.value['password']);
     console.log("TEST onSUBMIT" + this.isConnected);
-    this.isWrong = !this.authService.getIsConnected();
+    //this.isWrong = !this.authService.getIsConnected();
 
     
   }
