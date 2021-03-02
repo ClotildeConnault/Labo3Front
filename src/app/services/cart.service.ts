@@ -8,59 +8,48 @@ export class CartService {
 
   constructor() { }
 
-  products : Product[] = [];
-  quantities : number[] = [];
   completeCart = [];
   counter : number = 0;
-
-  showProducts(): Product[] {
-    return this.products;
-  }
-
-  showQuantities(): number[] {
-    return this.quantities;
-  }
 
   showCart(): any[] {
     return this.completeCart;
   }
 
   add(product: Product, quantity : number){
-    this.products.push(product);
-    this.quantities.push(quantity);
-    //Test tableau 2 éléments
-    this.completeCart.push([product, quantity]);
+    this.counter = 0;
+    this.completeCart.forEach(data => {
+      if(product === data[0]){
+        this.counter = 1;
+      }
+    });
+    if(this.counter > 0) {
+      alert("Ce produit se trouve déjà dans votre panier, changez plutôt sa quantité");
+    } else {
+      this.completeCart.push([product, quantity]);
+    }
   }
 
   remove(product: Product){
     this.counter = 0;
-    this.products.forEach(data => {
-      if(data === product){
-        this.products.splice(this.counter);
-        this.quantities.splice(this.counter);
-        //Test tableau 2 éléments
-        this.completeCart.splice(this.counter);
+    this.completeCart.forEach(data => {
+      if(product === data[0]){
+        this.completeCart.splice(this.counter,1);
       }
       this.counter++;
     });
   }
 
-  addQuantity(product: Product, quantity: number){
+  changeQuantity(product: Product, quantity: number){
     this.counter = 0;
-    this.products.forEach(data => {
-      if(data === product){
-        this.quantities[this.counter] = quantity;
-        //Test tableau 2 éléments
-        this.completeCart[this.counter,1] = quantity;
+    this.completeCart.forEach(data => {
+      if(product === data[0]){
+        this.completeCart[this.counter][1] = quantity;
       }
       this.counter++;
     });
   }
 
   clearCart(){
-    this.products = [];
-    this.quantities = [];
-    //Test tableau 2 éléments
     this.completeCart = [];
   }
 }
