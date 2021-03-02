@@ -15,7 +15,7 @@
         <!-- Si le produit est toujours en DB -->
         <div *ngIf="!p.inactive">
             <span title="Voir le détail de l'article"><a [routerLink]="['productdetail', p.id]">{{p.name}}</a></span><br>
-            <button (click)="buy(p)">Commander ce produit</button>
+            <button (click)="buy(p)">Ajouter au panier</button>
         </div>
         <!-- Si le produit n'est plus en DB -->
         <div *ngIf="p.inactive">

@@ -13,17 +13,14 @@ export class BasketComponent implements OnInit {
 
   products$ : Observable<Product[]>;
   cart : any[];
-  cartSubscription : Subscription;
 
   constructor(private cartService : CartService) { }
 
   ngOnInit(): void {
-    // this.cartService.cartSub.subscribe(d => this.cart = d);
     this.cart = this.cartService.showCart();
   }
 
   refresh(){
-    // this.cartService.cartSub.subscribe(d => this.cart = d);
     this.cart = this.cartService.showCart();
   }
 
@@ -39,6 +36,15 @@ export class BasketComponent implements OnInit {
   oneLess(product: Product){
     this.cartService.oneLess(product);
     this.refresh();
+  }
+
+  removeAll(){
+    this.cartService.clearCart();
+    this.refresh();
+  }
+
+  accept(){
+    
   }
 
 }
