@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="card"></div>
+        <div class="card-header">
+            Mes informations personnelles
+        </div>
+        <div class="card-body">
+            
+            <table>
+                <tr>
+                    <td>Prénom : </td>
+                    <td>{{user.firstName}}</td>
+                </tr>
+                <tr>
+                    <td>Nom : </td>
+                    <td>{{user.lastName}}</td>
+                </tr>
+                <tr>
+                    <td>Pseudo : </td>
+                    <td>{{user.pseudo}}</td>
+                </tr>
+                <tr>
+                    <td>Niveau d'accès : </td>
+                    <td>{{user.accessLevel}}</td>
+                </tr>
+                <tr>
+        
+                    <td>Adresse : 
+                        <ul class="list-group">
+                            <li class="list-group-item">{{user.address.street}}, &nbsp; {{user.address.number}}</li>
+                            <li class="list-group-item">{{user.address.zipCode}}</li>
+                            <li class="list-group-item">{{user.address.city}}</li>
+                            <li class="list-group-item">{{user.address.country}}</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="card"></div>
+        <div class="card-header">
+            Mes commandes
+        </div>
+        <div class="card-body">
+            <p></p>
+            <table>
+                <tr *ngFor="let o of orders$ | async">
+                    <td>Prénom : </td>
+                    <td>{{o.reference}}</td>
+                </tr>
+               
+            </table>
+        </div>
+    
+</div>

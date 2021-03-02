@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -10,12 +12,15 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class NavComponent implements OnInit {
 
+  isConnected : boolean;
+  status : Subscription;
   searchForm : FormGroup;
   
   constructor(
     private productService : ProductService,
     private builder : FormBuilder,
-    private router : Router
+    private router : Router,
+    private authService : AuthService
   ) { }
 
   ngOnInit(): void {
@@ -23,6 +28,8 @@ export class NavComponent implements OnInit {
       search : new FormControl("", Validators.required)
     })
     this.productService.emitSearching(false)
+
+    this.status = this.authService.conSub.subscribe((data : boolean) => this.isConnected = data)
   }
 
   search(){

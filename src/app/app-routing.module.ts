@@ -11,17 +11,22 @@ import { SupplierComponent } from './components/supplier/supplier.component';
 import { SupplierDetailComponent } from './components/supplier/supplier-detail/supplier-detail.component';
 import { SupplierAddComponent } from './components/supplier/supplier-add/supplier-add.component';
 import { SupplierUpdateComponent } from './components/supplier/supplier-update/supplier-update.component';
+import { BasketComponent } from './components/basket/basket.component';
+import { UserComponent } from './components/user/user.component';
 
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent, children: [{
     path: 'register', component: RegisterComponent
   }]},
+
   {path: 'products', component: ProductComponent, children: [{
     path: 'detail/:id',
     component: ProductDetailComponent
   }
 ]},
+  {path: 'basket', component: BasketComponent},
+  {path: 'user', component: UserComponent},
   {path: 'products/add', component: ProductAddComponent},
   {path: 'products/search', component: ProductSearchComponent},
   {path: 'products/update/:id', component: ProductUpdateComponent},

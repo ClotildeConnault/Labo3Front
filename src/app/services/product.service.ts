@@ -41,10 +41,7 @@ export class ProductService {
   }
 
   delete(id) {
-    this.httpClient.delete(this.BASE_URL + "/" + id).subscribe(
-      data => console.log("success", data),
-      error => console.error("couldn't delete because, error")
-    );
+    return this.httpClient.delete(this.BASE_URL + "/" + id);
   }
 
   insert(product: Product): Observable<Product> {

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Order } from '../models/order.model';
 import { User } from '../models/user.model';
 import { UserRegister } from '../models/userRegister.model';
 
@@ -39,5 +40,7 @@ export class UserService {
   update(id, user: User): Observable<User> {
     return this.httpClient.put<User>(this.BASE_URL + "/" + id, user);
   }
+
+  
   
 }

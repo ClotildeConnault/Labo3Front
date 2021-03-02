@@ -25,6 +25,7 @@ export class AuthService {
 
   emitStatus() {
     this.conSub.next(this.isConnected);
+    console.log("emitStatus");
   }
 
   public getIsConnected(): boolean {
@@ -57,5 +58,9 @@ export class AuthService {
     this.isConnected = false;
     this.emitStatus();
     localStorage.removeItem('isConnected');
+  }
+
+  getCurrentUser() : User {
+    return this.currentUser
   }
 }
