@@ -49,6 +49,29 @@ export class CartService {
     });
   }
 
+  oneMore(product: Product){
+    this.counter = 0;
+    this.completeCart.forEach(data => {
+      if(product === data[0]){
+        this.completeCart[this.counter][1]++;
+      }
+      this.counter++;
+    });
+  }
+
+  oneLess(product: Product){
+    this.counter = 0;
+    this.completeCart.forEach(data => {
+      if(product === data[0]){
+        this.completeCart[this.counter][1]--;
+        if (this.completeCart[this.counter][1] === 0){
+          this.remove(product);
+        }
+      }
+      this.counter++;
+    });
+  }
+
   clearCart(){
     this.completeCart = [];
   }
