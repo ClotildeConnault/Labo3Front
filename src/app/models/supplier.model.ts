@@ -8,6 +8,7 @@ export class Supplier {
     insertionDate : Date;
     updateDate : Date;
     products : Product[];
+    inactive : boolean;
 }
 
 export enum SocialStatut {
