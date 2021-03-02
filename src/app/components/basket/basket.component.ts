@@ -13,15 +13,18 @@ export class BasketComponent implements OnInit {
 
   products$ : Observable<Product[]>;
   cart : any[];
+  cartPrice : number;
 
   constructor(private cartService : CartService) { }
 
   ngOnInit(): void {
     this.cart = this.cartService.showCart();
+    this.cartPrice = this.cartService.totalPrice();
   }
 
   refresh(){
     this.cart = this.cartService.showCart();
+    this.cartPrice = this.cartService.totalPrice();
   }
 
   remove(product: Product){

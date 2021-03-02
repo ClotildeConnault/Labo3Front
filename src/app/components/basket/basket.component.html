@@ -6,11 +6,14 @@
     <thead>
         <th>Produit</th>
         <th>Quantité</th>
+        <th>Prix total</th>
         <th></th>
     </thead>
     <tbody>
         <tr *ngFor="let c of cart">
             <td>{{c[0].name}}</td>
+            <td>{{c[1]}}</td>
+            <td>{{c[0].price * c[1]}} €</td>
             <td>
                 <button class="btn btn-outline-light btn-sm" type="button" (click)="oneMore(c[0])">+</button>
                 {{c[1]}}
@@ -20,4 +23,5 @@
         </tr>
     </tbody>
 </table>
+<p class="totalPrice">Prix total de votre panier = {{cartPrice}} €</p>
 <button button class="btn btn-success" type="button" (click)="accept()">Valider votre commande</button>&nbsp;<button button class="btn btn-danger" type="button" (click)="removeAll()">Vider le panier</button>

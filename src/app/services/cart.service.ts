@@ -11,6 +11,7 @@ export class CartService {
 
   completeCart = [];
   counter : number = 0;
+  cartPrice : number = 0;
 
   showCart(): any[] {
     return this.completeCart;
@@ -79,6 +80,14 @@ export class CartService {
     } else {
       return false;
     }
+  }
+
+  totalPrice() : number{
+    this.cartPrice = 0;
+    this.completeCart.forEach(data => {
+      this.cartPrice = this.cartPrice + (data[0].price * data[1]);
+    });
+    return this.cartPrice;
   }
 
   clearCart(){
