@@ -2,7 +2,6 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProductPage } from 'src/app/models/productPage.model';
-import { threadId } from 'worker_threads';
 import { Product } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
@@ -19,6 +18,7 @@ export class ProductComponent implements OnInit {
   products : Product[];
   productPage : ProductPage;
   numberPage : Number[] = [];
+  pageLoaded: number;
   navigationSubscription;
 
   constructor(
@@ -33,33 +33,52 @@ export class ProductComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    
+    //this.productService.searchingSubscriber$.subscribe(searching => {
+   //  console.log("toto")
     this.productService.getWithPagination(0,10).subscribe(data => {
       this.productPage=data;
+      this.pageLoaded=this.productPage.pageable.pageNumber
      for (let index = 1; index <= this.productPage.totalPages; index++) {
         this.numberPage.push(index)      
-      }   
-    })
-    /*
-    this.productService.searchingSubscriber$.subscribe(searching => {
+        }   
+      })
+    //})
+  }
+    
+    /*this.productService.searchingSubscriber$.subscribe(searching => {
         if (searching){
           console.log("hello")
             this.productService.listProductSubscriber$.subscribe(data => this.products=data)
           
           }else{
             console.log("coucou")
-          this.productService.getWithPagination(0,10).subscribe(data => this.productPage=data)
-          this.products = this.productPage.content
+            this.productService.getWithPagination(0,10).subscribe(data => {
+              this.productPage=data;
+              this.pageLoaded=this.productPage.pageable.pageNumber
+             for (let index = 1; index <= this.productPage.totalPages; index++) {
+                this.numberPage.push(index)      
+              }   
+            })
          // console.log(this.products)
         }    
-      })*/    
-  }
+      })   
+    }*/
 
   initialize() {
+
+    for (let index = 1; index <= this.productPage.totalPages; index++) {
+      this.numberPage.push(index)      
+      }   
+  }
     
+    /*this.productService.getWithPagination(this.pageLoaded,10).subscribe(data => {
+      console.log(data)
+      //this.productPage=data;
+    })
+    //this.productService.searchingSubscriber$.subscribe(searching => {
       
-    /*this.productService.searchingSubscriber$.subscribe(searching => {
-      
-      if (searching){
+     if (searching){
         console.log("searching : true")
           this.productService.listProductSubscriber$.subscribe(data => this.products=data)
         
@@ -69,20 +88,28 @@ export class ProductComponent implements OnInit {
         this.products = this.productPage.content
        // console.log(this.products)
       }    
-    })*/
-  // this.productService.getAll().subscribe(data => this.products=data);
-  }
+    })
+  // this.productService.getAll().subscribe(data => this.products=data);*/
+  
 
-  onClick(id : number) {
+  onDelete(id : number) {
     this.productService.delete(id).subscribe(
+      () => {
+        this.productService.getWithPagination(this.pageLoaded,10).subscribe(data => {
+          console.log(data)
+          this.productPage=data;
+        })
+      })
+  };
+    /*this.productService.delete(id).subscribe(
       data => {console.log("success", data);
       this.initialize();
       this.router.navigate(['/products'])},
       error => console.error("couldn't delete because, error")
-    );
+    );*/
     
     
-  }
+  
 
   details(id) {
     this.router.navigate(['products/detail/' + id]);
@@ -117,6 +144,7 @@ export class ProductComponent implements OnInit {
   navigateTo(index : number){
     this.productService.getWithPagination(index,10).subscribe(data => {
       this.productPage=data;
+      this.pageLoaded=this.productPage.pageable.pageNumber
     })
   }
 
