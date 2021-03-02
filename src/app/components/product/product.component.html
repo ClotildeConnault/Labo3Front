@@ -13,7 +13,7 @@
                     <th></th>
                     <th></th>
                 </thead>
-                <tbody *ngFor="let p of products$ | async">
+                <tbody *ngFor="let p of productPage.content">
                     <tr *ngIf="!p.inactive">
                         <td>{{p.name}}</td>
                         <td><ul>
@@ -29,6 +29,13 @@
                     </tr>
                 </tbody>
             </table>
+            <nav aria-label="Page navigation" class="col-3 offset-1">
+                <ul class="pagination">
+                  <li class="page-item" [ngClass]="{disabled: productPage.first}"><a class="page-link" (click)="navigateTo(productPage.pageable.pageNumber-1)" >Previous</a></li>
+                  <li class="page-item" *ngFor="let page of numberPage; index as i" [ngClass]="{active: page==productPage.number+1}"><a class="page-link" (click)="navigateTo(i)">{{page}}</a></li>
+                  <li class="page-item" [ngClass]="{disabled: productPage.last}"><a class="page-link" (click)="navigateTo(productPage.pageable.pageNumber+1)">Next</a></li>
+                </ul>
+            </nav>
             <button class="btn btn-secondary" *ngIf="isShow" (click)="gotoTop()">Revenir au début</button>
         </div>
         
