@@ -30,16 +30,20 @@ export class SupplierDetailComponent implements OnInit {
   }
 
   buy(productToBuy : Product){
-    this.answer = prompt("Combien d'exemplaires?");
-    if (isNaN(this.answer) || this.answer===null) {
-      alert("Tu te fiches de moi? C'est pas un nombre, ça...");
+    if (this.cartService.alreadyInCart(productToBuy)){
+      alert("Ce produit se trouve déjà dans votre panier, passez par celui-ci pour changer sa quantité");
     } else {
-      this.number = parseInt(this.answer);
-      if (this.number < 1){
-        alert("Il me faut au moins un exemplaire...");
+      this.answer = prompt("Combien d'exemplaires?");
+      if (isNaN(this.answer) || this.answer===null) {
+        alert("Tu te fiches de moi? C'est pas un nombre, ça...");
       } else {
-        this.cartService.add(productToBuy, this.number);
-        console.log(this.cartService.showCart());
+        this.number = parseInt(this.answer);
+        if (this.number < 1){
+          alert("Il me faut au moins un exemplaire...");
+        } else {
+          this.cartService.add(productToBuy, this.number);
+          console.log(this.cartService.showCart());
+        }
       }
     }
   }

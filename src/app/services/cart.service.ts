@@ -16,14 +16,8 @@ export class CartService {
   }
 
   add(product: Product, quantity : number){
-    this.counter = 0;
-    this.completeCart.forEach(data => {
-      if(product === data[0]){
-        this.counter = 1;
-      }
-    });
-    if(this.counter > 0) {
-      alert("Ce produit se trouve déjà dans votre panier, changez plutôt sa quantité");
+    if(this.alreadyInCart(product)) {
+      alert("Ce produit se trouve déjà dans votre panier, passez par celui-ci pour changer sa quantité");
     } else {
       this.completeCart.push([product, quantity]);
     }
@@ -70,6 +64,20 @@ export class CartService {
       }
       this.counter++;
     });
+  }
+
+  alreadyInCart(product: Product): boolean{
+    this.counter = 0;
+    this.completeCart.forEach(data => {
+      if(product === data[0]){
+        this.counter = 1;
+      }
+    });
+    if (this.counter>0){
+      return true;
+    } else {
+      return false;
+    }
   }
 
   clearCart(){
