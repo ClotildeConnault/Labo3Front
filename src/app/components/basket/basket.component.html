@@ -2,3 +2,21 @@
     <h3>Votre panier</h3>
 </div>
 
+<table class="table table-striped">
+    <thead>
+        <th>Produit</th>
+        <th>Quantité</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let c of cart">
+            <td>{{c[0].name}}</td>
+            <td>
+                <button class="btn btn-primary btn-sm" type="button" (click)="oneMore(c[0])">+</button>
+                {{c[1]}}
+                <button class="btn btn-primary btn-sm" type="button" (click)="oneLess(c[0])">-</button>
+            </td>
+            <td><button class="btn btn-primary" type="button" (click)="remove(c[0])">Retirer du panier</button></td>
+        </tr>
+    </tbody>
+</table>
