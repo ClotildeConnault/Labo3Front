@@ -18,11 +18,12 @@ import { SupplierComponent } from './components/supplier/supplier.component';
 import { SupplierDetailComponent } from './components/supplier/supplier-detail/supplier-detail.component';
 import { SupplierAddComponent } from './components/supplier/supplier-add/supplier-add.component';
 import { SupplierUpdateComponent } from './components/supplier/supplier-update/supplier-update.component';
-import { BasketComponent } from './components/basket/basket.component';
-import { UserComponent } from './components/user/user.component';
+
 import { ValidateOrderComponent } from './components/validate-order/validate-order.component';
 import { OrderComponent } from './components/order/order.component';
 import { UpdateUserComponent } from './components/user/update-user/update-user.component';
+import { BasketComponent } from './components/basket/basket.component';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { UpdateUserComponent } from './components/user/update-user/update-user.c
     SupplierUpdateComponent,
     BasketComponent,
     UserComponent,
-    ValidateOrderComponent
+    ValidateOrderComponent,
     OrderComponent,
     UpdateUserComponent
   ],
