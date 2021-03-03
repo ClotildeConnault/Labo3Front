@@ -42,7 +42,7 @@ import { UpdateUserComponent } from './components/user/update-user/update-user.c
     SupplierUpdateComponent,
     BasketComponent,
     UserComponent,
-    ValidateOrderComponent
+    ValidateOrderComponent,
     OrderComponent,
     UpdateUserComponent
   ],
