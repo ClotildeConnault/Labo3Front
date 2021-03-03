@@ -34,17 +34,26 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     
-    //this.productService.searchingSubscriber$.subscribe(searching => {
-   //  console.log("toto")
-    this.productService.getWithPagination(0,10).subscribe(data => {
-      this.productPage=data;
-      this.pageLoaded=this.productPage.pageable.pageNumber
-     for (let index = 1; index <= this.productPage.totalPages; index++) {
-        this.numberPage.push(index)      
-        }   
-      })
-    //})
+    this.productService.sharedSearching.subscribe(searching => {
+      this.searching=searching
+      if (searching){
+        this.productService.sharedListProduct.subscribe(data => this.productPage.content=data)
+      }else{
+        this.productService.getWithPagination(0,10).subscribe(data => {
+        this.productPage=data;
+        this.products=this.productPage.content;
+        this.pageLoaded=this.productPage.pageable.pageNumber
+        this.numberPage=[];
+          for (let index = 1; index <= this.productPage.totalPages; index++) {
+            this.numberPage.push(index)      
+          }   
+        })
+      }
+    })
   }
+
+    
+  
     
     /*this.productService.searchingSubscriber$.subscribe(searching => {
         if (searching){

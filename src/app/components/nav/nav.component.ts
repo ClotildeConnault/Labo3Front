@@ -27,17 +27,17 @@ export class NavComponent implements OnInit {
     this.searchForm = this.builder.group({
       search : new FormControl("", Validators.required)
     })
-    this.productService.emitSearching(false)
+    this.productService.nextSearching(false)
 
     this.status = this.authService.conSub.subscribe((data : boolean) => this.isConnected = data)
   }
 
   search(){
     if (this.searchForm.valid){      
-      this.productService.emitSearching(true);
+      this.productService.nextSearching(true);
       const searchName = this.searchForm.value['search'];
       this.productService.searchByName(searchName).subscribe(pl => {
-        this.productService.emitListProduct(pl)
+        this.productService.nextListProduct(pl)
       })
       
       //this.productService.emitSearchValue(searchName)
@@ -46,6 +46,11 @@ export class NavComponent implements OnInit {
       }
 
     
+  }
+
+  productRefresh(){
+    this.productService.nextSearching(false)
+    this.productService.nextListProduct([])
   }
 
 }
