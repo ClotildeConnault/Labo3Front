@@ -60,7 +60,7 @@ export class ProductDetailComponent implements OnInit {
       alert("Ce produit se trouve déjà dans votre panier, passez par celui-ci pour changer sa quantité");
     } else {
       this.answer = prompt("Combien d'exemplaires?");
-      if (isNaN(this.answer) || this.answer===null) {
+      if (isNaN(this.answer) || this.answer===null || this.answer === "") {
         alert("Tu te fiches de moi? C'est pas un nombre, ça...");
       } else {
         this.number = parseInt(this.answer);

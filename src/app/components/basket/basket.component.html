@@ -15,13 +15,13 @@
             <td>{{c[1]}}</td>
             <td>{{c[0].price * c[1]}} €</td>
             <td>
-                <button class="btn btn-outline-light btn-sm" type="button" (click)="oneMore(c[0])">+</button>
-                {{c[1]}}
-                <button class="btn btn-outline-light btn-sm" type="button" (click)="oneLess(c[0])">-</button>
+                <button class="btn btn-outline-light btn-sm" type="button" (click)="oneMore(c[0])">+</button>&nbsp;
+                {{c[1]}}&nbsp;
+                <button class="btn btn-outline-light btn-sm" type="button" (click)="oneLess(c[0])">-</button>&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-outline-alert" type="button" (click)="remove(c[0])">&#10060;</button>
             </td>
-            <td><button class="btn btn-warning" type="button" (click)="remove(c[0])">Retirer du panier</button></td>
         </tr>
     </tbody>
 </table>
 <p class="totalPrice">Prix total de votre panier = {{cartPrice}} €</p>
-<button button class="btn btn-success" type="button" (click)="accept()">Valider votre commande</button>&nbsp;<button button class="btn btn-danger" type="button" (click)="removeAll()">Vider le panier</button>
+<button button class="btn btn-success" type="button" (click)="accept()">Valider votre commande &#10004;</button>&nbsp;<button button class="btn btn-danger" type="button" (click)="removeAll()">Vider le panier</button>
