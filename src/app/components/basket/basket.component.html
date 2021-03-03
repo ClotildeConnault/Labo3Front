@@ -1,7 +1,7 @@
 <div class="container">
     <h3>Votre panier</h3>
 </div>
-<div *ngIf="cartExists">
+<div *ngIf="cartExists" class="col-12">
 <table class="table table-dark table-striped col-sm-6">
     <thead>
         <th>Produit</th>
@@ -27,7 +27,7 @@
 <button button class="btn btn-success" type="button" (click)="accept()">Valider votre commande &#10004;</button>&nbsp;<button button class="btn btn-danger" type="button" (click)="removeAll()">Vider le panier</button>
 </div>
 
-<div *ngIf="!cartExists">
+<div *ngIf="!cartExists" class="col-12">
     <h4>Vous n'avez pas d'article dans votre panier</h4>
     <img src="https://www.reactiongifs.us/wp-content/uploads/2013/06/raining_david_tennant_nosedrip.gif">
 </div>
