@@ -2,6 +2,7 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Product } from '../models/product.model';
+import { ProductPage } from '../models/productPage.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,10 @@ export class ProductService {
 
   getAll(): Observable<Product[]> {
     return this.httpClient.get<Product[]>(this.BASE_URL);
+  }
+
+  getWithPagination(page : number, size : number) : Observable<ProductPage>{
+    return this.httpClient.get<ProductPage>(this.BASE_URL + "?page=" + page + "&size="+ size)
   }
 
   getByID(id): Observable<Product> {
