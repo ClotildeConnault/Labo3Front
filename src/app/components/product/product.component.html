@@ -28,8 +28,10 @@
                         </td>
                     </tr>
                 </tbody>
+                
+                
             </table>
-            <nav aria-label="Page navigation" class="col-3 offset-1">
+            <nav aria-label="Page navigation" class="col-3 offset-1" *ngIf="!searching">
                 <ul class="pagination">
                   <li class="page-item" [ngClass]="{disabled: productPage.first}"><a class="page-link" (click)="navigateTo(productPage.pageable.pageNumber-1)" >Previous</a></li>
                   <li class="page-item" *ngFor="let page of numberPage; index as i" [ngClass]="{active: page==productPage.number+1}"><a class="page-link" (click)="navigateTo(i)">{{page}}</a></li>

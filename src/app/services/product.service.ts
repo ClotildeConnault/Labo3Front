@@ -1,6 +1,6 @@
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Product } from '../models/product.model';
 import { ProductPage } from '../models/productPage.model';
 
@@ -11,24 +11,18 @@ export class ProductService {
 
   private BASE_URL = 'http://localhost:8080/products'
 
-  private searchingSubject = new Subject<boolean>();
-  //private searchValueSubject = new Subject<String>();
-  private listProductSubject = new Subject<Product[]>();
+  private searching = new BehaviorSubject(false);
+  private listProduct = new BehaviorSubject([]);
 
-  searchingSubscriber$ = this.searchingSubject.asObservable();
-  //searchValueSubscriber$ = this.searchValueSubject.asObservable();
-  listProductSubscriber$ = this.listProductSubject.asObservable();
+  sharedSearching = this.searching.asObservable();
+  sharedListProduct= this.listProduct.asObservable();
   
-  emitSearching(searching : boolean){
-    this.searchingSubject.next(searching);
+  nextSearching(searching : boolean){
+    this.searching.next(searching);
   }
 
- /* emitSearchValue(searchValue : String){
-    this.searchValueSubject.next(searchValue);
-  }*/
-
-  emitListProduct(listProduct : Product[]){
-    this.listProductSubject.next(listProduct);
+  nextListProduct(listProduct : Product[]){
+    this.listProduct.next(listProduct);
   }
 
   constructor(private httpClient: HttpClient) { }
