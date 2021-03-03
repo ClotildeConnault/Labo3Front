@@ -1,33 +1,33 @@
 <div class="container">
     <h3>Votre panier</h3>
-</div>
-<div *ngIf="cartExists" class="col-12">
-<table class="table table-dark table-striped col-sm-6">
-    <thead>
-        <th>Produit</th>
-        <th>Quantité</th>
-        <th>Prix total</th>
-        <th></th>
-    </thead>
-    <tbody>
-        <tr *ngFor="let c of cart">
-            <td>{{c[0].name}}</td>
-            <td>{{c[1]}}</td>
-            <td>{{c[0].price * c[1]}} €</td>
-            <td>
-                <button class="btn btn-outline-light btn-sm" type="button" (click)="oneMore(c[0])">+</button>&nbsp;
-                {{c[1]}}&nbsp;
-                <button class="btn btn-outline-light btn-sm" type="button" (click)="oneLess(c[0])">-</button>&nbsp;&nbsp;&nbsp;
-                <button class="btn btn-outline-alert" type="button" (click)="remove(c[0])">&#10060;</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<p class="totalPrice">Prix total de votre panier = {{cartPrice}} €</p>
-<button button class="btn btn-success" type="button" (click)="accept()">Valider votre commande &#10004;</button>&nbsp;<button button class="btn btn-danger" type="button" (click)="removeAll()">Vider le panier</button>
-</div>
+    <div *ngIf="cartExists" class="col-12">
+    <table class="table table-dark table-striped col-sm-6">
+        <thead>
+            <th>Produit</th>
+            <th>Quantité</th>
+            <th>Prix total</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of cart">
+                <td>{{c[0].name}}</td>
+                <td>{{c[1]}}</td>
+                <td>{{c[0].price * c[1]}} €</td>
+                <td>
+                    <button class="btn btn-outline-light btn-sm" type="button" (click)="oneMore(c[0])">+</button>&nbsp;
+                    {{c[1]}}&nbsp;
+                    <button class="btn btn-outline-light btn-sm" type="button" (click)="oneLess(c[0])">-</button>&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-outline-alert" type="button" (click)="remove(c[0])">&#10060;</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="totalPrice">Prix total de votre panier = {{cartPrice}} €</p>
+    <button button class="btn btn-success" type="button" (click)="accept()">Valider votre commande &#10004;</button>&nbsp;<button button class="btn btn-danger" type="button" (click)="removeAll()">Vider le panier</button>
+    </div>
 
-<div *ngIf="!cartExists" class="col-12">
-    <h4>Vous n'avez pas d'article dans votre panier</h4>
-    <img src="https://www.reactiongifs.us/wp-content/uploads/2013/06/raining_david_tennant_nosedrip.gif">
+    <div *ngIf="!cartExists" class="col-12">
+        <h4>Vous n'avez pas d'article dans votre panier</h4>
+        <img src="https://www.reactiongifs.us/wp-content/uploads/2013/06/raining_david_tennant_nosedrip.gif">
+    </div>
 </div>
