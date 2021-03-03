@@ -15,3 +15,7 @@ export const PRODUCT_FORM_CREATE: FormGroupDef = {
     categories: new FormControl(0, [Validators.required, Validators.min(1)]),
     supplier: new FormControl(0, [Validators.required, Validators.min(1)]),
 }
+
+
+ 
+  

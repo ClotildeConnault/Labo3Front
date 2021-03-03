@@ -17,9 +17,9 @@ export class Address {
 }
 
 export enum AccessLevel {
-    CUSTOMER,
-    EMPLOYEE,
-    ADMINISTRATOR,
+    CUSTOMER = 0,
+    EMPLOYEE = 1,
+    ADMINISTRATOR = 2,
 }
 
 export const accessLevelLabelMapping: Record<AccessLevel, string> = {

@@ -38,7 +38,10 @@ export class UserService {
   }
 
   update(id, user: User): Observable<User> {
+    console.log("J'UPDATE");
+    this.router.navigate(['/user']);
     return this.httpClient.put<User>(this.BASE_URL + "/" + id, user);
+    
   }
 
   

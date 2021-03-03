@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
     
     this.authService.logout();
     this.isConnected = false;
+    this.router.navigate(['./home']);
   
   }
 

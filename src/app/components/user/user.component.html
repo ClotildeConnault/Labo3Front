@@ -1,11 +1,12 @@
 <div class="container">
-    <div class="card"></div>
+    <div class="card">
+
         <div class="card-header">
             Mes informations personnelles
         </div>
         <div class="card-body">
             
-            <table>
+            <table class="table">
                 <tr>
                     <td>Prénom : </td>
                     <td>{{user.firstName}}</td>
@@ -20,35 +21,53 @@
                 </tr>
                 <tr>
                     <td>Niveau d'accès : </td>
-                    <td>{{user.accessLevel}}</td>
+                    <td>{{accessLevelLabelMapping[accessLevel]}}</td>
                 </tr>
                 <tr>
         
-                    <td>Adresse : 
-                        <ul class="list-group">
-                            <li class="list-group-item">{{user.address.street}}, &nbsp; {{user.address.number}}</li>
-                            <li class="list-group-item">{{user.address.zipCode}}</li>
-                            <li class="list-group-item">{{user.address.city}}</li>
-                            <li class="list-group-item">{{user.address.country}}</li>
-                        </ul>
-                    </td>
+                    <td>Adresse :  </td>
+                        <td>
+                            <table class="table">
+                            <tr>{{user.address.street}}, &nbsp; {{user.address.number}}</tr>
+                            <tr>{{user.address.zipCode}}</tr>
+                            <tr>{{user.address.city}}</tr>
+                            <tr>{{user.address.country}}</tr>
+                        </table>
+                        </td>
+                     
+                        
+                   
                 </tr>
             </table>
+            <button class="btn btn-outline-info" (click)="onClickUpdate()">Modifier mes informations personnelles</button>
         </div>
 
-        <div class="card"></div>
-        <div class="card-header">
-            Mes commandes
+
+    </div>
+        
+
+        <div class="card" *ngIf="!orderDetail">
+            <div class="card-header">
+                Mes commandes
+            </div>
+            <div class="card-body">
+                <p></p>
+                <table>
+                    <tr *ngFor="let o of orders$ | async">
+                        <td>{{o.creationDate | date:'dd/MM/yyyy, HH:mm:ss'}} : </td>
+                        <td>Référence : {{o.reference}}</td>
+                        <td><button class="btn btn-info btn-sm" (click)="onClick(o.id)">Détails</button></td>
+                    </tr>
+                   
+                </table>
+            </div>
+
         </div>
-        <div class="card-body">
-            <p></p>
-            <table>
-                <tr *ngFor="let o of orders$ | async">
-                    <td>Prénom : </td>
-                    <td>{{o.reference}}</td>
-                </tr>
-               
-            </table>
+        
+
+        <div class="order" *ngIf="orderDetail">
+            <router-outlet></router-outlet>
         </div>
+        
     
 </div>

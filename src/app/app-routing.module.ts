@@ -11,8 +11,11 @@ import { SupplierComponent } from './components/supplier/supplier.component';
 import { SupplierDetailComponent } from './components/supplier/supplier-detail/supplier-detail.component';
 import { SupplierAddComponent } from './components/supplier/supplier-add/supplier-add.component';
 import { SupplierUpdateComponent } from './components/supplier/supplier-update/supplier-update.component';
+
+import { OrderComponent } from './components/order/order.component';
 import { BasketComponent } from './components/basket/basket.component';
 import { UserComponent } from './components/user/user.component';
+import { UpdateUserComponent } from './components/user/update-user/update-user.component';
 
 
 const routes: Routes = [
@@ -26,7 +29,12 @@ const routes: Routes = [
   }
 ]},
   {path: 'basket', component: BasketComponent},
-  {path: 'user', component: UserComponent},
+  {path: 'user', component: UserComponent, children: [{
+    path: 'order/:id',
+    component: OrderComponent
+  },
+  {path: 'update', component: UpdateUserComponent}
+  ]},
   {path: 'products/add', component: ProductAddComponent},
   {path: 'products/search', component: ProductSearchComponent},
   {path: 'products/update/:id', component: ProductUpdateComponent},

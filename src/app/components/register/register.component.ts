@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ITS_JUST_ANGULAR } from '@angular/core/src/r3_symbols';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { USER_FORM_CREATE } from 'src/app/forms/user.form';
 import { AccessLevel, accessLevelLabelMapping, Address} from 'src/app/models/user.model';
 import { UserRegister } from 'src/app/models/userRegister.model';
 import { UserService } from 'src/app/services/user.service';
@@ -12,7 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RegisterComponent implements OnInit {
 
-  fg : FormGroup;
+  fg : FormGroup = new FormGroup(USER_FORM_CREATE);
   accessLevelLabelMapping =  accessLevelLabelMapping;
   accessLevel = Object.values(AccessLevel).filter(value => typeof value === 'number');
 
@@ -23,7 +24,7 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.fg = this.builder.group({
+    /*this.fg = this.builder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       accessLevel : ['', Validators.required],
@@ -36,7 +37,7 @@ export class RegisterComponent implements OnInit {
         city : new FormControl('', Validators.required),
         country : new FormControl('', Validators.required)
       })
-    })
+    })*/
 
 
   }

@@ -1,0 +1,43 @@
+
+<div class="card">
+    <div class="card-header">
+        Commande {{order.reference}}
+        <button class="btn btn-link" [routerLink]="['../user']">Retour aux commandes</button>
+    </div>
+    <div class="card-body">
+        <table>
+            <tr>
+                <td>Date :  </td>
+                <td>{{order.creationDate | date:'dd/MM/yyyy, HH:mm:ss'}}</td>
+            </tr>
+            <tr>
+                <td>Etat de la commande : </td>
+                <td>{{paid}}</td>
+            </tr>
+            <tr>
+                <td>Moyen de paiement : </td>
+                <td>{{order.paymentMethod}}</td>
+            </tr>
+        </table>
+
+        <div class="card">
+            <div class="card-header">
+                Produits
+            </div>
+            <div class="card-body">
+                <table>
+                    <tr *ngFor="let product of order.products">
+                        <td>{{product.name}}</td> &nbsp;
+                        <td>{{product.price}}</td> &nbsp;
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+       
+    </div>
+
+</div>

@@ -1,0 +1,50 @@
+<div class="card bg-light mb-3" style="width: 40rem;">
+    <div class="card-header">
+        Modifier mes informations personnelles
+    </div>
+    <div class="card-body">
+        <form [formGroup]="fg" (ngSubmit)="onSubmit()"> 
+            <div class="form-group">
+
+                <label>Prénom</label>
+                <input class="form-control" type="text" formControlName="firstName" [(ngModel)]="user.firstName">
+                <label>Nom</label>
+                <input class="form-control" type="text" formControlName="lastName" [(ngModel)]="user.lastName">
+                <label>Niveau d'accès</label>
+                <select class="form-control" formControlName="accessLevel" [(ngModel)]="accessLevelId">
+                    <option *ngFor="let a of accessLevel" [value]="a">{{accessLevelLabelMapping[a]}}</option>
+                </select>
+                <label>Pseudo</label>
+                <input class="form-control" type="text" formControlName="pseudo" [(ngModel)]="user.pseudo">
+                <label>Mot de passe</label>
+                <input class="form-control" type="password" formControlName="password" [(ngModel)]="user.password">
+            </div>
+            <label>Adresse</label>
+            <div formGroupName="address" class="sousForm">
+                <div >
+                    <label>Rue</label>
+                    <input type="text" formControlName="street" name="street" [(ngModel)]="user.address.street">
+                </div>
+                <div>
+                     <label>Numéro</label>
+                     <input type="number" formControlName="number" name="number" [(ngModel)]="user.address.number">
+                </div>
+                <div >
+                    <label>Ville</label>
+                    <input type="text" formControlName="city" name="city" [(ngModel)]="user.address.city">
+                </div>
+                <div >
+                    <label>Code postal</label>
+                    <input type="text" formControlName="zipcode" name="zipcode" [(ngModel)]="user.address.zipCode">
+                </div>
+                <div>
+                    <label>Pays</label>
+                    <input type="text" formControlName="country" name="country" [(ngModel)]="user.address.country">
+                </div>
+
+            </div>
+           
+            <button class="btn btn-light" [disabled]="fg.invalid">Enregistrer</button>
+        </form>
+
+    </div>

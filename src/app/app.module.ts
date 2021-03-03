@@ -20,6 +20,8 @@ import { SupplierAddComponent } from './components/supplier/supplier-add/supplie
 import { SupplierUpdateComponent } from './components/supplier/supplier-update/supplier-update.component';
 import { BasketComponent } from './components/basket/basket.component';
 import { UserComponent } from './components/user/user.component';
+import { OrderComponent } from './components/order/order.component';
+import { UpdateUserComponent } from './components/user/update-user/update-user.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { UserComponent } from './components/user/user.component';
     SupplierAddComponent,
     SupplierUpdateComponent,
     BasketComponent,
-    UserComponent
+    UserComponent,
+    OrderComponent,
+    UpdateUserComponent
   ],
   imports: [
     BrowserModule,

@@ -5,9 +5,9 @@ export class Order {
     id : number;
     reference : string;
     creationDate : Date;
-   // products : Product[];
+    products : Product[];
     isPaid : boolean;
-   // paymentMethod : PaymentMethod;
+    paymentMethod : PaymentMethod;
     user : User;
 }
 
