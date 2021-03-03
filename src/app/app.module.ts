@@ -20,6 +20,7 @@ import { SupplierAddComponent } from './components/supplier/supplier-add/supplie
 import { SupplierUpdateComponent } from './components/supplier/supplier-update/supplier-update.component';
 import { BasketComponent } from './components/basket/basket.component';
 import { UserComponent } from './components/user/user.component';
+import { ValidateOrderComponent } from './components/validate-order/validate-order.component';
 import { OrderComponent } from './components/order/order.component';
 import { UpdateUserComponent } from './components/user/update-user/update-user.component';
 
@@ -41,6 +42,7 @@ import { UpdateUserComponent } from './components/user/update-user/update-user.c
     SupplierUpdateComponent,
     BasketComponent,
     UserComponent,
+    ValidateOrderComponent
     OrderComponent,
     UpdateUserComponent
   ],

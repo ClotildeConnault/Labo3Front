@@ -1,4 +1,4 @@
-<div *ngIf="supplier">
+<div *ngIf="supplier" class="col-12">
     <div class="display-4">
         Page du fournisseur {{supplier.companyName}}
     </div>
@@ -8,20 +8,26 @@
     <p class="lead">Date de création de la fiche : {{supplier.insertionDate | date:'dd/MM/yyyy, HH:mm:ss'}}</p>
     <p class="lead">Date de mise à jour de la fiche : {{supplier.updateDate | date:'dd/MM/yyyy, HH:mm:ss'}} </p> 
     <p class="lead">Produits proposés :</p>
-    <div class="article" style="width: 18rem;" *ngFor="let p of supplier.products">
-        <div class="imageArticle">
-            <img src={{p.imagePath}} alt="image du produit">
+    <div class="col-8">
+        <div class="article" style="width: 18rem;" *ngFor="let p of supplier.products">
+            <div class="imageArticle">
+                <img src={{p.imagePath}} alt="image du produit">
+            </div>
+            <!-- Si le produit est toujours en DB -->
+            <div *ngIf="!p.inactive">
+                <div>{{p.name}}</div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" [routerLink]="['productdetail', p.id]">
+                    Détails
+                </button>
+                <!-- <span title="Voir le détail de l'article"><a [routerLink]="['productdetail', p.id]">{{p.name}}</a></span><br> -->
+                <!-- <button (click)="buy(p)">Ajouter au panier</button> -->
+            </div>
+            <!-- Si le produit n'est plus en DB -->
+            <div *ngIf="p.inactive">
+                <div>{{p.name}}</div>
+                <div>Ce produit n'est plus en vente</div>
+            </div>
         </div>
-        <!-- Si le produit est toujours en DB -->
-        <div *ngIf="!p.inactive">
-            <span title="Voir le détail de l'article"><a [routerLink]="['productdetail', p.id]">{{p.name}}</a></span><br>
-            <button (click)="buy(p)">Ajouter au panier</button>
-        </div>
-        <!-- Si le produit n'est plus en DB -->
-        <div *ngIf="p.inactive">
-            <div>{{p.name}}</div>
-            <div>Ce produit n'est plus en vente</div>
-        </div>
-    </div>   
+    </div>
 </div>
 <router-outlet></router-outlet>

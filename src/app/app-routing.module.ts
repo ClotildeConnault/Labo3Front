@@ -15,6 +15,7 @@ import { SupplierUpdateComponent } from './components/supplier/supplier-update/s
 import { OrderComponent } from './components/order/order.component';
 import { BasketComponent } from './components/basket/basket.component';
 import { UserComponent } from './components/user/user.component';
+import { ValidateOrderComponent } from './components/validate-order/validate-order.component';
 import { UpdateUserComponent } from './components/user/update-user/update-user.component';
 
 
@@ -29,6 +30,7 @@ const routes: Routes = [
   }
 ]},
   {path: 'basket', component: BasketComponent},
+  {path: 'validate', component: ValidateOrderComponent},
   {path: 'user', component: UserComponent, children: [{
     path: 'order/:id',
     component: OrderComponent

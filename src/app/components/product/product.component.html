@@ -1,8 +1,6 @@
-<h4>Liste des produits</h4>
-
-
 <div class="container">
-    <button class="btn btn-warning" type="button" routerLink="/products/add">Ajouter un produit</button>
+    <h4>Liste des produits</h4>
+    <button class="btn btn-info boutonPropre" type="button" routerLink="/products/add">Ajouter un produit</button>
     <div class="innerContainer">
         <div>
             <table class="table table-striped">
@@ -10,6 +8,7 @@
                     <th>Nom</th>
                     <th>Catégorie</th>
                     <th>Prix</th>
+                    <th></th>
                     <th></th>
                     <th></th>
                 </thead>
@@ -21,15 +20,23 @@
                         </ul></td>
                         <td>{{p.price}}</td>
                         <td>
-                        <button class="btn btn-primary" type="button" (click)="details(p.id)">Détails</button>
+                        <!-- <button class="btn btn-primary" type="button" (click)="details(p.id)">Détails</button> -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="details(p.id)">
+                            Détails
+                        </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-warning" type="button" routerLink="/products/update/{{p.id}}">Modifier</button>
                         </td>
                         <td>
                             <button class="btn btn-danger" type="button" (click)="onDelete(p.id)">Supprimer</button>
                         </td>
                     </tr>
                 </tbody>
+                
+                
             </table>
-            <nav aria-label="Page navigation" class="col-3 offset-1">
+            <nav aria-label="Page navigation" class="col-3 offset-1" *ngIf="!searching">
                 <ul class="pagination">
                   <li class="page-item" [ngClass]="{disabled: productPage.first}"><a class="page-link" (click)="navigateTo(productPage.pageable.pageNumber-1)" >Previous</a></li>
                   <li class="page-item" *ngFor="let page of numberPage; index as i" [ngClass]="{active: page==productPage.number+1}"><a class="page-link" (click)="navigateTo(i)">{{page}}</a></li>
