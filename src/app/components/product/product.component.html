@@ -20,7 +20,10 @@
                         </ul></td>
                         <td>{{p.price}}</td>
                         <td>
-                        <button class="btn btn-primary" type="button" (click)="details(p.id)">Détails</button>
+                        <!-- <button class="btn btn-primary" type="button" (click)="details(p.id)">Détails</button> -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="details(p.id)">
+                            Détails
+                        </button>
                         </td>
                         <td>
                             <button class="btn btn-warning" type="button" routerLink="/products/update/{{p.id}}">Modifier</button>

@@ -15,8 +15,12 @@
             </div>
             <!-- Si le produit est toujours en DB -->
             <div *ngIf="!p.inactive">
-                <span title="Voir le détail de l'article"><a [routerLink]="['productdetail', p.id]">{{p.name}}</a></span><br>
-                <button (click)="buy(p)">Ajouter au panier</button>
+                <div>{{p.name}}</div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" [routerLink]="['productdetail', p.id]">
+                    Détails
+                </button>
+                <!-- <span title="Voir le détail de l'article"><a [routerLink]="['productdetail', p.id]">{{p.name}}</a></span><br> -->
+                <!-- <button (click)="buy(p)">Ajouter au panier</button> -->
             </div>
             <!-- Si le produit n'est plus en DB -->
             <div *ngIf="p.inactive">
