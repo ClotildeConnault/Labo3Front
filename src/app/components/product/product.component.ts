@@ -20,6 +20,9 @@ export class ProductComponent implements OnInit {
   numberPage : Number[] = [];
   pageLoaded: number;
   navigationSubscription;
+  
+
+
 
   constructor(
     private productService : ProductService,
@@ -117,13 +120,22 @@ export class ProductComponent implements OnInit {
       error => console.error("couldn't delete because, error")
     );*/
     
-    
+    test() {
+      console.log("trigger");
+    }
   
 
   details(id) {
+    let element:HTMLElement = document.getElementById("trigger"+id) as HTMLElement;
+    
     this.router.navigate(['products/detail/' + id]);
+    element.click();
+    element.click();
+    element.click();
     this.gotoTop();
+    console.log("trigger");
   }
+
 
   @HostListener('window:scroll')
   checkScroll() {

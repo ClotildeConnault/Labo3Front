@@ -1,11 +1,12 @@
 import { Product } from "./product.model";
+import { PurchaseProduct } from "./purchaseproduct.model";
 import { User } from "./user.model";
 
 export class Order {
     id : number;
     reference : string;
     creationDate : Date;
-    products : Product[];
+    products : PurchaseProduct[];
     isPaid : boolean;
     paymentMethod : PaymentMethod;
     user : User;
