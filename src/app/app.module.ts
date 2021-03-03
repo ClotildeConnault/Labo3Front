@@ -21,8 +21,6 @@ import { SupplierUpdateComponent } from './components/supplier/supplier-update/s
 import { BasketComponent } from './components/basket/basket.component';
 import { UserComponent } from './components/user/user.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

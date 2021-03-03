@@ -16,12 +16,21 @@ export class SupplierComponent implements OnInit {
   constructor(private service : SupplierService, private router : Router) { }
 
   ngOnInit(): void {
-    this.suppliers$ = this.service.getAll()
+    this.initialize();
+  }
+
+  initialize(){
+    this.suppliers$ = this.service.getAll();
   }
 
   deleteThis(id : number) {
-    this.service.delete(id).subscribe();
-    this.router.navigate(['/suppliers']);
+    this.service.delete(id).subscribe(
+      data => {
+        this.initialize();
+        this.router.navigate(['/suppliers'])
+      },
+      error => console.error("Oups, j'ai pas pu effacer...")
+    );
   }
 
 }
