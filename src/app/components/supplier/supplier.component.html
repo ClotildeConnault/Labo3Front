@@ -1,20 +1,22 @@
-<h4>Liste des fournisseurs</h4>
-
-<table class="table table-striped">
-    <thead>
-        <th>Nom</th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </thead>
-    <tbody *ngFor="let s of suppliers$ | async">
-        <tr *ngIf="!s.inactive">
-            <td>{{s.companyName}}</td>
-            <td><button class="btn btn-primary" type="button" routerLink="/suppliers/detail/{{s.id}}">Détails</button></td>
-            <td><button class="btn btn-warning" type="button" routerLink="/suppliers/update/{{s.id}}">Modifier</button></td>
-            <td><button class="btn btn-danger" type="button" (click)="deleteThis(s.id)">Supprimer</button></td>
-        </tr>
-        
-    </tbody>
-</table>
-<button class="btn btn-info" type="button" routerLink="/suppliers/add">Ajouter un fournisseur</button>
+<div class = container>
+    <h4>Liste des fournisseurs</h4>
+    <button class="btn btn-info" type="button" routerLink="/suppliers/add">Ajouter un fournisseur</button>
+    <div class = "innerContainer">
+        <table class="table table-striped table-responsive-md">
+            <thead>
+                <th>Nom</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </thead>
+            <tbody *ngFor="let s of suppliers$ | async">
+                <tr *ngIf="!s.inactive">
+                    <td>{{s.companyName}}</td>
+                    <td><button class="btn btn-primary" type="button" routerLink="/suppliers/detail/{{s.id}}">Détails</button></td>
+                    <td><button class="btn btn-warning" type="button" routerLink="/suppliers/update/{{s.id}}">Modifier</button></td>
+                    <td><button class="btn btn-danger" type="button" (click)="deleteThis(s.id)">Supprimer</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

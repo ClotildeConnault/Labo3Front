@@ -1,8 +1,6 @@
-<h4>Liste des produits</h4>
-
-
 <div class="container">
-    <button class="btn btn-warning" type="button" routerLink="/products/add">Ajouter un produit</button>
+    <h4>Liste des produits</h4>
+    <button class="btn btn-info boutonPropre" type="button" routerLink="/products/add">Ajouter un produit</button>
     <div class="innerContainer">
         <div>
             <table class="table table-striped">
@@ -10,6 +8,7 @@
                     <th>Nom</th>
                     <th>Catégorie</th>
                     <th>Prix</th>
+                    <th></th>
                     <th></th>
                     <th></th>
                 </thead>
@@ -22,6 +21,9 @@
                         <td>{{p.price}}</td>
                         <td>
                         <button class="btn btn-primary" type="button" (click)="details(p.id)">Détails</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-warning" type="button" routerLink="/products/update/{{p.id}}">Modifier</button>
                         </td>
                         <td>
                             <button class="btn btn-danger" type="button" (click)="onDelete(p.id)">Supprimer</button>
