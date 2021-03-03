@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
@@ -15,7 +16,7 @@ export class BasketComponent implements OnInit {
   cart : any[];
   cartPrice : number;
 
-  constructor(private cartService : CartService) { }
+  constructor(private cartService : CartService, private router : Router) { }
 
   ngOnInit(): void {
     this.cart = this.cartService.showCart();
@@ -28,7 +29,8 @@ export class BasketComponent implements OnInit {
   }
 
   remove(product: Product){
-    this.cartService.remove(product)
+    this.cartService.remove(product);
+    this.refresh();
   }
 
   oneMore(product: Product){
@@ -42,12 +44,20 @@ export class BasketComponent implements OnInit {
   }
 
   removeAll(){
-    this.cartService.clearCart();
-    this.refresh();
+    if(this.cartService.totalPrice() > 0) {
+      this.cartService.clearCart();
+      this.refresh();
+    } else {
+      alert("Ce panier est déjà vide, arrêtez de vous acharner sur ce pauvre bouton...");
+    }
   }
 
   accept(){
-    
+    if(this.cartService.totalPrice() > 0) {
+      this.router.navigate(['validate']);
+    } else {
+      alert("Vous n'allez quand même pas valider un panier vide...");
+    }
   }
 
 }
