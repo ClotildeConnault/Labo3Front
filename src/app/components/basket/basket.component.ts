@@ -15,17 +15,28 @@ export class BasketComponent implements OnInit {
   products$ : Observable<Product[]>;
   cart : any[];
   cartPrice : number;
+  cartExists : boolean;
 
   constructor(private cartService : CartService, private router : Router) { }
 
   ngOnInit(): void {
     this.cart = this.cartService.showCart();
     this.cartPrice = this.cartService.totalPrice();
+    if(this.cartPrice > 0){
+      this.cartExists = true;
+    } else {
+      this.cartExists = false;
+    }
   }
 
   refresh(){
     this.cart = this.cartService.showCart();
     this.cartPrice = this.cartService.totalPrice();
+    if(this.cartPrice > 0){
+      this.cartExists = true;
+    } else {
+      this.cartExists = false;
+    }
   }
 
   remove(product: Product){
