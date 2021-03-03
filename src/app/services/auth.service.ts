@@ -55,6 +55,7 @@ export class AuthService {
   }
 
   logout() {
+    this.currentUser=null;
     this.isConnected = false;
     this.emitStatus();
     localStorage.removeItem('isConnected');
