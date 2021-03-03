@@ -31,10 +31,10 @@ export class ProductSearchComponent implements OnInit {
     
     if(this.searchForm.valid){
       this.router.navigateByUrl("/products");
-      this.productService.nextSearching(true)
+      this.productService.searching = true;
       const product = this.searchForm.value      
       this.productService.search(product).subscribe(pl => {
-        this.productService.nextListProduct(pl)
+        this.productService.listProduct = pl;
       })
       
     }

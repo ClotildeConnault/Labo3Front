@@ -16,7 +16,7 @@ export class ProductComponent implements OnInit {
   isShow : boolean;
   searching : boolean;
   products : Product[];
-  productPage : ProductPage;
+  productPage : ProductPage = new ProductPage();
   numberPage : Number[] = [];
   pageLoaded: number;
   navigationSubscription;
@@ -33,11 +33,10 @@ export class ProductComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    
-    this.productService.sharedSearching.subscribe(searching => {
-      this.searching=searching
-      if (searching){
-        this.productService.sharedListProduct.subscribe(data => this.productPage.content=data)
+       console.log("init")
+      this.searching=this.productService.searching
+      if (this.searching){
+        this.productPage.content=this.productService.listProduct
       }else{
         this.productService.getWithPagination(0,10).subscribe(data => {
         this.productPage=data;
@@ -49,8 +48,10 @@ export class ProductComponent implements OnInit {
           }   
         })
       }
-    })
+    
   }
+
+  
 
     
   
@@ -78,7 +79,23 @@ export class ProductComponent implements OnInit {
 
     for (let index = 1; index <= this.productPage.totalPages; index++) {
       this.numberPage.push(index)      
-      }   
+      }  
+      
+      this.searching=this.productService.searching
+      if (this.searching){
+        this.productPage.content=this.productService.listProduct
+      }else{
+        this.productService.getWithPagination(0,10).subscribe(data => {
+        this.productPage=data;
+        this.products=this.productPage.content;
+        this.pageLoaded=this.productPage.pageable.pageNumber
+        this.numberPage=[];
+          for (let index = 1; index <= this.productPage.totalPages; index++) {
+            this.numberPage.push(index)      
+          }   
+        })
+      }
+     
   }
     
     /*this.productService.getWithPagination(this.pageLoaded,10).subscribe(data => {
