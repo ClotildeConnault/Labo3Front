@@ -43,11 +43,7 @@ export class NavComponent implements OnInit {
       //this.productService.emitSearchValue(searchName)
       
         this.router.navigateByUrl("/products");
-      
-      
-    }else{
-      console.log("pas valide")
-    }
+      }
 
     
   }
