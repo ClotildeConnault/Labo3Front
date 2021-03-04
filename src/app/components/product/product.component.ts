@@ -81,7 +81,7 @@ export class ProductComponent implements OnInit {
       this.numberPage.push(index)      
       }  
       
-      /*this.searching=this.productService.searching
+      this.searching=this.productService.searching
       if (this.searching){
         this.productPage.content=this.productService.listProduct
       }else{
@@ -94,7 +94,7 @@ export class ProductComponent implements OnInit {
             this.numberPage.push(index)      
           }   
         })
-      }*/
+      }
      
   }
     
@@ -123,9 +123,15 @@ export class ProductComponent implements OnInit {
       () => {
         this.productService.getWithPagination(this.pageLoaded,10).subscribe(data => {
           console.log(data)
-          this.productPage=data;
+          this.productPage=data; 
+          this.numberPage=[];
+            for (let index = 1; index <= this.productPage.totalPages; index++) {
+              this.numberPage.push(index)      
+            } 
         })
       })
+
+   
   };
     /*this.productService.delete(id).subscribe(
       data => {console.log("success", data);
