@@ -20,8 +20,8 @@ export enum Sector {
 }
 
 export const SocialStatutLabelMapping: Record<SocialStatut, string> = {
-    [SocialStatut.SA]: "Société Anonyme",
-    [SocialStatut.SPRL]: "Société Privée à Responsabilité Limitée"
+    [SocialStatut.SA]: "SA",
+    [SocialStatut.SPRL]: "SPRL"
 };
 
 export const SectorLabelMapping: Record<Sector, string> = {
