@@ -9,13 +9,13 @@
         </div>
         <div class="form-group">
 	        <label for="statut">Statut social : </label>
-            <select class="form-control" type="text" id="statut" name="statut" formControlName="statut">
+            <select class="form-control" type="text" id="statut" name="statut" formControlName="statut" [(ngModel)]="statutId">
                 <option *ngFor="let s of statut" [value]="s">{{SocialStatutLabelMapping[s]}}</option>
             </select>
         </div>
         <div class="form-group">
 	        <label for="sector">Secteur d'activité : </label>
-            <select class="form-control" type="text" id="sector" name="sector" formControlName="sector">
+            <select class="form-control" type="text" id="sector" name="sector" formControlName="sector" [(ngModel)]="sectorId">
                 <option *ngFor="let sc of sector" [value]="sc">{{SectorLabelMapping[sc]}}</option>
             </select>
         </div>

@@ -18,9 +18,11 @@ export class SupplierUpdateComponent implements OnInit {
 
   SocialStatutLabelMapping =  SocialStatutLabelMapping;
   statut = Object.values(SocialStatut).filter(value => typeof value === 'number');
+  statutId: number;
 
   SectorLabelMapping = SectorLabelMapping;
   sector = Object.values(Sector).filter(value => typeof value === 'number');
+  sectorId: number;
 
   constructor(private service : SupplierService, private activatedRoute : ActivatedRoute, private router : Router) { }
 
@@ -28,7 +30,11 @@ export class SupplierUpdateComponent implements OnInit {
     let id = this.activatedRoute.snapshot.params['id'];
 
     this.service.getByID(id).subscribe(
-      supplier => {this.supplier = supplier}
+      supplier => {
+        this.supplier = supplier, 
+        this.statutId = (Object.keys(SocialStatut).indexOf(this.supplier.statut.toString()) -1) /2, 
+        this.sectorId = (Object.keys(Sector).indexOf(this.supplier.sector.toString()) -1) /2
+      }
     )
   }
 

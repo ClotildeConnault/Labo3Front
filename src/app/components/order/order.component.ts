@@ -23,9 +23,9 @@ export class OrderComponent implements OnInit {
     this.id = this.activatedRoute.snapshot.params['id'];
     this.orderService.getByID(this.id).subscribe((data : Order) => {
       this.order = data
-      console.log(data.isPaid);
+      console.log(data.paid);
     })
-    if(this.order.isPaid) {
+    if(this.order.paid) {
       this.paid = "payée";
     }
     else {
