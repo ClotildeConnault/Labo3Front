@@ -47,11 +47,9 @@ export class NavComponent implements OnInit {
       
         
       } else {
-        this.productService.getAll().subscribe(p => {
-          this.productService.listProduct = p,
-          this.router.onSameUrlNavigation = 'reload',
-          this.router.navigateByUrl("/products");
-        });
+        this.productService.searching=false;
+        this.router.onSameUrlNavigation = 'reload'
+        this.router.navigateByUrl("/products");
       }
 
     

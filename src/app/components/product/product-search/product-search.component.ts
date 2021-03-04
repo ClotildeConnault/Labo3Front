@@ -29,12 +29,15 @@ export class ProductSearchComponent implements OnInit {
 
   search(){
     
-    if(this.searchForm.valid){
-      this.router.navigateByUrl("/products");
+    if(this.searchForm.valid){      
       this.productService.searching = true;
-      const product = this.searchForm.value      
+      let product : Product = this.searchForm.value
+      //2021-03-03T12:24:07Z 
+      product.expirationDate = new Date(this.searchForm.get('expirationDate').value)
+      console.log(product)  
       this.productService.search(product).subscribe(pl => {
         this.productService.listProduct = pl;
+        this.router.navigateByUrl("/products");
       })
       
     }
