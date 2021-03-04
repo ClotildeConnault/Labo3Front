@@ -76,12 +76,12 @@ export class ProductComponent implements OnInit {
     }*/
 
   initialize() {
-
+    this.numberPage = []
     for (let index = 1; index <= this.productPage.totalPages; index++) {
       this.numberPage.push(index)      
       }  
       
-      this.searching=this.productService.searching
+      /*this.searching=this.productService.searching
       if (this.searching){
         this.productPage.content=this.productService.listProduct
       }else{
@@ -94,7 +94,7 @@ export class ProductComponent implements OnInit {
             this.numberPage.push(index)      
           }   
         })
-      }
+      }*/
      
   }
     
