@@ -4,3 +4,18 @@
     font-family: 'Dosis', sans-serif;
 }
 
+html{
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+footer{
+    width: 100%;
+    text-align: center;
+    margin-top: auto;
+}
