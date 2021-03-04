@@ -1,1 +1,30 @@
-<p>validate-order works!</p>
+<div class="container">
+    <h1>Validation de votre commande</h1>
+    <h3>Récapitulatif de votre panier</h3>
+</div>
+
+<table class="table table-dark table-striped col-sm-6">
+    <thead>
+        <th>Produit</th>
+        <th>Quantité</th>
+        <th>Prix total</th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let c of cart">
+            <td>{{c[0].name}}</td>
+            <td>{{c[1]}}</td>
+            <td>{{c[0].price * c[1]}} €</td>
+        </tr>
+    </tbody>
+</table>
+<p class="totalPrice">Prix total de votre panier = {{cartPrice}} €</p>
+<form class="col-6" [formGroup]="form" (submit)="onSubmit()">
+    <div class="form-group">
+      <label for="payementMethod">Choissisez un moyen de payement</label>
+      <select class="form-control" id="payementMethod" formControlName="paymentMethod">
+        <option *ngFor="let mp of paymentMethod" [value]="mp">{{PaymentMethodLabelMapping[mp]}}</option>
+      </select>
+    </div>
+    <button class="btn btn-success" type="submit">Valider la commande</button>
+</form>

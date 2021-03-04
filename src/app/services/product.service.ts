@@ -11,19 +11,19 @@ export class ProductService {
 
   private BASE_URL = 'http://localhost:8080/products'
 
-  private searching = new BehaviorSubject(false);
-  private listProduct = new BehaviorSubject([]);
+  searching : boolean = false;
+  listProduct : Product[] = []
 
-  sharedSearching = this.searching.asObservable();
-  sharedListProduct= this.listProduct.asObservable();
+  //sharedSearching = this.searching.asObservable();
+  //sharedListProduct= this.listProduct.asObservable();
   
-  nextSearching(searching : boolean){
+  /*nextSearching(searching : boolean){
     this.searching.next(searching);
   }
 
   nextListProduct(listProduct : Product[]){
     this.listProduct.next(listProduct);
-  }
+  }*/
 
   constructor(private httpClient: HttpClient) { }
 
