@@ -33,6 +33,7 @@ export class NavComponent implements OnInit {
   }
 
   search(){
+   
     if (this.searchForm.valid){      
       this.productService.searching = true;
       const searchName = this.searchForm.value['search'];
