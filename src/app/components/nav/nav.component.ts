@@ -38,6 +38,7 @@ export class NavComponent implements OnInit {
       const searchName = this.searchForm.value['search'];
       this.productService.searchByName(searchName).subscribe(pl => {
         this.productService.listProduct = pl;
+        this.router.onSameUrlNavigation = 'reload'
         this.router.navigateByUrl("/products");
       })
       
