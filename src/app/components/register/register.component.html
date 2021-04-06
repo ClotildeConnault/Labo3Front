@@ -19,12 +19,12 @@
                             <input class="form-control" type="text" formControlName="firstName">
                             <label>Nom</label>
                             <input class="form-control" type="text" formControlName="lastName">
-                            <label>Niveau d'accès</label>
-                            <select class="form-control" formControlName="accessLevel">
+                            <label *ngIf="adminConnected">Niveau d'accès</label>
+                            <select class="form-control" formControlName="accessLevel" *ngIf="adminConnected">
                                 <option *ngFor="let a of accessLevel" [value]="a">{{accessLevelLabelMapping[a]}}</option>
                             </select>
                             <label>Pseudo</label>
-                            <input class="form-control" type="text" formControlName="pseudo">
+                            <input class="form-control" type="text" formControlName="username">
                             <label>Mot de passe</label>
                             <input class="form-control" type="password" formControlName="password">
                         </div>

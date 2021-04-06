@@ -4,7 +4,7 @@ export class UserRegister {
     firstName: string;
     lastName: string;
     accessLevel : AccessLevel;
-    pseudo : string;
+    username : string;
     password : string;
     address : Address;
 }

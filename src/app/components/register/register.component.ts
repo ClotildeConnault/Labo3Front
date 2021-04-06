@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { USER_FORM_CREATE } from 'src/app/forms/user.form';
 import { AccessLevel, accessLevelLabelMapping, Address} from 'src/app/models/user.model';
 import { UserRegister } from 'src/app/models/userRegister.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -14,13 +15,14 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RegisterComponent implements OnInit {
 
+  adminConnected : boolean;
   fg : FormGroup = new FormGroup(USER_FORM_CREATE);
   accessLevelLabelMapping =  accessLevelLabelMapping;
   accessLevel = Object.values(AccessLevel).filter(value => typeof value === 'number');
 
 
   constructor(
-    private builder : FormBuilder,
+    private authService : AuthService,
     private userService : UserService,
     private router : Router
   ) { }
@@ -41,6 +43,9 @@ export class RegisterComponent implements OnInit {
       })
     })*/
 
+    if (this.authService.currentUser != null) {
+      this.adminConnected = this.authService.currentUser.accessLevel == AccessLevel.ADMINISTRATOR ? true : false;
+    }
 
   }
 
@@ -59,7 +64,7 @@ export class RegisterComponent implements OnInit {
     userRegister.firstName = values['firstName'];
     userRegister.lastName = values['lastName'];
     userRegister.accessLevel = values['accessLevel'];
-    userRegister.pseudo = values['pseudo'];
+    userRegister.username = values['username'];
     userRegister.password = values['password'];
     userRegister.address = address;
     this.userService.insert(userRegister);
