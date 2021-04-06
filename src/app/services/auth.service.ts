@@ -79,5 +79,6 @@ export class AuthService {
     this.isConnected = false;
     this.emitStatus();
     localStorage.removeItem('isConnected');
+    localStorage.removeItem('token');
   }
 }
