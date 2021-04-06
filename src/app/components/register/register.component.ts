@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ITS_JUST_ANGULAR } from '@angular/core/src/r3_symbols';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
   fg : FormGroup = new FormGroup(USER_FORM_CREATE);
   accessLevelLabelMapping =  accessLevelLabelMapping;
   accessLevel = Object.values(AccessLevel).filter(value => typeof value === 'number');
-
+  @ViewChild('closeModal') closeModal: ElementRef;
 
   constructor(
     private authService : AuthService,
@@ -42,10 +42,12 @@ export class RegisterComponent implements OnInit {
         country : new FormControl('', Validators.required)
       })
     })*/
+    this.authService.currentUser.subscribe( u => {
+      if (u !== null) {
+       this.adminConnected = u.accessLevel == AccessLevel.ADMINISTRATOR ? true : false;
 
-    // if (this.authService.currentUser != null) {
-    //   this.adminConnected = this.authService.currentUser.accessLevel == AccessLevel.ADMINISTRATOR ? true : false;
-    // }
+      }
+    })
 
   }
 
@@ -69,6 +71,9 @@ export class RegisterComponent implements OnInit {
     userRegister.address = address;
     this.userService.insert(userRegister);
 console.log(JSON.stringify(userRegister));
+
+this.closeModal.nativeElement.click();
+
 this.router.navigate(['']);
   }
 
