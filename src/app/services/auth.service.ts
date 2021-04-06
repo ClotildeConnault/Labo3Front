@@ -46,6 +46,7 @@ export class AuthService {
     user.username = pseudo;
     user.password = pwd;
 
+    // Ancienne méthode de connexion :
     // this.client.post<User>(this.url+"/users/login", user).subscribe({
     //   next : (data : User) => {
     //     if(data !== null){
@@ -54,16 +55,22 @@ export class AuthService {
     //         this.emitStatus();
     //         localStorage.setItem("isConnected", 'ok');
     //     }
-
     //     this.emitStatus();
-
     //   },
     //   error : error => {console.log("ça plante : " + error.message)}
     // })
 
     this.client.post(this.url + "/login", user, {observe: "response"}).subscribe(response => {
       localStorage.setItem("token", response.headers.get("Authorization").replace("Bearer ", ""));
-      this.service.getUserConnected({"username":pseudo} as User).subscribe(u => {this._currentUser.next(u); this.router.navigate(['home']).then()})
+      console.log("J'ai retrouvé le token!")
+      this.service.getUserConnected({"username":pseudo} as User).subscribe(u => {
+        this._currentUser.next(u);
+        console.log("Tu es : " + this._currentUser.value.username);
+        this.isConnected=true;
+        this.emitStatus();
+        localStorage.setItem("isConnected", 'ok');
+        this.router.navigate(['home'])
+      })
     })
   }
 
