@@ -12,7 +12,7 @@
             <tr *ngFor="let c of cart">
                 <td>{{c[0].name}}</td>
                 <td>{{c[1]}}</td>
-                <td>{{c[0].price * c[1]}} €</td>
+                <td>{{(c[0].price * c[1]) | number : "0.2-2"}} €</td>
                 <td>
                     <button class="btn btn-outline-light btn-sm" type="button" (click)="oneMore(c[0])">+</button>&nbsp;
                     {{c[1]}}&nbsp;
