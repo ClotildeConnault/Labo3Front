@@ -34,7 +34,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     this.orders$ = null;
-    this.user = this.authService.currentUser;
+    this.user = this.authService._currentUser.value;
     console.log(this.user.firstName);
     this.orderService.getbyClient(this.user.id).subscribe(data => console.table(data));
     this.orders$ = this.orderService.getbyClient(this.user.id);

@@ -40,7 +40,7 @@ export class ValidateOrderComponent implements OnInit {
   onSubmit(){
     if (this.form.valid){
       let order  = new Order();
-      order.user=this.authService.currentUser;
+      order.user=this.authService._currentUser.value;
       if (order.user != null){
         order.paid = true;
         order.paymentMethod = this.form.value["paymentMethod"]
