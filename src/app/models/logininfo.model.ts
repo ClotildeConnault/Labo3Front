@@ -1,4 +1,4 @@
 export class LoginInfo {
-    pseudo : string;
+    username : string;
     password : string;
 }

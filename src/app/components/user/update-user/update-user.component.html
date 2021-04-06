@@ -15,7 +15,7 @@
                     <option *ngFor="let a of accessLevel" [value]="a">{{accessLevelLabelMapping[a]}}</option>
                 </select>
                 <label>Pseudo</label>
-                <input class="form-control" type="text" formControlName="pseudo" [(ngModel)]="user.pseudo">
+                <input class="form-control" type="text" formControlName="pseudo" [(ngModel)]="user.username">
                 <label>Mot de passe</label>
                 <input class="form-control" type="password" formControlName="password" [(ngModel)]="user.password">
             </div>

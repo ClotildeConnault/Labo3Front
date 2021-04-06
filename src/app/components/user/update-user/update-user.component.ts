@@ -27,7 +27,7 @@ export class UpdateUserComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.user = this.authService.currentUser;
+    this.user = this.authService._currentUser.value;
     this.accessLevelId = (Object.keys(AccessLevel).indexOf(this.user.accessLevel.toString()) -1) /2;
   }
 
@@ -44,7 +44,7 @@ export class UpdateUserComponent implements OnInit {
     user.firstName = values['firstName'];
     user.lastName = values['lastName'];
     user.accessLevel = values['accessLevel'];
-    user.pseudo = values['pseudo'];
+    user.username = values['pseudo'];
     user.password = values['password'];
     user.address = address;
     this.userService.update(this.user.id, user);
