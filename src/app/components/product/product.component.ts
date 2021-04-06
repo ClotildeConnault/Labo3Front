@@ -145,7 +145,7 @@ export class ProductComponent implements OnInit {
 
   details(id) {
     this.router.navigate(['products/detail/' + id]);
-    this.gotoTop();
+    //this.gotoTop();
   }
 
   @HostListener('window:scroll')

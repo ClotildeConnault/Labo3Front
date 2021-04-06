@@ -25,19 +25,24 @@ export class ProductDetailComponent implements OnInit {
     private router : Router,
     private cartService : CartService
     ) { 
-      this.navigationSubscription = this.router.events.subscribe(
-        (e:any) => {if (e instanceof NavigationEnd) {
-          this.initialize();
-        }}
-        )
+      // this.navigationSubscription = this.router.events.subscribe(
+      //   (e:any) => {if (e instanceof NavigationEnd) {
+      //     this.initialize();
+      //   }}
+      //   )
     }
 
   ngOnInit(): void {
-    let id = this.activatedRoute.snapshot.params['id'];
+    this.activatedRoute.params.subscribe(data => {
+      this.productService.getByID(data.id).subscribe(p => {
+        this.product = p;
+      })
+    })
+    // let id = this.activatedRoute.snapshot.params['id'];
 
-    this.productService.getByID(id).subscribe(
-      product => {this.product = product}
-    )
+    // this.productService.getByID(id).subscribe(
+    //   product => {this.product = product}
+    // )
     
     
   };
