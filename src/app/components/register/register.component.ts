@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ITS_JUST_ANGULAR } from '@angular/core/src/r3_symbols';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { USER_FORM_CREATE } from 'src/app/forms/user.form';
 import { AccessLevel, accessLevelLabelMapping, Address} from 'src/app/models/user.model';
 import { UserRegister } from 'src/app/models/userRegister.model';
@@ -20,7 +21,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private builder : FormBuilder,
-    private userService : UserService
+    private userService : UserService,
+    private router : Router
   ) { }
 
   ngOnInit(): void {
@@ -62,7 +64,10 @@ export class RegisterComponent implements OnInit {
     userRegister.address = address;
     this.userService.insert(userRegister);
 console.log(JSON.stringify(userRegister));
+this.router.navigate(['']);
   }
+
+  
 
 }
 
