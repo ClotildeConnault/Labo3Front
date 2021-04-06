@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductComponent } from './components/product/product.component';
@@ -24,6 +24,7 @@ import { OrderComponent } from './components/order/order.component';
 import { UpdateUserComponent } from './components/user/update-user/update-user.component';
 import { BasketComponent } from './components/basket/basket.component';
 import { UserComponent } from './components/user/user.component';
+import { TokenInterceptor } from './services/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,9 @@ import { UserComponent } from './components/user/user.component';
     BrowserModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    {provide : HTTP_INTERCEPTORS, useClass : TokenInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

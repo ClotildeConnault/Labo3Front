@@ -43,9 +43,9 @@ export class RegisterComponent implements OnInit {
       })
     })*/
 
-    if (this.authService.currentUser != null) {
-      this.adminConnected = this.authService.currentUser.accessLevel == AccessLevel.ADMINISTRATOR ? true : false;
-    }
+    // if (this.authService.currentUser != null) {
+    //   this.adminConnected = this.authService.currentUser.accessLevel == AccessLevel.ADMINISTRATOR ? true : false;
+    // }
 
   }
 

@@ -8,6 +8,10 @@ A corriger dans le Labo 4 :
 (Si clic d'un détail sur la page 5, on revient automatiquement sur la première page en arrière-plan de la modal)
 ~Solution envisageable~ : ?
 
+- Ouverture modale au premier clic
+
+- Fermeture propre de la modale
+
 - Suppression dynamique des pages excédentaires dans le détail des produits
 (Si un produit est effacé en page 11, sa présence en DB fait qu'il est malgré tout calculé dans le total des articles existants, et une page vide se génère)
 ~Solution envisageable~ : Gérer lors de la récupération de la data pour faire un tri sur le boolean active, et réinjecter le tableau trié
