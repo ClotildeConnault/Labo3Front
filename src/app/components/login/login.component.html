@@ -1,5 +1,5 @@
 <div class="login">
-    <div *ngIf="!isConnected">
+    <div class="form-group" *ngIf="!isConnected">
     <form class="form-group" [formGroup]="fg" (ngSubmit)="onSubmit()">
         <div class="test">
             
@@ -23,8 +23,8 @@
         
         
         <button class="btn btn-info" size="tiny" status="info" [disabled]="fg.invalid">Connexion</button>&nbsp;    
-        <button class="btn btn-info" size="tiny" status="info" (click)="register()" data-toggle="modal" data-target="#registerModal">Enregistrement</button>  
     </form>
+    <button class="btn btn-info" size="tiny" status="info" (click)="register()" data-toggle="modal" data-target="#registerModal">Enregistrement</button>
             
 </div>
 
