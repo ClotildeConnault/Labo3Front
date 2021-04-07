@@ -2,6 +2,8 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Supplier } from 'src/app/models/supplier.model';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { SupplierService } from 'src/app/services/supplier.service';
 
 @Component({
@@ -11,11 +13,14 @@ import { SupplierService } from 'src/app/services/supplier.service';
 })
 export class SupplierComponent implements OnInit {
 
+  user : User;
+
   suppliers$ : Observable<Supplier[]>;
 
-  constructor(private service : SupplierService, private router : Router) { }
+  constructor(private service : SupplierService, private router : Router, private authService : AuthService) { }
 
   ngOnInit(): void {
+    this.user = this.authService._currentUser.value;
     this.initialize();
   }
 
