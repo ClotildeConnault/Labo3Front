@@ -35,7 +35,8 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
     this.orders$ = null;
     this.user = this.authService._currentUser.value;
-    console.log(this.user.firstName);
+    console.log("Je suis " + this.user.firstName);
+    console.log("Niveau d'accès : " + this.user.accessLevel);
     this.orderService.getbyClient(this.user.id).subscribe(data => console.table(data));
     this.orders$ = this.orderService.getbyClient(this.user.id);
     this.accessLevel = (Object.keys(AccessLevel).indexOf(this.user.accessLevel.toString()) -1) /2;
