@@ -122,16 +122,18 @@ export class ProductComponent implements OnInit {
     this.productService.delete(id).subscribe(
       () => {
         this.productService.getWithPagination(this.pageLoaded,10).subscribe(data => {
-          console.log(data)
+          console.log(data);
           this.productPage=data; 
           this.numberPage=[];
             for (let index = 1; index <= this.productPage.totalPages; index++) {
-              this.numberPage.push(index)      
-            } 
+              this.numberPage.push(index);     
+            }
+          if (this.pageLoaded >= this.productPage.totalPages) {
+            this.pageLoaded = this.productPage.totalPages-1;
+            this.navigateTo(this.pageLoaded);
+          }
         })
       })
-
-   
   };
     /*this.productService.delete(id).subscribe(
       data => {console.log("success", data);
@@ -175,6 +177,7 @@ export class ProductComponent implements OnInit {
 
   navigateTo(index : number){
     this.productService.getWithPagination(index,10).subscribe(data => {
+      console.log(index)
       this.productPage=data;
       this.pageLoaded=this.productPage.pageable.pageNumber
     })
