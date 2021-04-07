@@ -12,10 +12,6 @@ A corriger dans le Labo 4 :
 
 - Fermeture propre de la modale
 
-- Suppression dynamique des pages excédentaires dans le détail des produits
-(Si un produit est effacé en page 11, sa présence en DB fait qu'il est malgré tout calculé dans le total des articles existants, et une page vide se génère)
-~Solution envisageable~ : Gérer lors de la récupération de la data pour faire un tri sur le boolean active, et réinjecter le tableau trié
-
 A ajouter dans le labo 4 :
 
 Historique des modifications d'un produit (utilisateur qui a fait le changement, ancien produit, date de la modif)

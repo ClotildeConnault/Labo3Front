@@ -16,10 +16,7 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     
     if (!request.headers.has("Authorization")) {
-      console.log("Par ici");
       if (localStorage.getItem('token') != null) {
-      console.log("Par là");
-
         let clone = request.clone({setHeaders : {"Authorization" : "Bearer " + localStorage.getItem('token')}});
         return next.handle(clone);
       } else {

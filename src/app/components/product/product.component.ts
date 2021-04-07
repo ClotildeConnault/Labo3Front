@@ -17,7 +17,7 @@ export class ProductComponent implements OnInit {
   searching : boolean;
   products : Product[];
   productPage : ProductPage = new ProductPage();
-  numberPage : Number[] = [];
+  numberPage : number[] = [];
   pageLoaded: number;
   navigationSubscription;
 
@@ -177,7 +177,6 @@ export class ProductComponent implements OnInit {
 
   navigateTo(index : number){
     this.productService.getWithPagination(index,10).subscribe(data => {
-      console.log(index)
       this.productPage=data;
       this.pageLoaded=this.productPage.pageable.pageNumber
     })
