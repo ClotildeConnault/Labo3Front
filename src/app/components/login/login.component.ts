@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
     
     this.authService.logout();
     this.isConnected = false;
+    localStorage.removeItem('token');
     this.router.navigate(['./home']);
   
   }
