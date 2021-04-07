@@ -17,6 +17,7 @@ import { BasketComponent } from './components/basket/basket.component';
 import { UserComponent } from './components/user/user.component';
 import { ValidateOrderComponent } from './components/validate-order/validate-order.component';
 import { UpdateUserComponent } from './components/user/update-user/update-user.component';
+import { AuthGuard } from './services/auth.guard';
 
 
 const routes: Routes = [
@@ -37,17 +38,17 @@ const routes: Routes = [
   },
   {path: 'update', component: UpdateUserComponent}
   ]},
-  {path: 'products/add', component: ProductAddComponent},
+  {path: 'products/add', component: ProductAddComponent, canActivate: [AuthGuard], data: {roles: ['ADMINISTRATOR']} },
   {path: 'products/search', component: ProductSearchComponent},
-  {path: 'products/update/:id', component: ProductUpdateComponent},
-  {path: 'suppliers', component: SupplierComponent},
+  {path: 'products/update/:id', component: ProductUpdateComponent, canActivate: [AuthGuard], data: {roles: ['ADMINISTRATOR']} },
+  {path: 'suppliers', component: SupplierComponent, canActivate: [AuthGuard], data: {roles: ['ADMINISTRATOR']} },
   {path: 'suppliers/detail/:id', component: SupplierDetailComponent, children: [{
     path: 'productdetail/:id',
     component: ProductDetailComponent
   }
 ]},
-  {path: 'suppliers/add', component: SupplierAddComponent},
-  {path: 'suppliers/update/:id', component: SupplierUpdateComponent},
+  {path: 'suppliers/add', component: SupplierAddComponent, canActivate: [AuthGuard], data: {roles: ['ADMINISTRATOR']} },
+  {path: 'suppliers/update/:id', component: SupplierUpdateComponent, canActivate: [AuthGuard], data: {roles: ['ADMINISTRATOR']} },
   {path: '**', redirectTo: 'home'}
 ];
 

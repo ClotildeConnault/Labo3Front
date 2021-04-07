@@ -33,8 +33,12 @@ export class AuthGuard implements CanActivate, CanActivateChild {
           output = true;
         }
       })
+      if (!output) {
+        alert("Vous n'avez pas les autorisations requises");
+      }
       return output;
     }
-    return this.router.parseUrl('/login');
+    alert("Vous devez être connecté pour accéder à cette ressource");
+    return this.router.parseUrl('/home');
   }
 }
