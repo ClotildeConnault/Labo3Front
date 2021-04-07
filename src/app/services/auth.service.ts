@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { LoginInfo } from '../models/logininfo.model';
-import { User } from '../models/user.model';
+import { AccessLevel, User } from '../models/user.model';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -29,7 +29,11 @@ export class AuthService {
     private router : Router,
     private client : HttpClient,
     private service : UserService
-  ) { }
+  ) {
+    localStorage.removeItem('isConnected');
+    localStorage.removeItem('token');
+    localStorage.removeItem("role");
+   }
 
   emitStatus() {
     this.conSub.next(this.isConnected);
@@ -62,10 +66,9 @@ export class AuthService {
 
     this.client.post(this.url + "/login", user, {observe: "response"}).subscribe(response => {
       localStorage.setItem("token", response.headers.get("Authorization").replace("Bearer ", ""));
-      console.log("J'ai retrouvé le token!")
       this.service.getUserConnected({"username":pseudo} as User).subscribe(u => {
         this._currentUser.next(u);
-        console.log("Tu es : " + this._currentUser.value.username);
+        localStorage.setItem("role", u.accessLevel.toString());
         this.isConnected=true;
         this.emitStatus();
         localStorage.setItem("isConnected", 'ok');
@@ -80,5 +83,6 @@ export class AuthService {
     this.emitStatus();
     localStorage.removeItem('isConnected');
     localStorage.removeItem('token');
+    localStorage.removeItem("role");
   }
 }

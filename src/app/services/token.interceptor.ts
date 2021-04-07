@@ -19,12 +19,11 @@ export class TokenInterceptor implements HttpInterceptor {
       if (localStorage.getItem('token') != null) {
         let clone = request.clone({setHeaders : {"Authorization" : "Bearer " + localStorage.getItem('token')}});
         return next.handle(clone);
-      } /*else {
-        this.router.navigate(['login']).then();
+      } else {
+        //this.router.navigate(['login']).then();
         return next.handle(request);
-      }*/
+      }
     }
-
     return next.handle(request);
   }
 }

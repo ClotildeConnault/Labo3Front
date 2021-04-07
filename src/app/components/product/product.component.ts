@@ -2,6 +2,8 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProductPage } from 'src/app/models/productPage.model';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { Product } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
@@ -13,6 +15,8 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 })
 export class ProductComponent implements OnInit {
 
+  user : User;
+
   isShow : boolean;
   searching : boolean;
   products : Product[];
@@ -23,7 +27,8 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private productService : ProductService,
-    private router : Router
+    private router : Router,
+    private authService : AuthService
     ) { 
       this.navigationSubscription = this.router.events.subscribe(
         (e:any) => {if (e instanceof NavigationEnd) {
@@ -33,7 +38,7 @@ export class ProductComponent implements OnInit {
     }
 
   ngOnInit(): void {
-       console.log("init")
+      this.user = this.authService._currentUser.value;
       this.searching=this.productService.searching
       if (this.searching){
         this.productPage.content=this.productService.listProduct
