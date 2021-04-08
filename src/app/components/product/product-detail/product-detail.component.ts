@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Product } from 'src/app/models/product.model';
 import { Supplier } from 'src/app/models/supplier.model';
@@ -12,6 +12,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductDetailComponent implements OnInit {
 
+  @ViewChild('closeModal') closeModal: ElementRef;
   product : Product;
   supplier : Supplier;
   navigationSubscription;
@@ -77,6 +78,11 @@ export class ProductDetailComponent implements OnInit {
         }
       }
     }
+  }
+
+  supplierClick(supplierId : number) {
+    this.closeModal.nativeElement.click();
+    this.router.navigate(["/suppliers/detail/" + supplierId]);
   }
 
 }

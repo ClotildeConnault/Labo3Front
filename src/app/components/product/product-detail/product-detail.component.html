@@ -3,7 +3,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Détail du produit {{product?.name}}</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button #closeModal type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -21,7 +21,7 @@
                 <p class="card-text">Date de péremption : {{product?.expirationDate | date:'dd/MM/yyyy, HH:mm:ss'}} </p>
                 <p class="card-text">Prix : {{product?.price}} </p>
                 <p class="card-text">Quantité en stock : {{product?.quantity}} </p>
-                <p class="card-text">Fournisseur : <span title="Page du fournisseur"><a routerLink="/suppliers/detail/{{product.supplier.id}}">{{product.supplier.companyName}}</a></span> </p>
+                <p class="card-text">Fournisseur : <span title="Page du fournisseur"><a routerLink="" (click)="supplierClick(product.supplier.id)">{{product.supplier.companyName}}</a></span> </p>
                 <p class="card-text">Catégorie(s)</p>
                     <ul>
                         <li *ngFor="let c of product.categories">{{c?.name}}</li>
