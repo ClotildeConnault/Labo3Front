@@ -77,6 +77,7 @@ export class AuthService {
     })
   }
 
+
   logout() {
     this._currentUser.next(null);
     this.isConnected = false;

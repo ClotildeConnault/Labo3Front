@@ -18,6 +18,7 @@ export class TokenInterceptor implements HttpInterceptor {
     if (!request.headers.has("Authorization")) {
       if (localStorage.getItem('token') != null) {
         let clone = request.clone({setHeaders : {"Authorization" : "Bearer " + localStorage.getItem('token')}});
+ 
         return next.handle(clone);
       } else {
         //this.router.navigate(['login']).then();
