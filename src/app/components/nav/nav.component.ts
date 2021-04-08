@@ -32,25 +32,32 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.menuItems = [
-      //   {title: "Nos produits", path : "/products", adminAccess: false},
-      //   {title: "Les fournisseurs", path : "/suppliers", adminAccess: true},
-      //   {title: "Comptes", path : "/accounts", adminAccess: true}
-    
-      // ]
+    let items : MenuItem[] = [
+      {title: "Nos produits", path : "/products", adminAccess: false},
+      {title: "Les fournisseurs", path : "/suppliers", adminAccess: true},
+      {title: "Comptes", path : "/accounts", adminAccess: true}
+    ]
 
     this.status = this.authService.conSub.subscribe((data : boolean) => {
       this.isConnected = data;
-      this.user = this.authService._currentUser.value;
+    });
+
+    this.authService._currentUser.subscribe(u => {
+      this.user = u;
       this.adminConnected = this.user != null && this.user.accessLevel.toString() === 'ADMINISTRATOR' ? true : false;
+      if (!this.adminConnected) {
+       this.menuItems =  items.filter(i => i.adminAccess !== true);
+       console.table(this.menuItems);
+      } else {
+        this.menuItems = items;
+        console.table(this.menuItems);
+      }
     });
 
     this.searchForm = this.builder.group({
       search : new FormControl("", Validators.required)
     })
     this.productService.searching = false
-
-    
 
     // this.authService.currentUser.subscribe((u : User) => {
     //  console.log(u.firstName)
