@@ -15,7 +15,9 @@ export class NavComponent implements OnInit {
 
   @ViewChild("navitem")
 
-  adminConnected : boolean = false;
+  user : User;
+
+  adminConnected : boolean;
   isConnected : boolean;
   status : Subscription;
   searchForm : FormGroup;
@@ -30,37 +32,45 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.menuItems = [
-      {title: "Nos produits", path : "/products", adminAccess: false},
-      {title: "Les fournisseurs", path : "/suppliers", adminAccess: true},
-      {title: "Comptes", path : "/accounts", adminAccess: true}
-  
-    ]
+    // this.menuItems = [
+      //   {title: "Nos produits", path : "/products", adminAccess: false},
+      //   {title: "Les fournisseurs", path : "/suppliers", adminAccess: true},
+      //   {title: "Comptes", path : "/accounts", adminAccess: true}
+    
+      // ]
+
+    this.status = this.authService.conSub.subscribe((data : boolean) => {
+      this.isConnected = data;
+      this.user = this.authService._currentUser.value;
+      this.adminConnected = this.user != null && this.user.accessLevel.toString() === 'ADMINISTRATOR' ? true : false;
+    });
 
     this.searchForm = this.builder.group({
       search : new FormControl("", Validators.required)
     })
     this.productService.searching = false
 
-    this.authService.currentUser.subscribe((u : User) => {
-     console.log(u.firstName)
-      
-      console.log("ACCESS LEVEL" + u.accessLevel);
-      this.adminConnected = u != null && u.accessLevel === AccessLevel.ADMINISTRATOR ? true : false;
-
-
-      let currentUrl = this.router.url;
-      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-      this.router.onSameUrlNavigation = 'reload';
-      this.router.navigate([currentUrl]);
-
-      // if (!this.adminConnected) {
     
-      //  this.menuItems =  this.menuItems.filter(i => i.adminAccess !== true);
-      //  console.table(this.menuItems);
-      // }
-    })
-    this.status = this.authService.conSub.subscribe((data : boolean) => this.isConnected = data)
+
+    // this.authService.currentUser.subscribe((u : User) => {
+    //  console.log(u.firstName)
+      
+    //   console.log("ACCESS LEVEL" + u.accessLevel);
+    //   this.adminConnected = u != null && u.accessLevel === AccessLevel.ADMINISTRATOR ? true : false;
+
+
+    //   let currentUrl = this.router.url;
+    //   this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    //   this.router.onSameUrlNavigation = 'reload';
+    //   this.router.navigate([currentUrl]);
+
+    //   // if (!this.adminConnected) {
+    
+    //   //  this.menuItems =  this.menuItems.filter(i => i.adminAccess !== true);
+    //   //  console.table(this.menuItems);
+    //   // }
+    // });
+    
   }
 
 
