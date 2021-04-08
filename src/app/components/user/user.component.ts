@@ -19,6 +19,7 @@ export class UserComponent implements OnInit {
   accessLevel : number;
   orderDetail : boolean;
   navigationSubscription;
+  update : boolean = false;
 
   constructor(
     private orderService : OrderService,
@@ -44,6 +45,7 @@ export class UserComponent implements OnInit {
   }
 
   onClickUpdate() {
+    this.update = true;
     this.router.navigate(["user/update"]);
   }
 

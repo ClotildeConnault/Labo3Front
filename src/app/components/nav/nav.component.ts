@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AccessLevel, User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -12,9 +13,13 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class NavComponent implements OnInit {
 
+  @ViewChild("navitem")
+
+  adminConnected : boolean = false;
   isConnected : boolean;
   status : Subscription;
   searchForm : FormGroup;
+  menuItems : MenuItem[] 
   
   constructor(
     private productService : ProductService,
@@ -24,13 +29,40 @@ export class NavComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.menuItems = [
+      {title: "Nos produits", path : "/products", adminAccess: false},
+      {title: "Les fournisseurs", path : "/suppliers", adminAccess: true},
+      {title: "Comptes", path : "/accounts", adminAccess: true}
+  
+    ]
+
     this.searchForm = this.builder.group({
       search : new FormControl("", Validators.required)
     })
     this.productService.searching = false
 
+    this.authService.currentUser.subscribe((u : User) => {
+     console.log(u.firstName)
+      
+      console.log("ACCESS LEVEL" + u.accessLevel);
+      this.adminConnected = u != null && u.accessLevel === AccessLevel.ADMINISTRATOR ? true : false;
+
+
+      let currentUrl = this.router.url;
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate([currentUrl]);
+
+      // if (!this.adminConnected) {
+    
+      //  this.menuItems =  this.menuItems.filter(i => i.adminAccess !== true);
+      //  console.table(this.menuItems);
+      // }
+    })
     this.status = this.authService.conSub.subscribe((data : boolean) => this.isConnected = data)
   }
+
 
   search(){
    
@@ -61,4 +93,10 @@ export class NavComponent implements OnInit {
     this.router.navigateByUrl("/products")
   }
 
+}
+
+export class MenuItem {
+  title : string;
+  path : string;
+  adminAccess? : boolean;
 }

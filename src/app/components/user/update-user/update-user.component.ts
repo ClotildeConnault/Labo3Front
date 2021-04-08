@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { USER_FORM_CREATE } from 'src/app/forms/user.form';
 import { accessLevelLabelMapping, AccessLevel, Address, User } from 'src/app/models/user.model';
@@ -23,12 +23,18 @@ export class UpdateUserComponent implements OnInit {
 
   constructor(
     private userService : UserService,
-    private authService : AuthService
+    private authService : AuthService,
+    private builder : FormBuilder
   ) { }
 
   ngOnInit(): void {
-    this.user = this.authService._currentUser.value;
-    this.accessLevelId = (Object.keys(AccessLevel).indexOf(this.user.accessLevel.toString()) -1) /2;
+    console.log("ONINIT")
+    this.authService.currentUser.subscribe(u => {
+      this.user = u;
+      console.log("TEST" + u);
+      this.accessLevelId = (Object.keys(AccessLevel).indexOf(this.user.accessLevel.toString()) -1) /2;
+    })
+    
   }
 
   onSubmit() {
@@ -43,8 +49,9 @@ export class UpdateUserComponent implements OnInit {
     let user = new User();
     user.firstName = values['firstName'];
     user.lastName = values['lastName'];
-    user.accessLevel = values['accessLevel'];
-    user.username = values['pseudo'];
+    //user.accessLevel = values['accessLevel'];
+    user.accessLevel = this.user.accessLevel;
+    user.username = values['username'];
     user.password = values['password'];
     user.address = address;
     this.userService.update(this.user.id, user);

@@ -1,8 +1,5 @@
 A corriger dans le Labo 4 :
 
-- Changement de niveau d'accès d'un User
-(Actuellement, le changement ne se répercute pas en DB)
-~Solution envisageable~ : ?
 
 - Affichage de la page exacte lors d'un clic sur le détail d'un produit
 (Si clic d'un détail sur la page 5, on revient automatiquement sur la première page en arrière-plan de la modal)
@@ -10,13 +7,10 @@ A corriger dans le Labo 4 :
 
 - Ouverture modale au premier clic
 
-- Fermeture propre de la modale
-
-- Suppression dynamique des pages excédentaires dans le détail des produits
-(Si un produit est effacé en page 11, sa présence en DB fait qu'il est malgré tout calculé dans le total des articles existants, et une page vide se génère)
-~Solution envisageable~ : Gérer lors de la récupération de la data pour faire un tri sur le boolean active, et réinjecter le tableau trié
 
 A ajouter dans le labo 4 :
 
 Historique des modifications d'un produit (utilisateur qui a fait le changement, ancien produit, date de la modif)
 ~Solution envisageable~ : Gestion d'une nouvelle table + entité history OU Gestion d'une table intermédiaire avec champs complémentaires OU gestion via triggers SQL
+
+Panneau administrateur : liste complète des utilisateurs, bouton pour switch le rôle, possibilité de jouer sur les 4 booleans

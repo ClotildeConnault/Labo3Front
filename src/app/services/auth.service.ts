@@ -64,7 +64,7 @@ export class AuthService {
       localStorage.setItem("token", response.headers.get("Authorization").replace("Bearer ", ""));
       console.log("J'ai retrouvé le token!")
       this.service.getUserConnected({"username":pseudo} as User).subscribe(u => {
-        this._currentUser.next(u);
+        this.currentUser.next(u);
         console.log("Tu es : " + this._currentUser.value.username);
         this.isConnected=true;
         this.emitStatus();
@@ -73,6 +73,7 @@ export class AuthService {
       })
     })
   }
+
 
   logout() {
     this._currentUser.next(null);

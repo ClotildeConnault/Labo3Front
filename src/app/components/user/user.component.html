@@ -28,10 +28,10 @@
                     <td>Adresse :  </td>
                         <td>
                             <table class="table">
-                            <tr>{{user.address.street}}, &nbsp; {{user.address.number}}</tr>
-                            <tr>{{user.address.zipCode}}</tr>
-                            <tr>{{user.address.city}}</tr>
-                            <tr>{{user.address.country}}</tr>
+                            <tr>{{user.address?.street}}, &nbsp; {{user.address?.number}}</tr>
+                            <tr>{{user.address?.zipCode}}</tr>
+                            <tr>{{user.address?.city}}</tr>
+                            <tr>{{user.address?.country}}</tr>
                         </table>
                         </td>
                      
@@ -44,7 +44,9 @@
 
 
     </div>
-        
+     
+           
+
 
         <div class="card" *ngIf="!orderDetail">
             <div class="card-header">

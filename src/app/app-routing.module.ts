@@ -17,6 +17,7 @@ import { BasketComponent } from './components/basket/basket.component';
 import { UserComponent } from './components/user/user.component';
 import { ValidateOrderComponent } from './components/validate-order/validate-order.component';
 import { UpdateUserComponent } from './components/user/update-user/update-user.component';
+import { AccountsComponent } from './components/accounts/accounts.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
   }
 ]},
   {path: 'basket', component: BasketComponent},
+  {path: 'accounts', component: AccountsComponent},
   {path: 'validate', component: ValidateOrderComponent},
   {path: 'user', component: UserComponent, children: [{
     path: 'order/:id',

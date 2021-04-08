@@ -5,8 +5,10 @@
     </button>
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <a class="nav-link" routerLink="/products" (click)="productRefresh()">Nos produits<span class="sr-only">(current)</span></a>
+        <a *ngFor="let i of menuItems" class="nav-link" routerLink={{i.path}} [hidden]="adminConnected === true? true : i.adminAccess">{{i.title}}<span class="sr-only">(current)</span></a>
+        <!-- <a class="nav-link" routerLink="/products" (click)="productRefresh()">Nos produits<span class="sr-only">(current)</span></a>
         <a class="nav-link" routerLink="/suppliers">Les fournisseurs<span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink="/accounts" *ngIf="adminConnected">Comptes<span class="sr-only">(current)</span></a> -->
         <form class="form-inline ml-3 my-2 my-lg-0" [formGroup]="searchForm">
             <input class="form-control mr-sm-2" type="search" placeholder="Recherche par produit" aria-label="Recherche" formControlName="search">
             <button class="btn btn-primary my-2 mr-2 my-sm-0" type="submit" (click)="search()">Je veux ça !</button>
