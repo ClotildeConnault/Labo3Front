@@ -19,6 +19,7 @@ import { ValidateOrderComponent } from './components/validate-order/validate-ord
 import { UpdateUserComponent } from './components/user/update-user/update-user.component';
 import { AccountsComponent } from './components/accounts/accounts.component';
 import { AuthGuard } from './services/auth.guard';
+import { ProductLogComponent } from './components/product-log/product-log.component';
 
 
 const routes: Routes = [
@@ -51,6 +52,8 @@ const routes: Routes = [
 ]},
   {path: 'suppliers/add', component: SupplierAddComponent, canActivate: [AuthGuard], data: {roles: ['ADMINISTRATOR']} },
   {path: 'suppliers/update/:id', component: SupplierUpdateComponent, canActivate: [AuthGuard], data: {roles: ['ADMINISTRATOR']} },
+  {path: 'plog/product/:id', component: ProductLogComponent, canActivate: [AuthGuard], data: {roles: ['ADMINISTRATOR']} },
+  {path: 'plog/user/:id', component: ProductLogComponent, canActivate: [AuthGuard], data: {roles: ['ADMINISTRATOR']} },
   {path: '**', redirectTo: 'home'}
 ];
 

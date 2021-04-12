@@ -5,8 +5,11 @@ import { Observable } from 'rxjs';
 import { PRODUCT_FORM_CREATE } from 'src/app/forms/product.form';
 import { Category } from 'src/app/models/category.model';
 import { Product } from 'src/app/models/product.model';
+import { ProductLog } from 'src/app/models/productLog.model';
 import { Supplier } from 'src/app/models/supplier.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { CategoryService } from 'src/app/services/category.service';
+import { ProductLogService } from 'src/app/services/product-log.service';
 import { ProductService } from 'src/app/services/product.service';
 import { SupplierService } from 'src/app/services/supplier.service';
 
@@ -25,15 +28,26 @@ export class ProductUpdateComponent implements OnInit {
   cattab: Array<Category>;
   product: Product;
   productUpdate: Product;
+  log: ProductLog = new ProductLog;
   categories: Array<Category> = [];
 
-  constructor(private service : ProductService, private supplServ : SupplierService, private catServ : CategoryService, private activatedRoute : ActivatedRoute, private router : Router) { }
+  productLogOld : string;
+
+  constructor(
+    private service : ProductService,
+    private supplServ : SupplierService,
+    private catServ : CategoryService,
+    private logServ : ProductLogService,
+    private authServ : AuthService,
+    private activatedRoute : ActivatedRoute,
+    private router : Router
+    ) { }
 
   ngOnInit(): void {
     let id = this.activatedRoute.snapshot.params['id'];
 
     this.service.getByID(id).subscribe(
-      product => {this.product = product}
+      product => {this.product = product; this.productLogOld = JSON.stringify(product)}
     )
 
     this.suppliers$ = this.supplServ.getAll();
@@ -83,9 +97,20 @@ export class ProductUpdateComponent implements OnInit {
         });     
       }
       this.productUpdate.categories = this.categories;
+
+      // Création du log d'historique du produit
+      this.log.productId = this.product.id;
+      let productLogNew : Product = this.productUpdate;
+      productLogNew.supplier.products = null;
+      this.log.oldProduct = this.productLogOld;
+      this.log.newProduct = JSON.stringify(productLogNew);
+      this.log.userId = this.authServ._currentUser.value.id;
+      this.logServ.insert(this.log).subscribe();
       
       //console.log(this.product);
       this.service.update(this.product.id, this.productUpdate).subscribe();
+
+
       this.form_product.reset();
       this.router.navigate(['products']);
     } else {

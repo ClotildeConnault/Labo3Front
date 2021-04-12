@@ -155,6 +155,10 @@ export class ProductComponent implements OnInit {
     //this.gotoTop();
   }
 
+  historic(id) {
+    this.router.navigate(['plog/product/' + id]);
+  }
+
   @HostListener('window:scroll')
   checkScroll() {
     const scrollPosition = document.documentElement.scrollTop;

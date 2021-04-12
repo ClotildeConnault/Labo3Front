@@ -26,6 +26,7 @@ import { BasketComponent } from './components/basket/basket.component';
 import { UserComponent } from './components/user/user.component';
 import { TokenInterceptor } from './services/token.interceptor';
 import { AccountsComponent } from './components/accounts/accounts.component';
+import { ProductLogComponent } from './components/product-log/product-log.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { AccountsComponent } from './components/accounts/accounts.component';
     ValidateOrderComponent,
     OrderComponent,
     UpdateUserComponent,
-    AccountsComponent
+    AccountsComponent,
+    ProductLogComponent
   ],
   imports: [
     BrowserModule,
