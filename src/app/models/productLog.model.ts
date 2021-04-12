@@ -8,3 +8,12 @@ export class ProductLog {
     userId : number;
     logDate : Date;
 }
+
+export class ProductLogWithProducts {
+    id : number;
+    productId : number;
+    oldProduct : Product;
+    newProduct : Product;
+    userId : number;
+    logDate : Date;
+}
