@@ -1,4 +1,8 @@
 <div *ngIf="plog != null && plog?.length > 0">
+
+    <h2 *ngIf="entry == 'product'">Historique des modifications pour le produit {{prod?.name}}</h2>
+    <h2 *ngIf="entry == 'user'">Historique des modifications de l'utilisateur {{user?.username}}</h2>
+
     <table class="table table-striped">
         <thead>
             <th>Date de modif</th>
@@ -18,5 +22,6 @@
 </div>
 
 <div *ngIf="plog === null || plog?.length == 0">
-    <p>Pas de modification enregistrée pour ce produit</p>
+    <h2 *ngIf="entry == 'product'">Pas de modification enregistrée pour le produit {{prod?.name}}</h2>
+    <h2 *ngIf="entry == 'user'">{{user?.username}} n'a fait aucune modification de produit</h2>
 </div>
