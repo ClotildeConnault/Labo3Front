@@ -13,7 +13,7 @@
         </div>
         <div class="form-group">
 	        <label for="expirationDate">Date d'expiration : </label>
-	        <input class="form-control" type="date" id="expirationDate" name="expirationDate" formControlName="expirationDate">
+	        <input class="form-control" type="date" id="expirationDate" name="expirationDate" formControlName="expirationDate" [(ngModel)]="expirationDateString">
         </div>
         <div class="form-group">
 	        <label for="price">Prix unitaire (en euros) : </label>

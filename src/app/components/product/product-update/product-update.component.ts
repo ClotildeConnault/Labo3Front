@@ -27,6 +27,7 @@ export class ProductUpdateComponent implements OnInit {
   suppltab: Array<Supplier>;
   cattab: Array<Category>;
   product: Product;
+  expirationDateString : string
   productUpdate: Product;
   log: ProductLog = new ProductLog;
   categories: Array<Category> = [];
@@ -47,18 +48,24 @@ export class ProductUpdateComponent implements OnInit {
     let id = this.activatedRoute.snapshot.params['id'];
 
     this.service.getByID(id).subscribe(
-      product => {this.product = product; this.productLogOld = JSON.stringify(product)}
+      product => {this.product = product; this.productLogOld = JSON.stringify(product); this.expirationDateString=this.product.expirationDate.toString().substring(0,10)}
+      
     )
 
     this.suppliers$ = this.supplServ.getAll();
     this.categories$ = this.catServ.getAll()
     this.supplServ.getAll().subscribe(x => this.suppltab = x);
     this.catServ.getAll().subscribe(x => this.cattab = x);
+
+    
   }
 
   onUpdate() {
     const form = this.form_product;
-    if(form.valid){
+    if (form.pristine){
+      alert ("Vous n'avez rien modifié pour ce produit")
+    }
+    else if(form.valid){
       this.productUpdate = form.value;
 
       this.productUpdate.insertDate = this.product.insertDate;
