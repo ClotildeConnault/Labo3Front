@@ -26,6 +26,7 @@ import { BasketComponent } from './components/basket/basket.component';
 import { UserComponent } from './components/user/user.component';
 import { TokenInterceptor } from './services/token.interceptor';
 import { AccountsComponent } from './components/accounts/accounts.component';
+import { CheckPasswordValidatorDirective } from './util/check-password-validator.directive';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { AccountsComponent } from './components/accounts/accounts.component';
     ValidateOrderComponent,
     OrderComponent,
     UpdateUserComponent,
-    AccountsComponent
+    AccountsComponent,
+    CheckPasswordValidatorDirective
   ],
   imports: [
     BrowserModule,

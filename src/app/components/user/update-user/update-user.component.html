@@ -10,14 +10,37 @@
                 <input class="form-control" type="text" formControlName="firstName" [(ngModel)]="user.firstName">
                 <label>Nom</label>
                 <input class="form-control" type="text" formControlName="lastName" [(ngModel)]="user.lastName">
-                <!-- <label>Niveau d'accès</label>
-                <select class="form-control" formControlName="accessLevel" [(ngModel)]="accessLevelId">
-                    <option *ngFor="let a of accessLevel" [value]="a">{{accessLevelLabelMapping[a]}}</option>
-                </select> -->
+                <label hidden>Niveau d'accès</label>
+                <select hidden class="form-control" formControlName="accessLevel" [(ngModel)]="accessLevelId">
+                    <option *ngFor="let a of accessLevel" [value]="user.accessLevel">{{accessLevelLabelMapping[a]}}</option>
+                </select>
                 <label>Pseudo</label>
                 <input class="form-control" type="text" formControlName="username" [(ngModel)]="user.username">
-                <label>Mot de passe</label>
-                <input class="form-control" type="password" formControlName="password" [(ngModel)]="user.password">
+                
+                
+            </div>
+            <label>Mot de passe</label>
+            <div formGroupName="password" class="sousForm" >
+                <div>
+                    <label>Nouveau mot de passe</label>
+                <input ([ngClass])="identical" type="password" formControlName="password">
+                </div>
+                <div>
+                    <label>Confirmer le nouveau mot de passe</label>
+                <input type="password" formControlName="confirmPassword" [ngClass]="{'is-invalid': fg.get('password').errors ||
+                ((fg.get('password').touched || 
+                fg.get('password').dirty) && 
+                !fg.get('password').valid) }">
+                <span class="invalid-feedback">
+                    <span *ngIf="fg.get('password.confirmPassword').errors?.required">
+                      Please confirm your password.
+                    </span>
+                    <span *ngIf="fg.get('password').errors?.match">
+                      The confirmation does not match the password.
+                    </span>
+                  </span>
+                </div>
+
             </div>
             <label>Adresse</label>
             <div formGroupName="address" class="sousForm">
@@ -44,7 +67,7 @@
 
             </div>
            
-            <button class="btn btn-light" [disabled]="fg.invalid">Enregistrer</button>
+            <button class="btn btn-light" >Enregistrer</button>
         </form>
 
     </div>

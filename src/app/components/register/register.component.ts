@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
     })*/
     this.authService.currentUser.subscribe( u => {
       if (u !== null) {
-       this.adminConnected = u.accessLevel == AccessLevel.ADMINISTRATOR ? true : false;
+       this.adminConnected = u.accessLevel == "ADMINISTRATOR" ? true : false;
 
       }
     })
@@ -66,6 +66,8 @@ export class RegisterComponent implements OnInit {
     userRegister.firstName = values['firstName'];
     userRegister.lastName = values['lastName'];
     userRegister.accessLevel = values['accessLevel'];
+    console.log("NUL " + values["accessLevel"]);
+    console.log(userRegister.accessLevel);
     userRegister.username = values['username'];
     userRegister.password = values['password'];
     userRegister.address = address;

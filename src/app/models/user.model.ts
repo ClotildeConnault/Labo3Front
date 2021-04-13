@@ -2,7 +2,7 @@ export class User {
     id: number;
     firstName: string;
     lastName: string;
-    accessLevel : AccessLevel;
+    accessLevel : string;
     username : string;
     password : string;
     address : Address;
@@ -17,13 +17,23 @@ export class Address {
 }
 
 export enum AccessLevel {
-    CUSTOMER = 0,
-    EMPLOYEE = 1,
-    ADMINISTRATOR = 2,
+    CUSTOMER,
+    EMPLOYEE,
+    ADMINISTRATOR
 }
+
+
+
+
 
 export const accessLevelLabelMapping: Record<AccessLevel, string> = {
     [AccessLevel.CUSTOMER]: "Client",
     [AccessLevel.EMPLOYEE]: "Employé",
     [AccessLevel.ADMINISTRATOR]: "Administrateur"
+};
+
+export const accessLevelMapping: Record<AccessLevel, string> = {
+    [AccessLevel.CUSTOMER]: "CUSTOMER",
+    [AccessLevel.EMPLOYEE]: "EMPLOYEE",
+    [AccessLevel.ADMINISTRATOR]: "ADMINISTRATOR"
 };

@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     return this.canActivate(childRoute, state);
   }
 
-  checkLogin(url: string, roles: AccessLevel[]): boolean | UrlTree {
+  checkLogin(url: string, roles: string[]): boolean | UrlTree {
 
     let output = false;
 

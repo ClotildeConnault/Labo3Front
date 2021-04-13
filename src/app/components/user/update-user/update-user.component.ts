@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { USER_FORM_CREATE } from 'src/app/forms/user.form';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ADDRESS_FORM_CREATE, checkPasswords, USER_FORM_CREATE } from 'src/app/forms/user.form';
 import { accessLevelLabelMapping, AccessLevel, Address, User } from 'src/app/models/user.model';
 import { UserRegister } from 'src/app/models/userRegister.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,19 +15,37 @@ import { UserComponent } from '../user.component';
 })
 export class UpdateUserComponent implements OnInit {
 
-  fg : FormGroup = new FormGroup(USER_FORM_CREATE);
+  //fg : FormGroup = new FormGroup(USER_FORM_CREATE);
+  fg : FormGroup;
   accessLevelLabelMapping =  accessLevelLabelMapping;
   accessLevel = Object.values(AccessLevel).filter(value => typeof value === 'number');
   accessLevelId : number;
   user : User;
+  identical : string = "border border-dark";
 
   constructor(
     private userService : UserService,
     private authService : AuthService,
-    private builder : FormBuilder
+    private builder : FormBuilder,
+    private router : Router
   ) { }
 
   ngOnInit(): void {
+
+    this.fg = this.builder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      accessLevel : ['CUSTOMER', Validators.required],
+      username : ['', Validators.required],
+      password : this.builder.group({password : ['', Validators.required],
+                              confirmPassword : ['', Validators.required]}, {validator : checkPasswords}),
+      address : new FormGroup(ADDRESS_FORM_CREATE)
+      })
+    
+
+
+
+
     console.log("ONINIT")
     this.authService.currentUser.subscribe(u => {
       this.user = u;
@@ -40,6 +58,7 @@ export class UpdateUserComponent implements OnInit {
   onSubmit() {
     let values = this.fg.value;
     let addressValues = values['address'];
+    let passwordValues = values['password'];
     let address = new Address;
     address.city = addressValues['city'];
     address.country = addressValues['country'];
@@ -49,12 +68,42 @@ export class UpdateUserComponent implements OnInit {
     let user = new User();
     user.firstName = values['firstName'];
     user.lastName = values['lastName'];
-    //user.accessLevel = values['accessLevel'];
     user.accessLevel = this.user.accessLevel;
     user.username = values['username'];
-    user.password = values['password'];
     user.address = address;
-    this.userService.update(this.user.id, user);
+
+    if(this.fg.get('password').invalid) {
+      console.log("INVALID");
+      this.identical = "border border-danger";
+    }
+
+    user.password = passwordValues['password'];
+    console.log("LA" + JSON.stringify(user));
+        this.userService.update(this.user.id, user).subscribe({
+              next : () => this.router.navigate(['/user']),
+              error : (error) => console.log(error)
+            });
+
+    // if(values['password'] !== null) {
+    //   if(values['password'] !== this.confPassword) {
+    //     C
+    //   } else {
+    //     user.password = values['password'];
+    //     this.userService.update(this.user.id, user).subscribe({
+    //           next : () => this.router.navigate(['/user']),
+    //           error : (error) => console.log(error)
+    //         });
+    //   }
+     
+    // } else {
+    //   user.password = this.user.password;
+    //   this.userService.update(this.user.id, user).subscribe({
+    //     next : () => this.router.navigate(['/user']),
+    //     error : (error) => console.log(error)
+    //   });
+    // }
+
+    
   }
 
 }

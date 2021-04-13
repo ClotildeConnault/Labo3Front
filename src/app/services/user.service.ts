@@ -37,13 +37,10 @@ export class UserService {
     })
   }
 
-  update(id, user: User) {
+  update(id, user: User) : Observable<User>{
     console.log(JSON.stringify(user));
    // this.router.navigate(['/user']);
-    return this.httpClient.put<User>(this.BASE_URL + "/" + id, user).subscribe({
-      next : () => this.router.navigate(['/user']),
-      error : (error) => console.log(error)
-    })
+    return this.httpClient.patch<User>(this.BASE_URL + "/" + id, user);
     
   }
 

@@ -57,26 +57,7 @@ export class NavComponent implements OnInit {
     this.searchForm = this.builder.group({
       search : new FormControl("", Validators.required)
     })
-    this.productService.searching = false
-
-    // this.authService.currentUser.subscribe((u : User) => {
-    //  console.log(u.firstName)
-      
-    //   console.log("ACCESS LEVEL" + u.accessLevel);
-    //   this.adminConnected = u != null && u.accessLevel === AccessLevel.ADMINISTRATOR ? true : false;
-
-
-    //   let currentUrl = this.router.url;
-    //   this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    //   this.router.onSameUrlNavigation = 'reload';
-    //   this.router.navigate([currentUrl]);
-
-    //   // if (!this.adminConnected) {
-    
-    //   //  this.menuItems =  this.menuItems.filter(i => i.adminAccess !== true);
-    //   //  console.table(this.menuItems);
-    //   // }
-    // });
+    this.productService.searching = false;
     
   }
 

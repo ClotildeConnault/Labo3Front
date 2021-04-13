@@ -20,8 +20,8 @@
                             <label>Nom</label>
                             <input class="form-control" type="text" formControlName="lastName">
                             <label *ngIf="adminConnected">Niveau d'accès</label>
-                            <select class="form-control" formControlName="accessLevel" *ngIf="adminConnected">
-                                <option *ngFor="let a of accessLevel" [value]="a">{{accessLevelLabelMapping[a]}}</option>
+                            <select class="form-control" formControlName="accessLevel" >
+                                <option *ngFor="let a of accessLevel" [value]="'CUSTOMER'">{{accessLevelLabelMapping[a]}}</option>
                             </select>
                             <label>Pseudo</label>
                             <input class="form-control" type="text" formControlName="username">
