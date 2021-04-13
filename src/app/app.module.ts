@@ -51,7 +51,7 @@ import { CheckPasswordValidatorDirective } from './util/check-password-validator
     OrderComponent,
     UpdateUserComponent,
     AccountsComponent,
-    ProductLogComponent
+    ProductLogComponent,
     CheckPasswordValidatorDirective
   ],
   imports: [
