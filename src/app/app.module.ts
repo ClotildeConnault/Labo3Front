@@ -26,6 +26,7 @@ import { BasketComponent } from './components/basket/basket.component';
 import { UserComponent } from './components/user/user.component';
 import { TokenInterceptor } from './services/token.interceptor';
 import { AccountsComponent } from './components/accounts/accounts.component';
+import { ProductLogComponent } from './components/product-log/product-log.component';
 import { CheckPasswordValidatorDirective } from './util/check-password-validator.directive';
 
 @NgModule({
@@ -50,6 +51,7 @@ import { CheckPasswordValidatorDirective } from './util/check-password-validator
     OrderComponent,
     UpdateUserComponent,
     AccountsComponent,
+    ProductLogComponent
     CheckPasswordValidatorDirective
   ],
   imports: [

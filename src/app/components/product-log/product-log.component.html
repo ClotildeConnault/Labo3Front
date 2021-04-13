@@ -1,0 +1,53 @@
+<div *ngIf="plog != null && plog?.length > 0">
+
+    <h2 *ngIf="entry == 'product'">Historique des modifications pour le produit {{prod?.name}}</h2>
+    <h2 *ngIf="entry == 'user'">Historique des modifications de l'utilisateur {{user?.username}}</h2>
+
+    <table class="table table-striped table-sm">
+        <thead>
+            <th>Date de modif</th>
+            <th>ID du produit</th>
+            <th>ID de l'utilisateur ayant modifié le produit</th>
+            <th>Ancien produit</th>
+            <th>Nouveau produit</th>
+        </thead>
+        <tbody *ngFor="let p of plogp">
+            <tr>
+                <td>{{p?.logDate | date:'dd/MM/yyyy, HH:mm:ss'}}</td>
+                <td>{{p?.productId}}</td>
+                <td>{{p?.userId}}</td>
+                <td>
+                    <p>Nom : {{p?.oldProduct.name}}</p>
+                    <p>Description : {{p?.oldProduct.description}}</p>
+                    <p>Date d'expiration : {{p?.oldProduct.expirationDate | date:'dd/MM/yyyy'}}</p>
+                    <p>URL de l'image : : {{p?.oldProduct.imagePath}}</p>
+                    <p>Quantité en stock : {{p?.oldProduct.quantity}}</p>
+                    <p>Prix : {{p?.oldProduct.price}}</p>
+                    <p>TVA : {{p?.oldProduct.tva}}</p>
+                    <p>Fournisseur : {{p?.oldProduct.supplier.companyName}}</p>
+                    <ul *ngFor="let c of p?.oldProduct.categories"> Catégories :
+                        <li>{{c.name}}</li>
+                    </ul>
+                </td>
+                <td>
+                    <p>Nom : {{p?.newProduct.name}}</p>
+                    <p>Description : {{p?.newProduct.description}}</p>
+                    <p>Date d'expiration : {{p?.newProduct.expirationDate | date:'dd/MM/yyyy'}}</p>
+                    <p>URL de l'image : : {{p?.newProduct.imagePath}}</p>
+                    <p>Quantité en stock : {{p?.newProduct.quantity}}</p>
+                    <p>Prix : {{p?.newProduct.price}}</p>
+                    <p>TVA : {{p?.newProduct.tva}}</p>
+                    <p>Fournisseur : {{p?.newProduct.supplier.companyName}}</p>
+                    <ul *ngFor="let c of p?.newProduct.categories"> Catégories :
+                        <li>{{c.name}}</li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div *ngIf="plog === null || plog?.length == 0">
+    <h2 *ngIf="entry == 'product'">Pas de modification enregistrée pour le produit {{prod?.name}}</h2>
+    <h2 *ngIf="entry == 'user'">{{user?.username}} n'a fait aucune modification de produit</h2>
+</div>
