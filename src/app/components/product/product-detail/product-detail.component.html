@@ -1,4 +1,4 @@
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="product">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -21,7 +21,7 @@
                 <p class="card-text">Date de péremption : {{product?.expirationDate | date:'dd/MM/yyyy, HH:mm:ss'}} </p>
                 <p class="card-text">Prix : {{product?.price}} </p>
                 <p class="card-text">Quantité en stock : {{product?.quantity}} </p>
-                <p class="card-text">Fournisseur : <span title="Page du fournisseur"><a routerLink="" (click)="supplierClick(product.supplier.id)">{{product.supplier.companyName}}</a></span> </p>
+                <p class="card-text">Fournisseur : <span title="Page du fournisseur"><a routerLink="" (click)="supplierClick(product?.supplier.id)">{{product?.supplier.companyName}}</a></span> </p>
                 <p class="card-text">Catégorie(s)</p>
                     <ul>
                         <li *ngFor="let c of product.categories">{{c?.name}}</li>
