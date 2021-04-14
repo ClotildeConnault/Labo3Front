@@ -5,10 +5,61 @@
     <h3>Notre site de vente alimentaire en ligne !</h3>
     <br>
     <!-- <iframe width="400" height="225" src="https://www.youtube.com/embed/4IcIIDj4YZA?controls=0?rel=0&autoplay=1&mute=1&loop=1&playlist=4IcIIDj4YZA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-    <img src="https://s4.gifyu.com/images/food-slow-motion.gif" alt="food-slow-motion.gif">
-    <br>
-    <p>Venez découvrir notre <a routerLink="/products">gamme de produits</a></p>
+    <img src="https://s4.gifyu.com/images/food-slow-motion.gif" class="taillegif" alt="food-slow-motion.gif">
+    <br><br><br><br><br>
+
+    <p>Découvrez notre <a routerLink="/products">gamme de produits</a> : </p>
+
+    <div id="carouselExampleIndicators" class="carousel slide modifscarousel" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="media">
+                <img src="{{p1?.imagePath}}" class="imgcarousel" alt="...">
+                <div class="media-body" class="textecarousel">
+                    <h5>{{p1?.name}}</h5>
+                    <p>{{p1?.description}}</p>
+                    <p>{{p1?.price}} € - {{p1?.quantity}} en stock</p>
+                    <a routerLink="/products/detail/{{p1?.id}}" data-toggle="modal" data-target="#exampleModal">Ce produit m'intéresse !</a>
+                </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="media">
+                <img src="{{p2?.imagePath}}" class="imgcarousel" alt="...">
+                <div class="media-body" class="textecarousel">
+                    <h5>{{p2?.name}}</h5>
+                    <p>{{p2?.description}}</p>
+                    <p>{{p2?.price}} € - {{p2?.quantity}} en stock</p>
+                    <a routerLink="/products/detail/{{p2?.id}}" data-toggle="modal" data-target="#exampleModal">Ce produit m'intéresse !</a>
+                </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="media">
+                <img src="{{p3?.imagePath}}" class="imgcarousel" alt="...">
+                <div class="media-body" class="textecarousel">
+                    <h5>{{p3?.name}}</h5>
+                    <p>{{p3?.description}}</p>
+                    <p>{{p3?.price}} € - {{p3?.quantity}} en stock</p>
+                    <a routerLink="/products/detail/{{p3?.id}}" data-toggle="modal" data-target="#exampleModal">Ce produit m'intéresse !</a>
+                </div>
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+    </div>
 </div>
 
 <router-outlet></router-outlet>
-
