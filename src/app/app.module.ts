@@ -28,6 +28,8 @@ import { TokenInterceptor } from './services/token.interceptor';
 import { AccountsComponent } from './components/accounts/accounts.component';
 import { ProductLogComponent } from './components/product-log/product-log.component';
 import { CheckPasswordValidatorDirective } from './util/check-password-validator.directive';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { TermsComponent } from './components/terms/terms.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { CheckPasswordValidatorDirective } from './util/check-password-validator
     UpdateUserComponent,
     AccountsComponent,
     ProductLogComponent,
-    CheckPasswordValidatorDirective
+    CheckPasswordValidatorDirective,
+    AdminPanelComponent,
+    TermsComponent
   ],
   imports: [
     BrowserModule,
