@@ -32,6 +32,16 @@ export class ProductUpdateComponent implements OnInit {
   log: ProductLog = new ProductLog;
   categories: Array<Category> = [];
 
+  //Message d'erreur : boolean
+  nameError : boolean = false
+  descriptionError : boolean = false
+  expirationDateError : boolean = false
+  priceError : boolean = false;
+  quantityError : boolean = false;
+  tvaError : boolean = false;
+  fournisseurError : boolean = false;
+  categorieError : boolean = false;
+
   productLogOld : string;
 
   constructor(
@@ -48,8 +58,15 @@ export class ProductUpdateComponent implements OnInit {
     let id = this.activatedRoute.snapshot.params['id'];
 
     this.service.getByID(id).subscribe(
-      product => {this.product = product; this.productLogOld = JSON.stringify(product); this.expirationDateString=this.product.expirationDate.toString().substring(0,10)}
-      
+      product => {
+        this.product = product;
+        this.productLogOld = JSON.stringify(product);
+        this.expirationDateString=this.product.expirationDate.toString().substring(0,10) // récupération de la date au format YYYY-MM-DD
+
+        var selectedCategoriesID = []
+        this.product.categories.forEach(c => selectedCategoriesID.push(c.id))
+        this.form_product.get("categories").setValue(selectedCategoriesID)
+      }       
     )
 
     this.suppliers$ = this.supplServ.getAll();
@@ -121,7 +138,79 @@ export class ProductUpdateComponent implements OnInit {
       this.form_product.reset();
       this.router.navigate(['products']);
     } else {
+      this.blur("name")
+      this.blur("description")
+      this.blur("expirationDate")
+      this.blur("price")
+      this.blur("quantity")
+      this.blur("tva")
+      this.blur("supplier")
+      this.blur("categories")
       alert("Un ou plusieurs champs sont invalides. Recommencez");
+    }
+  }
+
+  blur(inputName : string){
+    const input = document.getElementById(inputName)
+    if (input.classList.contains("ng-invalid")){
+      input.classList.add("invalidInput")
+      switch (inputName){
+        case "name":
+          this.nameError=true;
+          break;
+        case "description":
+          this.descriptionError=true;
+          break;
+        case "expirationDate":
+          this.expirationDateError=true;
+          break;
+        case "price":
+          this.priceError=true;
+          break;
+        case "quantity":
+          this.quantityError=true;
+          break;
+        case "tva":
+          this.tvaError=true;
+          break;
+        case "supplier":
+          this.fournisseurError=true;
+          break;
+        case "categories":
+          this.categorieError=true
+      }
+    }
+  }
+
+  change(inputName: string){
+    const input = document.getElementById(inputName)
+    if(input.classList.contains("ng-valid")){
+      input.classList.remove("invalidInput")
+      switch (inputName){
+        case "name":
+          this.nameError=false;
+          break;
+        case "description":
+          this.descriptionError=false;
+          break;
+        case "expirationDate":
+          this.expirationDateError=false;
+          break;
+        case "price":
+          this.priceError=false;
+          break;
+        case "quantity":
+          this.quantityError=false;
+          break;
+        case "tva":
+          this.tvaError=false;
+          break;
+        case "supplier":
+          this.fournisseurError=false;
+          break;
+        case "categories":
+          this.categorieError=false
+      }
     }
   }
 

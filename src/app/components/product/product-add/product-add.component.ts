@@ -99,15 +99,7 @@ export class ProductAddComponent implements OnInit {
       this.blur("tva")
       this.blur("supplier")
       this.blur("categories")
-  
-      // this.nameError=document.getElementById("name").classList.contains("ng-invalid")
-      // this.descriptionError=document.getElementById("description").classList.contains("ng-invalid")
-      // this.expirationDateError=document.getElementById("expirationDate").classList.contains("ng-invalid")
-      // this.priceError=document.getElementById("price").classList.contains("ng-invalid")
-      // this.quantityError=document.getElementById("quantity").classList.contains("ng-invalid")
-      // this.tvaError=document.getElementById("tva").classList.contains("ng-invalid")
-      // this.fournisseurError=document.getElementById("supplier").classList.contains("ng-invalid")
-      // this.categorieError=document.getElementById("categories").classList.contains("ng-invalid")
+
       alert("Un ou plusieurs champs sont invalides (marqué en rouge). Recommencez");
     }
   }

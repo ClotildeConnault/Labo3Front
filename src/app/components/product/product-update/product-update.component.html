@@ -5,23 +5,38 @@
     <form class="col-sm-8" [formGroup]="form_product" (submit)="onUpdate()">
 	    <div class="form-group">
 	        <label for="name">Nom : </label>
-	        <input class="form-control" type="text" id="name" name="name" placeholder="Nom du produit" formControlName="name" [(ngModel)]="product.name">
+	        <input class="form-control" type="text" id="name" name="name" placeholder="Nom du produit" formControlName="name" [(ngModel)]="product.name" (blur)="blur('name')" (keyup)="change('name')">
+            <ng-container *ngIf="nameError">
+                <p class="errorMessage">Le nom du produit doit contenir au minimum 1 caractère</p>
+            </ng-container> 
         </div>
         <div class="form-group">
 	        <label for="description">Description : </label>
-	        <textarea class="form-control" type="text" id="description" name="description" placeholder="Description du produit" formControlName="description" [(ngModel)]="product.description"></textarea>
+	        <textarea class="form-control" type="text" id="description" name="description" placeholder="Description du produit" formControlName="description" [(ngModel)]="product.description" (blur)="blur('description')" (keyup)="change('description')"></textarea>
+            <ng-container *ngIf="descriptionError">
+                <p class="errorMessage">La description du produit doit contenir au minimum 1 caractère</p>
+            </ng-container>
         </div>
         <div class="form-group">
 	        <label for="expirationDate">Date d'expiration : </label>
-	        <input class="form-control" type="date" id="expirationDate" name="expirationDate" formControlName="expirationDate" [(ngModel)]="expirationDateString">
+	        <input class="form-control" type="date" id="expirationDate" name="expirationDate" formControlName="expirationDate" [(ngModel)]="expirationDateString" (blur)="blur('expirationDate')" (keyup)="change('expirationDate')" (change)="change('expirationDate')">
+            <ng-container *ngIf="expirationDateError">
+                <p class="errorMessage">Entrez une date de péremption postérieure ou égale à celle d'aujourd'hui</p>
+            </ng-container>
         </div>
         <div class="form-group">
 	        <label for="price">Prix unitaire (en euros) : </label>
-	        <input class="form-control" type="number" step="0.01" id="price" name="price" formControlName="price" [(ngModel)]="product.price">
+	        <input class="form-control" type="number" step="0.01" min="0.01" id="price" name="price" formControlName="price" [(ngModel)]="product.price" (blur)="blur('price')" (keyup)="change('price')" (change)="change('price')">
+            <ng-container *ngIf="priceError">
+                <p class="errorMessage">Entrez un prix supérieur ou égal à 0,01€</p>
+            </ng-container>
         </div>
         <div class="form-group">
 	        <label for="quantity">Stock disponible : </label>
-	        <input class="form-control" type="number" id="quantity" name="quantity" formControlName="quantity" [(ngModel)]="product.quantity">
+	        <input class="form-control" type="number" min="0" id="quantity" name="quantity" formControlName="quantity" [(ngModel)]="product.quantity" (blur)="blur('quantity')" (keyup)="change('quantity')" (change)="change('quantity')">
+            <ng-container *ngIf="quantityError">
+                <p class="errorMessage">Entrez une quantité positive ou nulle</p>
+            </ng-container>
         </div>
         <div class="form-group">
 	        <label for="imagePath">Image : </label>
@@ -29,23 +44,32 @@
         </div>
         <div class="form-group">
 	        <label for="tva">TVA applicable : </label>
-            <select class="form-control" type="text" id="tva" name="tva" formControlName="tva" [(ngModel)]="product.tva">
+            <select class="form-control" type="text" id="tva" name="tva" formControlName="tva" [(ngModel)]="product.tva" (click)="change('tva')">
                 <option value="6">6%</option>
                 <option value="12">12%</option>
                 <option value="21">21%</option>
             </select>
+            <ng-container *ngIf="tvaError">
+                <p class="errorMessage">Veuillez sélectionnez une tva</p>
+            </ng-container>
         </div>
         <div class="form-group">
 	    	<label for="supplier">Fournisseur : </label>
-			<select class="form-control" id="supplier" name="supplier" formControlName="supplier" [(ngModel)]="product.supplier.id">
+			<select class="form-control" id="supplier" name="supplier" formControlName="supplier" [(ngModel)]="product.supplier.id" (click)="change('supplier')">
 		    		<option *ngFor="let s of suppliers$ | async" [value]="s.id">{{s.companyName}}</option>
 		    </select>
+            <ng-container *ngIf="fournisseurError">
+                <p class="errorMessage">Veuillez sélectionnez un fournisseur</p>
+            </ng-container>
 		</div>
         <div class="form-group">
 	    	<label for="categories">Catégorie : </label>
-			<select class="form-control" id="categories" name="categories" formControlName="categories" multiple>
+			<select class="form-control" id="categories" name="categories" formControlName="categories" multiple (click)="change('categories')">
 		    		<option *ngFor="let c of categories$ | async" [value]="c.id">{{c.name}}</option>
 		    </select>
+            <ng-container *ngIf="categorieError">
+                <p class="errorMessage">Veuillez sélectionnez une catégorie</p>
+            </ng-container>
 		</div>
         <button class="btn btn-success" type="submit">Modifier ce produit</button>&nbsp;<button class="btn btn-primary" routerLink="/products">Revenir à la liste des produits</button>
     </form>
