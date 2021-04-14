@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ADDRESS_FORM_CREATE, checkPasswords, USER_FORM_CREATE } from 'src/app/forms/user.form';
+import { ADDRESS_FORM_UPDATE, USER_FORM_UPDATE, checkPasswords } from 'src/app/forms/user-update.form';
 import { accessLevelLabelMapping, AccessLevel, Address, User } from 'src/app/models/user.model';
 import { UserRegister } from 'src/app/models/userRegister.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,7 +15,7 @@ import { UserComponent } from '../user.component';
 })
 export class UpdateUserComponent implements OnInit {
 
-  //fg : FormGroup = new FormGroup(USER_FORM_CREATE);
+  //fg : FormGroup = new FormGroup(USER_FORM_UPDATE);
   fg : FormGroup;
   accessLevelLabelMapping =  accessLevelLabelMapping;
   accessLevel = Object.values(AccessLevel).filter(value => typeof value === 'number');
@@ -39,7 +39,7 @@ export class UpdateUserComponent implements OnInit {
       username : ['', Validators.required],
       password : this.builder.group({password : ['', Validators.required],
                               confirmPassword : ['', Validators.required]}, {validator : checkPasswords}),
-      address : new FormGroup(ADDRESS_FORM_CREATE)
+      address : new FormGroup(ADDRESS_FORM_UPDATE)
       })
     
 
