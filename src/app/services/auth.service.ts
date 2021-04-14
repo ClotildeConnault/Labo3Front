@@ -31,6 +31,7 @@ export class AuthService {
     private service : UserService
   ) {
     localStorage.removeItem('isConnected');
+    localStorage.removeItem("isAdmin");
     localStorage.removeItem('token');
     localStorage.removeItem("role");
    }
@@ -68,10 +69,9 @@ export class AuthService {
       localStorage.setItem("token", response.headers.get("Authorization").replace("Bearer ", ""));
       this.service.getUserConnected({"username":pseudo} as User).subscribe(u => {
         this._currentUser.next(u);
-        localStorage.setItem("role", u.accessLevel.toString());
         this.isConnected=true;
         this.emitStatus();
-        localStorage.setItem("isConnected", 'ok');
+        this.updateLocalStorage(u);
         this.router.navigate(['home'])
       })
     })
@@ -83,7 +83,18 @@ export class AuthService {
     this.isConnected = false;
     this.emitStatus();
     localStorage.removeItem('isConnected');
+    localStorage.removeItem("isAdmin");
     localStorage.removeItem('token');
     localStorage.removeItem("role");
+  }
+
+  updateLocalStorage(user : User) {
+    localStorage.setItem("role", user.accessLevel.toString());
+    localStorage.setItem('isConnected', 'true');
+    if (user.accessLevel.toString() == "ADMINISTRATOR") {
+      localStorage.setItem("isAdmin", 'true');
+    } else {
+      localStorage.setItem("isAdmin", 'false');
+    }
   }
 }

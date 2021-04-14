@@ -20,6 +20,8 @@ import { UpdateUserComponent } from './components/user/update-user/update-user.c
 import { AccountsComponent } from './components/accounts/accounts.component';
 import { AuthGuard } from './services/auth.guard';
 import { ProductLogComponent } from './components/product-log/product-log.component';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { TermsComponent } from './components/terms/terms.component';
 
 
 const routes: Routes = [
@@ -27,29 +29,25 @@ const routes: Routes = [
     path: 'register', component: RegisterComponent
   }]},
 
-  {path: 'products', component: ProductComponent, children: [{
-    path: 'detail/:id',
-    component: ProductDetailComponent
-  }
-]},
+  {path: 'products', component: ProductComponent, children: [
+    {path: 'detail/:id', component: ProductDetailComponent}
+  ]},
   {path: 'basket', component: BasketComponent},
+  {path: 'terms', component: TermsComponent},
   {path: 'accounts', component: AccountsComponent},
   {path: 'validate', component: ValidateOrderComponent},
-  {path: 'user', component: UserComponent, children: [{
-    path: 'order/:id',
-    component: OrderComponent
-  },
-  {path: 'update', component: UpdateUserComponent}
+  {path: 'user', component: UserComponent, children: [
+    {path: 'order/:id', component: OrderComponent},
+    {path: 'update', component: UpdateUserComponent}
   ]},
+  {path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuard], data: {roles: ['ADMINISTRATOR']} },
   {path: 'products/add', component: ProductAddComponent, canActivate: [AuthGuard], data: {roles: ['ADMINISTRATOR']} },
   {path: 'products/search', component: ProductSearchComponent},
   {path: 'products/update/:id', component: ProductUpdateComponent, canActivate: [AuthGuard], data: {roles: ['ADMINISTRATOR']} },
   {path: 'suppliers', component: SupplierComponent, canActivate: [AuthGuard], data: {roles: ['ADMINISTRATOR']} },
-  {path: 'suppliers/detail/:id', component: SupplierDetailComponent, children: [{
-    path: 'productdetail/:id',
-    component: ProductDetailComponent
-  }
-]},
+  {path: 'suppliers/detail/:id', component: SupplierDetailComponent, children: [
+    {path: 'productdetail/:id', component: ProductDetailComponent}
+  ]},
   {path: 'suppliers/add', component: SupplierAddComponent, canActivate: [AuthGuard], data: {roles: ['ADMINISTRATOR']} },
   {path: 'suppliers/update/:id', component: SupplierUpdateComponent, canActivate: [AuthGuard], data: {roles: ['ADMINISTRATOR']} },
   {path: 'plog/product/:id', component: ProductLogComponent, canActivate: [AuthGuard], data: {roles: ['ADMINISTRATOR']} },

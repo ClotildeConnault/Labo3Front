@@ -34,8 +34,8 @@ export class NavComponent implements OnInit {
 
     let items : MenuItem[] = [
       {title: "Nos produits", path : "/products", adminAccess: false},
-      {title: "Les fournisseurs", path : "/suppliers", adminAccess: true},
-      {title: "Comptes", path : "/accounts", adminAccess: true}
+      // {title: "Les fournisseurs", path : "/suppliers", adminAccess: true},
+      // {title: "Comptes", path : "/accounts", adminAccess: true}
     ]
 
     this.status = this.authService.conSub.subscribe((data : boolean) => {
