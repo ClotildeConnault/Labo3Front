@@ -16,8 +16,7 @@ export const USER_FORM_CREATE: FormGroupDef = {
     lastName: new FormControl('', Validators.required),
     accessLevel : new FormControl('CUSTOMER', Validators.required),
     username : new FormControl('', Validators.required),
-    password : new FormGroup({password : new FormControl('', Validators.required),
-                            confirmPassword : new FormControl('', Validators.required)},checkPasswords),
+    password : new FormControl('', Validators.required),
     address : new FormGroup(ADDRESS_FORM_CREATE)
   }
 
