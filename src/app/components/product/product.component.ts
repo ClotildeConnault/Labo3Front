@@ -24,6 +24,9 @@ export class ProductComponent implements OnInit {
   numberPage : number[] = [];
   pageLoaded: number;
   navigationSubscription;
+  sortingFieldName : string = ""
+  sortingDirection : string = ""
+
 
   constructor(
     private productService : ProductService,
@@ -43,7 +46,7 @@ export class ProductComponent implements OnInit {
       if (this.searching){
         this.productPage.content=this.productService.listProduct
       }else{
-        this.productService.getWithPagination(0,10).subscribe(data => {
+        this.productService.getWithPagination(0,10,this.sortingFieldName,this.sortingDirection).subscribe(data => {
         this.productPage=data;
         this.products=this.productPage.content;
         this.pageLoaded=this.productPage.pageable.pageNumber
@@ -90,7 +93,7 @@ export class ProductComponent implements OnInit {
       if (this.searching){
         this.productPage.content=this.productService.listProduct
       }else{
-        this.productService.getWithPagination(0,10).subscribe(data => {
+        this.productService.getWithPagination(0,10, this.sortingFieldName, this.sortingDirection).subscribe(data => {
         this.productPage=data;
         this.products=this.productPage.content;
         this.pageLoaded=this.productPage.pageable.pageNumber
@@ -126,7 +129,7 @@ export class ProductComponent implements OnInit {
   onDelete(id : number) {
     this.productService.delete(id).subscribe(
       () => {
-        this.productService.getWithPagination(this.pageLoaded,10).subscribe(data => {
+        this.productService.getWithPagination(this.pageLoaded,10,this.sortingFieldName,this.sortingDirection).subscribe(data => {
           console.log(data);
           this.productPage=data; 
           this.numberPage=[];
@@ -185,9 +188,25 @@ export class ProductComponent implements OnInit {
   }
 
   navigateTo(index : number){
-    this.productService.getWithPagination(index,10).subscribe(data => {
+    this.productService.getWithPagination(index,10,this.sortingFieldName,this.sortingDirection).subscribe(data => {
       this.productPage=data;
       this.pageLoaded=this.productPage.pageable.pageNumber
+    })
+  }
+
+  sorted(field : string, direction : string){
+    this.sortingFieldName = field;
+    this.sortingDirection = direction
+
+
+    this.productService.getWithPagination(this.pageLoaded,10,this.sortingFieldName,this.sortingDirection).subscribe(data => {
+    this.productPage=data;
+    this.products=this.productPage.content;
+    this.pageLoaded=this.productPage.pageable.pageNumber
+    this.numberPage=[];
+      for (let index = 1; index <= this.productPage.totalPages; index++) {
+        this.numberPage.push(index)      
+      }   
     })
   }
 

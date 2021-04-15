@@ -31,8 +31,8 @@ export class ProductService {
     return this.httpClient.get<Product[]>(this.BASE_URL);
   }
 
-  getWithPagination(page : number, size : number) : Observable<ProductPage>{
-    return this.httpClient.get<ProductPage>(this.BASE_URL + "?page=" + page + "&size="+ size)
+  getWithPagination(page : number, size : number, sortingFieldName : string, sortingDirection : string) : Observable<ProductPage>{
+    return this.httpClient.get<ProductPage>(this.BASE_URL + "?page=" + page + "&size="+ size + "&sortingFieldName=" + sortingFieldName + "&sortingDirection=" + sortingDirection)
   }
 
   getByID(id): Observable<Product> {
