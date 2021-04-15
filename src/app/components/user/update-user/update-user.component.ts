@@ -65,19 +65,26 @@ export class UpdateUserComponent implements OnInit {
     address.number = addressValues['number'];
     address.street = addressValues['street'];
     address.zipCode = addressValues['zipcode'];
-    let user = new User();
-    user.firstName = values['firstName'];
-    user.lastName = values['lastName'];
-    user.accessLevel = this.user.accessLevel;
-    user.username = values['username'];
-    user.address = address;
+    let user : User;
 
     if(this.fg.get('password').invalid) {
       console.log("INVALID");
       this.identical = "border border-danger";
     }
 
-    user.password = passwordValues['password'];
+    if (passwordValues['password'] == "") {
+      user = ({"username":"", "firstName":"", "lastName":"", "address":address, "accessLevel":""} as User);
+    } else {
+      user = new User();
+      user.password = passwordValues['password'];
+    }
+    
+    user.firstName = values['firstName'];
+    user.lastName = values['lastName'];
+    user.accessLevel = this.user.accessLevel;
+    user.username = values['username'];
+    user.address = address;
+
     console.log("LA" + JSON.stringify(user));
         this.userService.update(this.user.id, user).subscribe({
               next : () => this.router.navigate(['/user']),
