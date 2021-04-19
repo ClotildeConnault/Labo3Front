@@ -66,17 +66,14 @@ export class RegisterComponent implements OnInit {
     userRegister.firstName = values['firstName'];
     userRegister.lastName = values['lastName'];
     userRegister.accessLevel = values['accessLevel'];
-    console.log("NUL " + values["accessLevel"]);
-    console.log(userRegister.accessLevel);
     userRegister.username = values['username'];
     userRegister.password = values['password'];
     userRegister.address = address;
     this.userService.insert(userRegister);
-console.log(JSON.stringify(userRegister));
 
-this.closeModal.nativeElement.click();
+    this.closeModal.nativeElement.click();
 
-this.router.navigate(['']);
+    this.router.navigate(['']);
   }
 
   

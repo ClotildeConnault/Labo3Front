@@ -31,8 +31,6 @@ export class AccountsComponent implements OnInit {
 
     let user : User = ({"accessLevel":"","id":0} as User);
     user.id = u.id;
- 
-    console.log(u.accessLevel);
 
     if (u.accessLevel == "CUSTOMER" ) {
       user.accessLevel = "ADMINISTRATOR";

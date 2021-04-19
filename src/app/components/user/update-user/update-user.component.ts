@@ -42,14 +42,8 @@ export class UpdateUserComponent implements OnInit {
       address : new FormGroup(ADDRESS_FORM_UPDATE)
       })
     
-
-
-
-
-    console.log("ONINIT")
     this.authService.currentUser.subscribe(u => {
       this.user = u;
-      console.log("TEST" + u);
       this.accessLevelId = (Object.keys(AccessLevel).indexOf(this.user.accessLevel.toString()) -1) /2;
     })
     
@@ -68,7 +62,6 @@ export class UpdateUserComponent implements OnInit {
     let user : User;
 
     if(this.fg.get('password').invalid) {
-      console.log("INVALID");
       this.identical = "border border-danger";
     }
 
@@ -85,7 +78,6 @@ export class UpdateUserComponent implements OnInit {
     user.username = values['username'];
     user.address = address;
 
-    console.log("LA" + JSON.stringify(user));
         this.userService.update(this.user.id, user).subscribe({
               next : () => this.router.navigate(['/user']),
               error : (error) => console.log(error)
