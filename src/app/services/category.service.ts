@@ -8,7 +8,7 @@ import { Category } from '../models/category.model';
 })
 export class CategoryService {
 
-  private BASE_URL = 'http://localhost:8080/categories'
+  private BASE_URL = 'https://laboback.herokuapp.com/categories'
 
   constructor(private httpClient: HttpClient) { }
 

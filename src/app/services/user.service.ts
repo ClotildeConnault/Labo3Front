@@ -11,7 +11,7 @@ import { UserRegister } from '../models/userRegister.model';
 })
 export class UserService {
 
-  private BASE_URL = 'http://localhost:8080/users'
+  private BASE_URL = 'https://laboback.herokuapp.com/users'
 
   constructor(
     private httpClient: HttpClient,

@@ -9,7 +9,7 @@ import { Order } from '../models/order.model';
 })
 export class OrderService {
 
-  private BASE_URL = 'http://localhost:8080/orders'
+  private BASE_URL = 'https://laboback.herokuapp.com/orders'
 
   constructor(
     private httpClient : HttpClient,

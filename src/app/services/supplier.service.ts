@@ -8,7 +8,7 @@ import { Supplier } from '../models/supplier.model';
 })
 export class SupplierService {
 
-  private BASE_URL = 'http://localhost:8080/suppliers'
+  private BASE_URL = 'https://laboback.herokuapp.com/suppliers'
 
   constructor(private httpClient: HttpClient) { }
 

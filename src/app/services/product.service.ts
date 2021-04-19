@@ -9,7 +9,7 @@ import { ProductPage } from '../models/productPage.model';
 })
 export class ProductService {
 
-  private BASE_URL = 'http://localhost:8080/products'
+  private BASE_URL = 'https://laboback.herokuapp.com/products'
 
   searchingByNameBool : boolean = false;
   searchingByNameValue : string = ""

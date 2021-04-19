@@ -11,7 +11,7 @@ import { UserService } from './user.service';
 })
 export class AuthService {
 
-  private url : string = "http://localhost:8080"
+  private url : string = "https://laboback.herokuapp.com"
 
   // currentUser : User;
 

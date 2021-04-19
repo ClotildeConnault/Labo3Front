@@ -8,7 +8,7 @@ import { ProductLog } from '../models/productLog.model';
 })
 export class ProductLogService {
 
-  private BASE_URL = 'http://localhost:8080/plogs'
+  private BASE_URL = 'https://laboback.herokuapp.com/plogs'
 
   constructor(private httpClient: HttpClient) { }
 
