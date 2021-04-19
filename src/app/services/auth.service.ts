@@ -38,7 +38,6 @@ export class AuthService {
 
   emitStatus() {
     this.conSub.next(this.isConnected);
-    console.log("emitStatus");
   }
 
   public getIsConnected(): boolean {

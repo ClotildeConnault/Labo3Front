@@ -47,10 +47,8 @@ export class NavComponent implements OnInit {
       this.adminConnected = this.user != null && this.user.accessLevel.toString() === 'ADMINISTRATOR' ? true : false;
       if (!this.adminConnected) {
        this.menuItems =  items.filter(i => i.adminAccess !== true);
-       console.table(this.menuItems);
       } else {
         this.menuItems = items;
-        console.table(this.menuItems);
       }
     });
 
