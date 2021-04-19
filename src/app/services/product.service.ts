@@ -11,8 +11,29 @@ export class ProductService {
 
   private BASE_URL = 'http://localhost:8080/products'
 
-  searching : boolean = false;
-  listProduct : Product[] = []
+  searchingByNameBool : boolean = false;
+  searchingByNameValue : string = ""
+
+  searchingAdvancedBool : boolean = false;
+  searchingAdvancedValue : Product = new Product()
+
+  // productPage : ProductPage = new ProductPage();
+  activatedPage : number = 0
+  numberElementByPage : number = 10
+  sortingField : string= ""
+  sortingDirection : string = ""
+
+  // searchingByNameBool : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  // searchingByNameValue : BehaviorSubject<string> = new BehaviorSubject<string>("")
+
+  // searchingAdvancedBool : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  // searchingAdvancedValue : BehaviorSubject<Product> = new BehaviorSubject<Product>(new Product())
+
+  productPage : BehaviorSubject<ProductPage> = new BehaviorSubject<ProductPage>(new ProductPage());
+  // activatedPage : BehaviorSubject<number>=new BehaviorSubject<number>(0)
+  // numberElementByPage : BehaviorSubject<number>= new BehaviorSubject<number>(10)
+  // sortingField : BehaviorSubject<string> = new BehaviorSubject<string>("")
+  // sortingDirection : BehaviorSubject<string> = new BehaviorSubject<string>("")
 
   //sharedSearching = this.searching.asObservable();
   //sharedListProduct= this.listProduct.asObservable();
@@ -51,11 +72,11 @@ export class ProductService {
     return this.httpClient.put<Product>(this.BASE_URL + "/" + id, product);
   }
 
-  searchByName(productName : String){
-    return this.httpClient.post<Product[]>(this.BASE_URL + "/searchByName", productName);
+  searchByNameWithPagination(productName : String, activatedPage : number, numberElementByPage : number, sortingField : string, sortingDirection : string){
+    return this.httpClient.post<ProductPage>(this.BASE_URL + "/searchByName?page="+ activatedPage +"&size="+ numberElementByPage +"&sortingFieldName="+ sortingField +"&sortingDirection=" + sortingDirection, productName);
   }
 
-  search(product : Product){
-    return this.httpClient.post<Product[]>(this.BASE_URL + "/search", product)
+  searchWithPagination(product : Product, activatedPage : number, numberElementByPage : number, sortingField : string, sortingDirection : string){
+    return this.httpClient.post<ProductPage>(this.BASE_URL + "/search?page="+ activatedPage +"&size="+ numberElementByPage +"&sortingFieldName="+ sortingField +"&sortingDirection=" + sortingDirection, product)
   }
 }

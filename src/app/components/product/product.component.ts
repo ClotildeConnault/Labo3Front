@@ -18,18 +18,24 @@ export class ProductComponent implements OnInit {
   user : User;
 
   isShow : boolean;
-  searching : boolean;
-  products : Product[];
-  productPage : ProductPage = new ProductPage();
   numberPage : number[] = [];
-  pageLoaded: number;
   navigationSubscription;
-  sortingFieldName : string = ""
-  sortingDirection : string = ""
+
+  // searchingByNameBool : boolean = false;
+  // searchingByNameValue : string = ""
+
+  // searchingAdvancedBool : boolean = false;
+  // searchingAdvancedValue : Product = new Product()
+
+  productPage : ProductPage = new ProductPage();
+  // activatedPage : number = 0
+  // numberElementByPage : number = 10
+  // sortingField : string= ""
+  // sortingDirection : string = ""
 
 
   constructor(
-    private productService : ProductService,
+    private _productService : ProductService,
     private router : Router,
     private authService : AuthService
     ) { 
@@ -40,22 +46,50 @@ export class ProductComponent implements OnInit {
         )
     }
 
+    get productService(): ProductService{
+      return this._productService;
+    }
+
   ngOnInit(): void {
       this.user = this.authService._currentUser.value;
-      this.searching=this.productService.searching
-      if (this.searching){
-        this.productPage.content=this.productService.listProduct
+
+      
+      if (this._productService.searchingByNameBool){
+        this._productService.searchByNameWithPagination(this._productService.searchingByNameValue, this._productService.activatedPage, this._productService.numberElementByPage, this._productService.sortingField, this._productService.sortingDirection).subscribe(pp => 
+          {this._productService.productPage.next(pp)
+          })
+      }else if(this._productService.searchingAdvancedBool){
+        this._productService.searchWithPagination(this._productService.searchingAdvancedValue, this._productService.activatedPage, this._productService.numberElementByPage, this._productService.sortingField, this._productService.sortingDirection).subscribe(pp => 
+          {this._productService.productPage.next(pp)
+          })
       }else{
-        this.productService.getWithPagination(0,10,this.sortingFieldName,this.sortingDirection).subscribe(data => {
-        this.productPage=data;
-        this.products=this.productPage.content;
-        this.pageLoaded=this.productPage.pageable.pageNumber
-        this.numberPage=[];
-          for (let index = 1; index <= this.productPage.totalPages; index++) {
-            this.numberPage.push(index)      
-          }   
+        this._productService.getWithPagination(this._productService.activatedPage, this._productService.numberElementByPage, this._productService.sortingField, this._productService.sortingDirection).subscribe(pp => {
+          this._productService.productPage.next(pp)
         })
       }
+      this._productService.productPage.subscribe(pp => {
+        this.productPage=pp;
+        this.numberPage=[];
+        for (let index = 1; index <= this.productPage.totalPages; index++) {
+          this.numberPage.push(index)      
+        } 
+      })
+      
+                
+      // this.searching=this.productService.searching
+      // if (this.searching){
+      //   this.productPage.content=this.productService.listProduct
+      // }else{
+      //   this.productService.getWithPagination(0,10,this.sortingFieldName,this.sortingDirection).subscribe(data => {
+      //   this.productPage=data;
+      //   this.products=this.productPage.content;
+      //   this.pageLoaded=this.productPage.pageable.pageNumber
+      //   this.numberPage=[];
+      //     for (let index = 1; index <= this.productPage.totalPages; index++) {
+      //       this.numberPage.push(index)      
+      //     }   
+      //   })
+      // }
     
   }
 
@@ -84,26 +118,26 @@ export class ProductComponent implements OnInit {
     }*/
 
   initialize() {
-    this.numberPage = []
-    for (let index = 1; index <= this.productPage.totalPages; index++) {
-      this.numberPage.push(index)      
-      }  
-      
-      this.searching=this.productService.searching
-      if (this.searching){
-        this.productPage.content=this.productService.listProduct
-      }else{
-        this.productService.getWithPagination(0,10, this.sortingFieldName, this.sortingDirection).subscribe(data => {
-        this.productPage=data;
-        this.products=this.productPage.content;
-        this.pageLoaded=this.productPage.pageable.pageNumber
-        this.numberPage=[];
-          for (let index = 1; index <= this.productPage.totalPages; index++) {
-            this.numberPage.push(index)      
-          }   
-        })
-      }
-     
+    if (this._productService.searchingByNameBool){
+      this._productService.searchByNameWithPagination(this._productService.searchingByNameValue, this._productService.activatedPage, this._productService.numberElementByPage, this._productService.sortingField, this._productService.sortingDirection).subscribe(pp => 
+        {this._productService.productPage.next(pp)
+      })
+    }else if(this._productService.searchingAdvancedBool){
+      this._productService.searchWithPagination(this._productService.searchingAdvancedValue, this._productService.activatedPage, this._productService.numberElementByPage, this._productService.sortingField, this._productService.sortingDirection).subscribe(pp => 
+        {this._productService.productPage.next(pp)
+      })
+    }else{
+      this._productService.getWithPagination(this._productService.activatedPage, this._productService.numberElementByPage, this._productService.sortingField, this._productService.sortingDirection).subscribe(pp => {
+        this._productService.productPage.next(pp)
+      })
+    }
+    this._productService.productPage.subscribe(pp => {
+      this.productPage=pp;
+      this.numberPage=[];
+      for (let index = 1; index <= this.productPage.totalPages; index++) {
+        this.numberPage.push(index)      
+      } 
+    })
   }
     
     /*this.productService.getWithPagination(this.pageLoaded,10).subscribe(data => {
@@ -127,22 +161,40 @@ export class ProductComponent implements OnInit {
   
 
   onDelete(id : number) {
-    this.productService.delete(id).subscribe(
+    this._productService.delete(id).subscribe(
       () => {
-        this.productService.getWithPagination(this.pageLoaded,10,this.sortingFieldName,this.sortingDirection).subscribe(data => {
-          console.log(data);
-          this.productPage=data; 
-          this.numberPage=[];
-            for (let index = 1; index <= this.productPage.totalPages; index++) {
-              this.numberPage.push(index);     
+        if (this._productService.searchingByNameBool){
+          this._productService.searchByNameWithPagination(this._productService.searchingByNameValue, this._productService.activatedPage, this._productService.numberElementByPage, this._productService.sortingField, this._productService.sortingDirection).subscribe(pp => {
+            this.productPage=pp;
+            this.numberPage=[];
+            if (this.productPage.totalPages > 0){
+              for (let index = 1; index <= this.productPage.totalPages; index++) {
+                this.numberPage.push(index)      
+              } 
+              if (this._productService.activatedPage >= this.productPage.totalPages) {
+                this._productService.activatedPage = this.productPage.totalPages-1;
+                this.navigateTo(this._productService.activatedPage);
+              }
             }
-          if (this.pageLoaded >= this.productPage.totalPages) {
-            this.pageLoaded = this.productPage.totalPages-1;
-            this.navigateTo(this.pageLoaded);
-          }
-        })
-      })
-  };
+          })
+        }else{
+          this._productService.getWithPagination(this._productService.activatedPage, this._productService.numberElementByPage, this._productService.sortingField, this._productService.sortingDirection).subscribe(pp => {
+            this.productPage=pp;
+            this.numberPage=[];
+            if (this.productPage.totalPages > 0){
+              for (let index = 1; index <= this.productPage.totalPages; index++) {
+                this.numberPage.push(index)      
+              } 
+              if (this._productService.activatedPage >= this.productPage.totalPages) {
+                this._productService.activatedPage = this.productPage.totalPages-1;
+                this.navigateTo(this._productService.activatedPage);
+              }
+            }            
+          })
+        }
+    })
+  }
+
     /*this.productService.delete(id).subscribe(
       data => {console.log("success", data);
       this.initialize();
@@ -188,26 +240,14 @@ export class ProductComponent implements OnInit {
   }
 
   navigateTo(index : number){
-    this.productService.getWithPagination(index,10,this.sortingFieldName,this.sortingDirection).subscribe(data => {
-      this.productPage=data;
-      this.pageLoaded=this.productPage.pageable.pageNumber
-    })
+    this._productService.activatedPage=index;
+    this.initialize();
   }
 
   sorted(field : string, direction : string){
-    this.sortingFieldName = field;
-    this.sortingDirection = direction
-
-
-    this.productService.getWithPagination(this.pageLoaded,10,this.sortingFieldName,this.sortingDirection).subscribe(data => {
-    this.productPage=data;
-    this.products=this.productPage.content;
-    this.pageLoaded=this.productPage.pageable.pageNumber
-    this.numberPage=[];
-      for (let index = 1; index <= this.productPage.totalPages; index++) {
-        this.numberPage.push(index)      
-      }   
-    })
+    this._productService.sortingField=field;
+    this._productService.sortingDirection=direction;
+    this.initialize();
   }
 
 }

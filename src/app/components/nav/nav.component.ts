@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Product } from 'src/app/models/product.model';
 import { AccessLevel, User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -56,8 +57,7 @@ export class NavComponent implements OnInit {
 
     this.searchForm = this.builder.group({
       search : new FormControl("", Validators.required)
-    })
-    this.productService.searching = false;
+    });
     
   }
 
@@ -65,31 +65,33 @@ export class NavComponent implements OnInit {
   search(){
    
     if (this.searchForm.valid){      
-      this.productService.searching = true;
-      const searchName = this.searchForm.value['search'];
-      this.productService.searchByName(searchName).subscribe(pl => {
-        this.productService.listProduct = pl;
-        this.router.onSameUrlNavigation = 'reload'
-        this.router.navigateByUrl("/products");
-      })
+      this.productService.searchingByNameBool=true;
+      this.productService.searchingByNameValue=this.searchForm.value['search'];
+      this.productService.searchingAdvancedBool=false;
+      this.productService.searchingAdvancedValue=new Product();
+      this.productService.activatedPage=0;
       
-      //this.productService.emitSearchValue(searchName)
-      
-        
-      } else {
-        this.productService.searching=false;
-        this.router.onSameUrlNavigation = 'reload'
-        this.router.navigateByUrl("/products");
-      }
+      this.router.onSameUrlNavigation = 'reload'
+      this.router.navigateByUrl("/products");
+    }else {
+      this.productService.searchingByNameBool=false;
+      this.productService.searchingByNameValue="";
+      this.productService.searchingAdvancedBool=false;
+      this.productService.searchingAdvancedValue=new Product();
+      this.productService.activatedPage=0;
+
+      this.router.onSameUrlNavigation = 'reload'
+      this.router.navigateByUrl("/products");
+    }
 
     
   }
 
-  productRefresh(){
-    this.productService.searching = false;
-    this.productService.listProduct = [];
-    this.router.navigateByUrl("/products")
-  }
+  // productRefresh(){
+  //   this.productService.searching = false;
+  //   this.productService.listProduct = [];
+  //   this.router.navigateByUrl("/products")
+  // }
 
 }
 

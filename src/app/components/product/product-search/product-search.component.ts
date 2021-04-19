@@ -29,18 +29,20 @@ export class ProductSearchComponent implements OnInit {
 
   search(){
     
-    if(this.searchForm.valid){      
-      this.productService.searching = true;
+    if(this.searchForm.valid){
       let product : Product = this.searchForm.value
       //2021-03-03T12:24:07Z 
       product.expirationDate = new Date(this.searchForm.get('expirationDate').value)
-      console.log(product)  
-      this.productService.search(product).subscribe(pl => {
-        this.productService.listProduct = pl;
-        this.router.navigateByUrl("/products");
-      })
-      
-    }
+
+      this.productService.searchingByNameBool=false;
+      this.productService.searchingByNameValue="";
+      this.productService.searchingAdvancedBool=true;
+      this.productService.searchingAdvancedValue=product;
+      this.productService.activatedPage=0;  
+
+      this.router.navigateByUrl("/products");
+    }      
   }
+
 
 }
