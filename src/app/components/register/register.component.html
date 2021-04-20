@@ -23,7 +23,10 @@
                                 <option *ngFor="let a of accessLevel" [value]="'CUSTOMER'">{{accessLevelLabelMapping[a]}}</option>
                             </select>
                             <label>Pseudo</label>
-                            <input class="form-control" type="text" formControlName="username">
+                            <input class="form-control" type="text" formControlName="username" (keyup)="pseudoExistTest()">
+                            <ng-container *ngIf="pseudoExist">
+                                <p class="red-color">Ce pseudo existe déjà</p>
+                            </ng-container>
                             <label>Mot de passe</label>
                             <input class="form-control" type="password" formControlName="password">
                         </div>
@@ -53,7 +56,7 @@
             
                         </div>
                        
-                        <button type="submit" class="btn btn-light" [disabled]="fg.invalid ">Enregistrer</button>
+                        <button type="submit" class="btn btn-light" [disabled]="fg.invalid || pseudoExist">Enregistrer</button>
                         
                     </form>
             
