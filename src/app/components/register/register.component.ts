@@ -20,6 +20,7 @@ export class RegisterComponent implements OnInit {
   accessLevelLabelMapping =  accessLevelLabelMapping;
   accessLevel = Object.values(AccessLevel).filter(value => typeof value === 'number');
   @ViewChild('closeModal') closeModal: ElementRef;
+  pseudoExist : boolean = false;
 
   constructor(
     private authService : AuthService,
@@ -69,13 +70,25 @@ export class RegisterComponent implements OnInit {
     userRegister.username = values['username'];
     userRegister.password = values['password'];
     userRegister.address = address;
-    this.userService.insert(userRegister);
 
-    this.closeModal.nativeElement.click();
+    this.userService.existByUsername(userRegister.username).subscribe(d => {
+      this.pseudoExist=d;
+      if (!this.pseudoExist){
+        this.userService.insert(userRegister);
 
-    this.router.navigate(['']);
+        this.closeModal.nativeElement.click();
+
+        this.router.navigate(['']);
+      }
+    })
+
+    
   }
 
-  
+  pseudoExistTest(){
+    this.userService.existByUsername(this.fg.get('username').value).subscribe(d => {
+      this.pseudoExist=d;
+    })
+  }
 
 }

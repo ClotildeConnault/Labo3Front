@@ -46,5 +46,9 @@ export class UserService {
   getUserConnected(user: User): Observable<User> {
     return this.httpClient.post<User>(this.BASE_URL + "/connected", {username: user.username});
   }
+
+  existByUsername(username : string) : Observable<boolean>{
+    return this.httpClient.post<boolean>(this.BASE_URL + "/exist", username)
+  }
   
 }
